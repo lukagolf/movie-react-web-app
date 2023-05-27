@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+@import url('https://fonts.cdnfonts.com/css/syne');
+.font-questrial {
+    font-family: 'Questrial', sans-serif;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.form-control {
+    width: 50%;
+}
+
+
+/* BACKGROUND */
+
+.wd-pinkBackground {
+    background-color: #FE4DAF;
+}
+
+.wd-purpleBackground {
+    background-color: #825CA7
+}
+
+.wd-whiteBackground {
+    background-color: white
+}
+
+.wd-blackBackground {
+    background-color: black
+}
+
+.wd-greenBackground {
+    background-color: #BADA55;
+}
+
+
+/* TEXT */
+
+.wd-whiteText {
+    color: white;
+}
+
+.wd-blackText {
+    color: black;
+}
+
+.wd-purpleText {
+    color: #825CA7
+}
+
+
+/* BORDER */
+
+.wd-purpleBorder {
+    border-width: 2px;
+    border-color: #825CA7;
+}
+
+.wd-whiteBorder {
+    border-width: 2px;
+    border-color: white;
+}
+
+
+/* BUTTONS */
+
+.wd-circleBtn {
+    border-style: none;
+    width: 48px;
+    height: 48px;
+}
+
+.wd-circleBorderBtn {
+    border-style: solid;
+    width: 48px;
+    height: 48px;
+}
+
+.wd-circleIcon {
+    width: 30px
+}
+
+.wd-boxBtn {
+    border-style: none;
+    width: 35px;
+    height: 35px;
+}
+
+
+/* BUTTON HOVER */
+
+button:hover.wd-pinkBackground {
+    background-color: #f89dd1;
+}
+
+button:hover.wd-purpleBackground {
+    background-color: #c99cf6
+}
+
+button:hover.wd-whiteBackground {
+    background-color: black;
+    color: white;
+}
+
+button:hover.wd-blackBackground {
+    background-color: white;
+    color: black
+}
+
+button:hover.wd-greenBackground {
+    background-color: #b7ec0b;
+}
