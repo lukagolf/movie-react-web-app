@@ -2,6 +2,7 @@ import React from "react";
 import MyNav from "../nav";
 import VideoBackground from "./video-background";
 import HomeCarousel from "./home-carousel";
+import HomeSearch from "./home-search";
 
 
 function Home() {
@@ -10,6 +11,7 @@ function Home() {
             <MyNav />
             <VideoBackground />
             <HomeCarousel />
+            <HomeSearch />
         </div>
     );
 }
