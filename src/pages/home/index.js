@@ -1,8 +1,8 @@
 import React from "react";
 import MyNav from "../nav";
-import VideoBackground from "./video-background";
-import HomeCarousel from "./home-carousel";
-import HomeSearch from "./home-search";
+import VideoBackground from "./video/video-background";
+import HomeCarousel from "./carousel/carousel";
+import HomeSearch from "./search/search";
 
 
 function Home() {

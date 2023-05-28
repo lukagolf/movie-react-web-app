@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
-import ExploreBtn from "../../ui-styling/buttons/exploreBtn";
-import AdminBtn from "../../ui-styling/buttons/adminBtn";
+import ExploreBtn from "../../../ui-styling/buttons/exploreBtn";
+import AdminBtn from "../../../ui-styling/buttons/adminBtn";
 
 function VideoBackground() {
     const divStyle = {
@@ -15,12 +15,12 @@ function VideoBackground() {
     };
 
     return (
-        <div className="video-background">
-            <video autoPlay="autoplay" loop="loop" muted className="video">
+        <div className="wd-video-background">
+            <video autoPlay="autoplay" loop="loop" muted className="wd-video">
                 <source src="media/home-background.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
-            <div className="wd-content position-absolute" style={divStyle}>
+            <div className="position-absolute" style={divStyle}>
                 <div class="wd-text-container">
                     <div className="position-relative">
                         <div className="wd-vline" />

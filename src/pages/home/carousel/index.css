@@ -1,0 +1,30 @@
+.wd-carousel-title {
+    left: 6%;
+    padding: 10px;
+}
+
+.wd-text-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.wd-slider {
+    margin: 0 20px;
+    overflow: "hidden";
+    padding: 2rem 0;
+}
+
+.wd-slider img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.react-multi-carousel-list {
+    padding: 0rem 0 2rem 0;
+}
+
+.wd-carousel-parent {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
