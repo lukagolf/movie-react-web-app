@@ -1,5 +1,10 @@
+import NavBar from "../ui-styling/common/navBar";
 function Login() {
-  return <></>;
+  return (
+    <>
+      <NavBar />
+    </>
+  );
 }
 
 export default Login;

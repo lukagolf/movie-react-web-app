@@ -1,6 +1,6 @@
 import React from "react";
 import { FaCheck } from "react-icons/fa";
-import "../styles.css";
+import "../../styles.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 // trash can with white border

@@ -1,6 +1,6 @@
 import React from "react";
 import { BsFillBookmarkFill } from "react-icons/bs";
-import "../styles.css";
+import "../../styles.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 // trash can with white border

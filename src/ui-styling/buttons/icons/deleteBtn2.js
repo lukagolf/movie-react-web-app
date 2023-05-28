@@ -1,15 +1,15 @@
 import React from "react";
-import { RiPencilFill } from "react-icons/ri";
-import "../styles.css";
+import { AiFillDelete } from "react-icons/ai";
+import "../../styles.css";
 import "bootstrap/dist/css/bootstrap.css";
 
-// pencil with white border
-function EditBtn2() {
+// trash can with white border
+function DeleteBtn2() {
   return (
     <button className="square rounded-circle wd-whiteBorder wd-circleBorderBtn wd-blackBackground wd-whiteText">
-      <RiPencilFill size={25} />
+      <AiFillDelete size={25} />
     </button>
   );
 }
 
-export default EditBtn2;
+export default DeleteBtn2;

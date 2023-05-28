@@ -1,5 +1,11 @@
+import NavBar from "../ui-styling/common/navBar";
 function Profile() {
-  return <></>;
+  return (
+    
+    <>
+      <NavBar />
+    </>
+  );
 }
 
 export default Profile;

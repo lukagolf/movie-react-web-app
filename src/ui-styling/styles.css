@@ -1,15 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 @import url('https://fonts.cdnfonts.com/css/syne');
-.font-questrial {
-    font-family: 'Questrial', sans-serif;
-}
-
 .container {
     margin-top: 20px;
 }
 
 .form-control {
     width: 50%;
+}
+
+.wd-padding10 {
+    padding: 10px !important;
+}
+
+.wd-marginLeft10 {
+    margin-left: 10px;
+}
+
+* {
+    font-family: 'Questrial', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700 !important;
 }
 
 
@@ -47,7 +63,11 @@
 }
 
 .wd-purpleText {
-    color: #825CA7
+    color: #825CA7 !important;
+}
+
+.wd-pinkText {
+    color: #FE4DAF
 }
 
 
@@ -55,7 +75,7 @@
 
 .wd-purpleBorder {
     border-width: 2px;
-    border-color: #825CA7;
+    border-color: #825CA7 !important;
 }
 
 .wd-whiteBorder {
@@ -101,7 +121,7 @@ button:hover.wd-purpleBackground {
 
 button:hover.wd-whiteBackground {
     background-color: black;
-    color: white;
+    color: white !important;
 }
 
 button:hover.wd-blackBackground {

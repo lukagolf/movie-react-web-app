@@ -10,7 +10,6 @@ import Login from "./pages/login";
 function App() {
   return (
     <BrowserRouter>
-      <div className="container">
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Home />} />
@@ -19,7 +18,6 @@ function App() {
           <Route path="/details" element={<Details />} />
           <Route path="/login" element={<Login />} />
         </Routes>
-      </div>
     </BrowserRouter>
   );
 }
