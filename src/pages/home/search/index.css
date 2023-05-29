@@ -1,0 +1,18 @@
+.wd-outer-div {
+    background-color: rgb(204, 173, 234);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.wd-inner-div {
+    background-color: white;
+    padding: 50px;
+    text-align: center;
+    width: 60%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
