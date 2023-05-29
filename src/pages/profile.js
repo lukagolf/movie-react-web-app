@@ -1,8 +1,8 @@
-import NavBar from "../common-components/navBar";
+import MyNav from "../common-components/nav";
 function Profile() {
   return (
     <>
-      <NavBar />
+      <MyNav />
     </>
   );
 }

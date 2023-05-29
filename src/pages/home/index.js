@@ -1,5 +1,5 @@
 import React from "react";
-import MyNav from "../nav";
+import MyNav from "../../common-components/nav";
 import VideoBackground from "./video/video-background";
 import HomeCarousel from "./carousel/carousel";
 import HomeSearch from "./search/search";

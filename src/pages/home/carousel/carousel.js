@@ -53,60 +53,60 @@ function HomeCarousel() {
     ];
 
     return (
-        <div>
-            <div className="wd-carousel-title position-relative">
-                <div class="wd-text-container">
-                    Latest Releases
+      <div>
+        <div className="wd-carousel-title position-relative">
+          <div class="wd-text-container">
+            <h3 className="wd-purpleText">Latest Releases</h3>
+          </div>
+        </div>
+        <div className="wd-carousel-parent">
+          <Carousel
+            responsive={responsive}
+            autoPlay={true}
+            swipeable={true}
+            draggable={true}
+            showDots={false}
+            infinite={true}
+            partialVisible={false}
+          >
+            {sliderImageUrl.map((imageUrl, index) => {
+              return (
+                // <CardFlip>
+                <div className="wd-slider p-0 m-0" key={index}>
+                  <img src={imageUrl.url} alt="movie" />
                 </div>
-            </div>
-            <div className="wd-carousel-parent">
-                <Carousel
-                    responsive={responsive}
-                    autoPlay={true}
-                    swipeable={true}
-                    draggable={true}
-                    showDots={false}
-                    infinite={true}
-                    partialVisible={false}
-                >
-                    {sliderImageUrl.map((imageUrl, index) => {
-                        return (
-                            // <CardFlip>
-                            <div className="wd-slider p-0 m-0" key={index}>
-                                <img src={imageUrl.url} alt="movie" />
-                            </div>
-                            // </CardFlip>
-                        );
-                    })}
-                </Carousel>
-            </div >
-            <div className="wd-carousel-title position-relative">
-                <div class="wd-text-container">
-                    Top Pics
+                // </CardFlip>
+              );
+            })}
+          </Carousel>
+        </div>
+        <div className="wd-carousel-title position-relative">
+          <div class="wd-text-container">
+            <h3 className="wd-purpleText">Top Picks</h3>
+          </div>
+        </div>
+        <div className="wd-carousel-parent">
+          <Carousel
+            responsive={responsive}
+            autoPlay={true}
+            swipeable={true}
+            draggable={true}
+            showDots={false}
+            infinite={true}
+            partialVisible={false}
+          >
+            {sliderImageUrl.map((imageUrl, index) => {
+              return (
+                // <CardFlip>
+                <div className="wd-slider p-0 m-0" key={index}>
+                  <img src={imageUrl.url} alt="movie" />
                 </div>
-            </div>
-            <div className="wd-carousel-parent">
-                <Carousel
-                    responsive={responsive}
-                    autoPlay={true}
-                    swipeable={true}
-                    draggable={true}
-                    showDots={false}
-                    infinite={true}
-                    partialVisible={false}
-                >
-                    {sliderImageUrl.map((imageUrl, index) => {
-                        return (
-                            // <CardFlip>
-                            <div className="wd-slider p-0 m-0" key={index}>
-                                <img src={imageUrl.url} alt="movie" />
-                            </div>
-                            // </CardFlip>
-                        );
-                    })}
-                </Carousel>
-            </div >
-        </div >
+                // </CardFlip>
+              );
+            })}
+          </Carousel>
+        </div>
+      </div>
     );
 }
 export default HomeCarousel;

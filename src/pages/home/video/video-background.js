@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
-import ExploreBtn from "../../../ui-styling/buttons/exploreBtn";
-import AdminBtn from "../../../ui-styling/buttons/adminBtn";
+import ExploreBtn from "../../../ui-styling/buttons/text/exploreBtn";
+import AdminBtn from "../../../ui-styling/buttons/text/adminBtn";
 
 function VideoBackground() {
     const divStyle = {
