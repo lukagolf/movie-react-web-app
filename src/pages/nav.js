@@ -1,8 +1,8 @@
 import React from "react";
 import { Nav, Navbar} from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ProfileBtn from "../ui-styling/buttons/profileBtn";
-import SearchBtn from "../ui-styling/buttons/searchBtn";
+import ProfileBtn from "../ui-styling/buttons/icons/profileBtn";
+import SearchBtn from "../ui-styling/buttons/icons/searchBtn";
 
 function MyNav() {
     return (

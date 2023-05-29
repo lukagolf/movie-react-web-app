@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 import "../index.css";
-import SearchBtn from "../../../ui-styling/buttons/searchBtn";
+import SearchBtn from "../../../ui-styling/buttons/icons/searchBtn";
 
 
 function HomeSearch() {
