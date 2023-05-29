@@ -1,6 +1,6 @@
 import React from "react";
 import { BsFillPersonFill } from "react-icons/bs";
-import "../../styles.css";
+import "../../index.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 function ProfileBtn({ className }) {

@@ -1,5 +1,5 @@
 import React from "react";
-import "../ui-styling/styles.css";
+import "../ui-styling/index.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { Nav, Navbar} from "react-bootstrap";
 import { Link } from "react-router-dom";

@@ -1,4 +1,4 @@
-import MyNav from "../common-components/nav";
+import MyNav from "../../common-components/nav";
 
 function Login() {
   return (

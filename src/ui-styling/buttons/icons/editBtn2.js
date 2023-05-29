@@ -1,6 +1,6 @@
 import React from "react";
 import { RiPencilFill } from "react-icons/ri";
-import "../../styles.css";
+import "../../index.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 // pencil with white border

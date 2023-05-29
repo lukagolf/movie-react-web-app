@@ -1,6 +1,6 @@
 import React from "react";
 import { AiFillDelete } from "react-icons/ai";
-import "../../styles.css";
+import "../../index.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 // trash can with black background

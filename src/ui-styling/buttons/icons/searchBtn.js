@@ -1,6 +1,6 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
-import "../../styles.css";
+import "../../index.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 function SearchBtn({className}) {
