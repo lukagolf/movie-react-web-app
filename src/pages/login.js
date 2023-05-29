@@ -1,4 +1,4 @@
-import NavBar from "../ui-styling/common/navBar";
+import NavBar from "../common-components/navBar";
 function Login() {
   return (
     <>

@@ -1,10 +1,10 @@
 import React from "react";
-import SignInBtn from "../buttons/text/signInBtn";
-import "../styles.css";
+import "../ui-styling/styles.css";
 import "bootstrap/dist/css/bootstrap.css";
-import SearchBtn from "../buttons/icons/searchBtn";
-import ProfileBtn from "../buttons/icons/profileBtn";
-import SignOutBtn from "../buttons/text/signOutBtn";
+import SearchBtn from "../ui-styling/buttons/icons/searchBtn";
+import ProfileBtn from "../ui-styling/buttons/icons/profileBtn";
+import SignInBtn from "../ui-styling/buttons/text/signInBtn";
+import SignOutBtn from "../ui-styling/buttons/text/signOutBtn";
 
 const NavBar = ({
   options = { homePage: false, search: true, signIn: true, profile: false, signOut: false},

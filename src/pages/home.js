@@ -8,8 +8,8 @@ import CheckmarkBtn from "../ui-styling/buttons/icons/checkmarkBtn";
 import BackBtn from "../ui-styling/buttons/icons/backBtn";
 import BookmarkBtn from "../ui-styling/buttons/icons/bookmarkBtn";
 import NextBtn from "../ui-styling/buttons/icons/nextBtn";
-import BackBar from "../ui-styling/common/backBar";
-import NavBar from "../ui-styling/common/navBar";
+import NavBar from "../common-components/navBar";
+import BackBar from "../common-components/backBar";
 
 function Home() {
   return (

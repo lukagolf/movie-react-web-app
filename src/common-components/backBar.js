@@ -1,6 +1,6 @@
 import React from "react";
-import BackBtn from "../buttons/icons/backBtn";
-import "../styles.css";
+import BackBtn from "../ui-styling/buttons/icons/backBtn";
+import "../ui-styling/styles.css"
 import "bootstrap/dist/css/bootstrap.css";
 
 const BackBar = () => {
