@@ -1,0 +1,9 @@
+.wd-vline {
+    border-left: 1px black solid;
+    height: 400px;
+}
+
+.wd-padding {
+    padding-left: 20% !important;
+    padding-right: 20% !important;
+}
