@@ -1,6 +1,6 @@
 import React from 'react';
 import "./index.css";
-import "../index.css"
+import "../../../ui-styling/index.css";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 /* import CardFlip from 'react-card-flip'; */

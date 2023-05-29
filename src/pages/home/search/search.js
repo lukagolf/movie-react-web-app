@@ -1,15 +1,15 @@
 import React from "react";
 import "./index.css";
-import "../index.css";
+import "../../../ui-styling/index.css"
 import SearchBtn from "../../../ui-styling/buttons/icons/searchBtn";
-
+import "bootstrap/dist/css/bootstrap.css";
 
 function HomeSearch() {
     return (
       <>
         <div class="wd-outer-div">
           <div class="wd-inner-div">
-            <h3 className="mb-4 wd-purpleText">Search for movies</h3>
+            <h3 class="mb-4 wd-purpleText">Search for movies</h3>
             <div class="d-flex justify-content-center">
               <input
                 type="text"

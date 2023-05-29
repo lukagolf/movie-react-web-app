@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.css";
+import "../../../ui-styling/index.css";
 import ExploreBtn from "../../../ui-styling/buttons/text/exploreBtn";
 import AdminBtn from "../../../ui-styling/buttons/text/adminBtn";
 
