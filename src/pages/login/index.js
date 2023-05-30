@@ -4,6 +4,7 @@ import BackBar from "../../common-components/backBar";
 import "../../ui-styling/index.css";
 import "./index.css";
 import BlackTextBtn from "../../ui-styling/buttons/text/blackTextBtn";
+import Banner from "./banner";
 
 function Login() {
   return (
@@ -25,29 +26,42 @@ function Login() {
           <div className="col-6">
             <h4 className="text-center">Sign In</h4>
             <br />
-            <form id="loginForm" className="wd-padding">
-              <label for="username">Username</label>
+            <form id="loginForm" className="wd-margin">
+              <label for="username" className="mt-2">
+                Username
+              </label>
               <br />
               <input id="username" className="form-control" />
-              <label for="password">Password</label>
+              <label for="password" className="mt-2">
+                Password
+              </label>
               <br />
               <input id="password" className="form-control" />
               <br />
-              <BlackTextBtn text={"Register"} />
+              <BlackTextBtn text={"Sign In"} />
             </form>
+            <br />
+            <Banner success={true} />
+            <Banner success={false} />
           </div>
 
           <div className="wd-vline col-6">
             <h4 className="text-center">Create Account</h4>
             <br />
-            <form id="signUpForm" className="wd-padding">
-              <label for="username">Username</label>
+            <form id="signUpForm" className="wd-margin">
+              <label for="username" className="mt-2">
+                Username
+              </label>
               <br />
-              <input id="username" className="form-control" />
-              <label for="password">Password</label>
+              <input id="username" type="text" className="form-control" />
+              <label for="password" className="mt-2">
+                Password
+              </label>
               <br />
-              <input id="password" className="form-control" />
-              <label for="role">Role</label>
+              <input id="password" type="password" className="form-control" />
+              <label for="role" className="mt-2">
+                Role
+              </label>
               <br />
               <select class="form-select">
                 <option value="VIEWER" selected>
@@ -56,16 +70,21 @@ function Login() {
                 <option value="CRITIC">Critic</option>
                 <option value="ADMIN">Admin</option>
               </select>
-              <label for="email">Email</label>
+              <label for="email" className="mt-2">
+                Email
+              </label>
               <br />
-              <input id="email" className="form-control" />
+              <input id="email" type="email" className="form-control" />
               <br />
               <BlackTextBtn text={"Register"} />
             </form>
+            <br />
+            <Banner success={true} />
+            <Banner success={false} />
           </div>
         </div>
       </div>
-      <BackBar />
+      <BackBar className={"fixed-bottom"} />
     </>
   );
 }

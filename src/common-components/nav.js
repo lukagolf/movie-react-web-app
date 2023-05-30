@@ -31,18 +31,14 @@ function MyNav({
         <Navbar.Collapse className="justify-content-end">
           {options.search ? (
             <Nav.Item>
-              <Nav.Link as={Link} to="/search">
-                <SearchBtn />
-              </Nav.Link>
+              <SearchBtn />
             </Nav.Item>
           ) : (
             ""
           )}
           {options.profile ? (
             <Nav.Item>
-              <Nav.Link as={Link} to="/profile">
-                <ProfileBtn />
-              </Nav.Link>
+              <ProfileBtn />
             </Nav.Item>
           ) : (
             ""
@@ -50,7 +46,7 @@ function MyNav({
           {options.signIn ? (
             <Nav.Item>
               <Nav.Link as={Link} to="/login">
-                <WhiteTextBtn text={"Sign In"}/>
+                <WhiteTextBtn text={"Sign In"} />
               </Nav.Link>
             </Nav.Item>
           ) : (
@@ -59,7 +55,7 @@ function MyNav({
           {options.signOut ? (
             <Nav.Item>
               <Nav.Link as={Link} to="/home">
-                <WhiteTextBtn text={"Sign Out"}/>
+                <WhiteTextBtn text={"Sign Out"} />
               </Nav.Link>
             </Nav.Item>
           ) : (

@@ -3,7 +3,11 @@
     height: 400px;
 }
 
-.wd-padding {
-    padding-left: 20% !important;
-    padding-right: 20% !important;
+.wd-margin {
+    margin-left: 20% !important;
+    margin-right: 20% !important;
+}
+
+.wd-greenBorder {
+    border-color: #BADA55;
 }

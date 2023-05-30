@@ -3,10 +3,13 @@ import { AiFillDelete } from "react-icons/ai";
 import "../../index.css";
 import "bootstrap/dist/css/bootstrap.css";
 
-// trash can with black background
-function DeleteBtn() {
+function DeleteBtn({addWhiteBorder}) {
   return (
-    <button className="square rounded-circle wd-circleBtn wd-blackBackground wd-whiteText">
+    <button
+      className={`square rounded-circle ${
+        addWhiteBorder ? "wd-whiteBorder wd-circleBorderBtn" : "wd-circleBtn"
+      } wd-blackBackground wd-whiteText`}
+    >
       <AiFillDelete size={25} />
     </button>
   );

@@ -3,10 +3,13 @@ import { RiPencilFill } from "react-icons/ri";
 import "../../index.css";
 import "bootstrap/dist/css/bootstrap.css";
 
-// pencil with black background)
-function EditBtn() {
+function EditBtn({addWhiteBorder}) {
   return (
-    <button className="square rounded-circle wd-circleBtn wd-blackBackground wd-whiteText">
+    <button
+      className={`square rounded-circle ${
+        addWhiteBorder ? "wd-whiteBorder wd-circleBorderBtn" : "wd-circleBtn"
+      } wd-blackBackground wd-whiteText`}
+    >
       <RiPencilFill size={25} />
     </button>
   );
