@@ -2,7 +2,6 @@ import React from "react";
 import "./index.css";
 import "../../../ui-styling/index.css"
 import SearchBtn from "../../../ui-styling/buttons/icons/searchBtn";
-import "bootstrap/dist/css/bootstrap.css";
 
 function HomeSearch() {
     return (

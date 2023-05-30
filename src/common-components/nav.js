@@ -5,8 +5,7 @@ import { Nav, Navbar} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ProfileBtn from "../ui-styling/buttons/icons/profileBtn";
 import SearchBtn from "../ui-styling/buttons/icons/searchBtn";
-import SignInBtn from "../ui-styling/buttons/text/signInBtn";
-import SignOutBtn from "../ui-styling/buttons/text/signOutBtn";
+import WhiteTextBtn from "../ui-styling/buttons/text/whiteTextBtn";
 
 function MyNav({
   options = {
@@ -32,26 +31,22 @@ function MyNav({
         <Navbar.Collapse className="justify-content-end">
           {options.search ? (
             <Nav.Item>
-              <Nav.Link as={Link} to="/search">
-                <SearchBtn />
-              </Nav.Link>
+              <SearchBtn />
             </Nav.Item>
           ) : (
             ""
           )}
           {options.profile ? (
             <Nav.Item>
-              <Nav.Link as={Link} to="/profile">
-                <ProfileBtn />
-              </Nav.Link>
+              <ProfileBtn />
             </Nav.Item>
           ) : (
             ""
           )}
           {options.signIn ? (
             <Nav.Item>
-              <Nav.Link as={Link} to="/signIn">
-                <SignInBtn />
+              <Nav.Link as={Link} to="/login">
+                <WhiteTextBtn text={"Sign In"} />
               </Nav.Link>
             </Nav.Item>
           ) : (
@@ -60,7 +55,7 @@ function MyNav({
           {options.signOut ? (
             <Nav.Item>
               <Nav.Link as={Link} to="/home">
-                <SignOutBtn />
+                <WhiteTextBtn text={"Sign Out"} />
               </Nav.Link>
             </Nav.Item>
           ) : (

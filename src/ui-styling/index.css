@@ -40,11 +40,11 @@ h4 {
 }
 
 .wd-whiteBackground {
-    background-color: white
+    background-color: white;
 }
 
 .wd-blackBackground {
-    background-color: black
+    background-color: black !important;
 }
 
 .wd-greenBackground {
@@ -55,11 +55,11 @@ h4 {
 /* TEXT */
 
 .wd-whiteText {
-    color: white;
+    color: white !important;
 }
 
 .wd-blackText {
-    color: black;
+    color: black !important;
 }
 
 .wd-purpleText {
@@ -124,13 +124,13 @@ button:hover.wd-purpleBackground {
 }
 
 button:hover.wd-whiteBackground {
-    background-color: black;
+    background-color: black !important;
     color: white !important;
 }
 
 button:hover.wd-blackBackground {
-    background-color: white;
-    color: black
+    background-color: white !important;
+    color: black !important;
 }
 
 button:hover.wd-greenBackground {

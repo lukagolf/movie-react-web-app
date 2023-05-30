@@ -1,0 +1,13 @@
+.wd-vline {
+    border-left: 1px black solid;
+    height: 400px;
+}
+
+.wd-margin {
+    margin-left: 20% !important;
+    margin-right: 20% !important;
+}
+
+.wd-greenBorder {
+    border-color: #BADA55;
+}

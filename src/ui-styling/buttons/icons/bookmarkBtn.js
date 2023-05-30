@@ -3,7 +3,6 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import "../../index.css";
 import "bootstrap/dist/css/bootstrap.css";
 
-// trash can with white border
 function BookmarkBtn() {
   return (
     <button className="square rounded-circle wd-purpleBackground wd-circleBtn wd-whiteText">
