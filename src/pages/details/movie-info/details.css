@@ -10,3 +10,9 @@
 .wd-title-text {
     font-size: 48px;
 }
+
+.wd-left-col {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}

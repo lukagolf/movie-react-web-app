@@ -2,6 +2,20 @@ import React from "react";
 import "./details.css"
 import testPhoto from "./flower.jpg"
 import "../../../ui-styling/index.css"
+import SavedBtn from "../../../ui-styling/buttons/icons/savedBtn";
+
+function leftCol({isAnonymous}) {
+    if (isAnonymous) {
+        return (
+            <></>
+        )
+    }
+    else {
+        return(
+            <SavedBtn/>
+        )
+    }
+}
 
 const MovieListItem = (
     {
@@ -19,7 +33,9 @@ const MovieListItem = (
     }) => {
     return (
         <div className="wd-video-details-background row">
-            <div className="wd-left-col col-1"></div>
+            <div className="wd-left-col col-1">
+                <SavedBtn/>
+            </div>
             <div className="wd-details-col col-5">
                 <div className="wd-title-text">Title</div>
                 <form>
