@@ -3,6 +3,7 @@ import "./details.css"
 import testPhoto from "./flower.jpg"
 import "../../../ui-styling/index.css"
 import SavedBtn from "../../../ui-styling/buttons/icons/savedBtn";
+import TagBtn from "../../../ui-styling/buttons/icons/tagBtn";
 
 function leftCol({isAnonymous}) {
     if (isAnonymous) {
@@ -41,7 +42,7 @@ const MovieListItem = (
                 <form>
                     {
                         movie.genres.split(",").map((genre) => (
-                            <button className="wd-whiteBackground wd-purpleText wd-purpleBorder rounded-pill p-2 m-1">{genre}</button>
+                            <TagBtn text={genre}/>
                         ))
                     }
                 </form><br/>
