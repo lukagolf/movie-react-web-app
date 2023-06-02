@@ -1,0 +1,28 @@
+.wd-review-div {
+    background-color: lightgrey;
+    padding: 50px;
+}
+
+.wd-review-content {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wd-review-list {
+    list-style: none;
+}
+
+.wd-review-list li a {
+    color: black
+}
+
+.wd-add-review-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.wd-add-review-form button {
+    margin-left: auto;
+}

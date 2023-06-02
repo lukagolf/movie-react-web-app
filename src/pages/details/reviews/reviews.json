@@ -1,0 +1,24 @@
+[
+    {
+      "_id": 123,
+      "criticId": "user123",
+      "title": "Best Movie ever",
+      "rating": 5,
+      "description": "description"
+    },
+    {
+        "_id": 124,
+        "criticId": "user456",
+        "title": "Greatest movie of all time",
+        "rating": 5,
+        "description": "description"
+    },
+    {
+        "_id": 125,
+        "criticId": "user789",
+        "title": "Pretty good",
+        "rating": 3,
+        "description": "description"
+    }
+   ]
+   

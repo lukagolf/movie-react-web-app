@@ -1,0 +1,14 @@
+.wd-profile-info-background {
+    position: relative;
+    height: 50vh;
+    color: white;
+    padding: 56px;
+}
+
+.wd-profile-list {
+    list-style: none;
+}
+
+.wd-movie-list-info {
+    padding-left: 48px;
+}
