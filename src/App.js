@@ -6,19 +6,27 @@ import Search from "./pages/search";
 import Home from "./pages/home/index";
 import Details from "./pages/details";
 import Login from "./pages/login";
+import userReducer from "../src/reducers/userReducer";
+import searchReducer from "../src/reducers/searchReducer";
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+
+const store = configureStore({reducer: {user: userReducer, search: searchReducer}});
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/profile/*" element={<Profile />} />
-        <Route path="/details" element={<Details />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/profile/*" element={<Profile />} />
+          <Route path="/details" element={<Details />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

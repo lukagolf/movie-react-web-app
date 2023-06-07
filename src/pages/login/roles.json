@@ -1,0 +1,13 @@
+[{
+    "value": "",
+    "label": ""
+}, {
+    "value": "VIEWER",
+    "label": "Viewer"
+}, {
+    "value": "CRITIC",
+    "label": "Critic"
+}, {
+    "value": "ADMIN",
+    "label": "Admin"
+}]

@@ -16,6 +16,15 @@
     margin-left: 10px;
 }
 
+.wd-bottom {
+    bottom: 0;
+    position: fixed;
+}
+
+.wd-fullHeight {
+    height: 100%;
+}
+
 * {
     font-family: 'Questrial', sans-serif;
 }
