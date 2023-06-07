@@ -10,14 +10,14 @@ import Login from "./pages/login";
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/profile/*" element={<Profile />} />
-        <Route path="/details" element={<Details />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/profile/*" element={<Profile />} />
+          <Route path="/details" element={<Details />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
     </BrowserRouter>
   );
 }

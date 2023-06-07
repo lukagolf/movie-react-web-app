@@ -6,7 +6,7 @@ import HomeSearch from "./search/search";
 
 function Home() {
     return (
-        <div>
+        <div style={{"overflow-x": "hidden"}}>
             <MyNav />
             <VideoBackground />
             <HomeCarousel />
