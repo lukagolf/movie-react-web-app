@@ -1,22 +1,14 @@
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router";
-import Profile from "./pages/profile";
-import Search from "./pages/search";
-import Home from "./pages/home/index";
-import Details from "./pages/details";
-import Login from "./pages/login";
+import MovieWebsite from "./movie-website";
 
 function App() {
   return (
     <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/profile/*" element={<Profile />} />
-          <Route path="/details" element={<Details />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Navigate to="/movie-website/home" />} />
+          <Route path="/*" element={<MovieWebsite />} />
         </Routes>
     </BrowserRouter>
   );
