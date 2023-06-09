@@ -1,9 +1,13 @@
 .wd-video-details-background {
     position: relative;
     background-color: black;
-    height: 70vh;
+    height: auto;
     color: white;
     padding: 56px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow:auto;
     
 }
 
@@ -15,4 +19,25 @@
     display: flex;
     justify-content: flex-end;
     padding: 20px;
+    width: 90px;
+}
+
+.wd-details-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.wd-photo-col {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wd-photo-col img {
+    width: 90%;
+    height: auto;
+}
+
+.wd-photo-small-screen {
+    padding-top: 20px;
 }

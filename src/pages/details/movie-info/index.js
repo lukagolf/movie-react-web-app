@@ -5,15 +5,15 @@ import "../../../ui-styling/index.css"
 import SavedBtn from "../../../ui-styling/buttons/icons/savedBtn";
 import TagBtn from "../../../ui-styling/buttons/icons/tagBtn";
 
-function leftCol({isAnonymous}) {
+function leftCol({ isAnonymous }) {
     if (isAnonymous) {
         return (
             <></>
         )
     }
     else {
-        return(
-            <SavedBtn/>
+        return (
+            <SavedBtn />
         )
     }
 }
@@ -33,33 +33,70 @@ const MovieListItem = (
         }
     }) => {
     return (
-        <div className="wd-video-details-background row">
-            <div className="wd-left-col col-1">
-                <SavedBtn/>
-            </div>
-            <div className="wd-details-col col-5">
-                <div className="wd-title-text">Title</div>
-                <form>
-                    {
-                        movie.genres.split(",").map((genre) => (
-                            <TagBtn text={genre}/>
-                        ))
-                    }
-                </form><br/>
-                <div>Rating: {movie.rating}/10</div>
-                <div>Number of Watchers: {movie.numWatchers}</div> <br />
-                <div>Year: {movie.year}</div>
-                <div>Cast: {movie.cast}</div>
-                <div>Director: {movie.director}</div> <br />
-                <div>Summary: {movie.summary}</div>
+        <div>
+            <div className="wd-video-details-background row">
+                <div className="d-none d-lg-flex row">
+                    <div className="wd-left-col col-1">
+                        <SavedBtn />
+                    </div>
+                    <div className="wd-details-col col-5">
+
+                        <div className="wd-title-text">Title</div>
+                        <form>
+                            {
+                                movie.genres.split(",").map((genre) => (
+                                    <TagBtn text={genre} />
+                                ))
+                            }
+                        </form><br />
+                        <div><b>Rating:</b> {movie.rating}/10</div>
+                        <div><b>Number of Watchers:</b> {movie.numWatchers}</div> <br />
+                        <div><b>Year:</b> {movie.year}</div>
+                        <div><b>Cast:</b> {movie.cast}</div>
+                        <div><b>Director:</b> {movie.director}</div> <br />
+                        <div><b>Summary:</b> {movie.summary}</div>
+
+                    </div>
+                    <div className="wd-photo-col col-5">
+                        <img src={testPhoto} />
+                    </div>
+                    <div className="wd-right-col col-1"></div>
+                </div>
+
+                <div className="d-lg-none">
+                    <div className="col-1">
+                       
+                    </div>
+                    <div className="wd-details-col col-10">
+                    <SavedBtn />
+                        <div className="wd-title-text">Title</div>
+                        <form>
+                            {
+                                movie.genres.split(",").map((genre) => (
+                                    <TagBtn text={genre} />
+                                ))
+                            }
+                        </form><br />
+                        <div><b>Rating:</b> {movie.rating}/10</div>
+                        <div><b>Number of Watchers:</b> {movie.numWatchers}</div> <br />
+                        <div><b>Year:</b> {movie.year}</div>
+                        <div><b>Cast:</b> {movie.cast}</div>
+                        <div><b>Director:</b> {movie.director}</div> <br />
+                        <div><b>Summary:</b> {movie.summary}</div>
+
+                        <div className="wd-photo-col wd-photo-small-screen">
+                        <img height={24} src={testPhoto} />
+                    </div>
+
+                    </div>
+
+                    <div className="wd-right-col col-1"></div>
+                </div>
 
             </div>
-            <div className="wd-photo-col col-5">
-                <img height={400} src={testPhoto} />
-            </div>
-            <div className="wd-right-col col-1"></div>
 
         </div>
+
     )
 };
 export default MovieListItem;

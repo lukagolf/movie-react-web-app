@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css"
 import "../../ui-styling/index.css"
-import TagBtn from "../../ui-styling/buttons/icons/tagBtn";
+import TagBtnNoHover from "../../ui-styling/buttons/icons/tagBtnNoHover";
 import { FaUserCircle } from "react-icons/fa";
 
 function ProfileInfo() {
@@ -11,7 +11,7 @@ function ProfileInfo() {
             </div>
             <div className="wd-details-col col-5">
                 <h3>Full name (you)</h3><br/>
-                <TagBtn text="Viewer"/><br/><br/><br/>
+                <TagBtnNoHover text="Viewer"/><br/><br/><br/>
                 <h5>username</h5>
                 <h5>password</h5>
 

@@ -8,21 +8,21 @@ function AddReview() {
         <div>
             <h3>Add Review</h3>
             <form className="wd-add-review-form">
-                <div class="mb-3">
-                    <label for="reviewTitle" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="reviewTitle" aria-describedby="reviewTitle" />
+                <div className="mb-3">
+                    <label for="reviewTitle" className="form-label">Title</label>
+                    <input type="text" className="form-control" id="reviewTitle" aria-describedby="reviewTitle" />
                 </div>
-                <div class="mb-3">
-                    <label for="reviewDescription" class="form-label">Rating</label><br />
+                <div className="mb-3">
+                    <label for="reviewDescription" className="form-label">Rating</label><br />
                     <Rating
                         name="simple-controlled"
                         value={0}
                         size="large"
                     />
                 </div>
-                <div class="mb-3">
-                    <label for="reviewDescription" class="form-label">Description</label>
-                    <input type="text" class="form-control" id="reviewDescription" aria-describedby="reviewDescription" />
+                <div className="mb-3">
+                    <label for="reviewDescription" className="form-label">Description</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <SubmitReviewBtn />
             </form>
