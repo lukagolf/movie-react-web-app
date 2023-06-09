@@ -4,19 +4,25 @@ import "../../index.css"
 
 function CriticReviewListItem({ title, rating, summary }) {
     return (
-        <li>
-            <div className="row">
-                <div className="col-2">
-                    <img src={MovieThumbnail} height={100} />
+        <a
+            href="#"
+            class="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
+        >
+            <div class="row p-3 wd-movie-list-row">
+                <div className="col-3 wd-movie-list-image">
+                    <img src={MovieThumbnail}
+                    class="float-left mr-3"
+                    />
                 </div>
-                <div className="col-10 wd-movie-list-info">
-                    <h4>Title</h4>
-                    <h6>Review Rating</h6>
-                    <h6>Review Summary</h6>
+                <div className="col-9 wd-movie-list-info">
+                    <h3>Title</h3>
+                    <div>
+                        Review Rating:
+                        <br />
+                    </div>
                 </div>
             </div>
-            <hr />
-        </li>
+        </a>
     )
 };
 

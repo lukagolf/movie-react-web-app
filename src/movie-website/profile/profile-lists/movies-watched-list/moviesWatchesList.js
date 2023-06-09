@@ -1,11 +1,11 @@
 import React from "react";
-import CriticReviewListItem from "../critic-review-list/criticReviewListItem";
 import MovieWatchedListItem from "./moviesWatchedListItem";
+import NextBtn from "../../../../ui-styling/buttons/icons/nextBtn";
 
 function MoviesWatchList() {
     return (
         <div>
-            <ul className="wd-profile-list">
+            <ul className="wd-profile-list list-group">
                 <li >
                     <h3>Movies You Have Seen</h3><br />
                 </li>
@@ -13,6 +13,15 @@ function MoviesWatchList() {
                 <MovieWatchedListItem />
                 <MovieWatchedListItem />
             </ul>
+
+            <div className="wd-list-results">
+                <label className="float-end">100 results</label>
+                <br />
+                <NextBtn />
+                <br />
+                <br />
+                <label className="float-end">1 of 10 pages</label>
+            </div>
         </div>
     );
 

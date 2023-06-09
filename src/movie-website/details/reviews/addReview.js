@@ -1,21 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./reviews.css"
 import Rating from '@mui/material/Rating'
 import SubmitReviewBtn from "../../../ui-styling/buttons/icons/submitReviewButton";
-import { useDispatch } from "react-redux";
-import { createReviewThunk } from "../../services/reviews-thunks";
 
-const AddReview = () => {
-    let [comment, setReview] = useState('');
-    const dispatch = useDispatch();
-    const reviewClickHandler = () => {
-        const newReview = {
-            review: comment
-        }
-        console.log(newReview);
-        dispatch(createReviewThunk(newReview));
-        setReview("");
-    }
+function AddReview() {
     return (
         <div>
             <h3>Add Review</h3>
@@ -34,10 +22,7 @@ const AddReview = () => {
                 </div>
                 <div class="mb-3">
                     <label for="reviewDescription" class="form-label">Description</label>
-                    <textarea value={comment} placeholder="Type your review here..."
-                        className="form-control" id="reviewDescription" aria-describedby="reviewDescription"
-                        onChange={(event) => setReview(event.target.value)}>
-                    </textarea>
+                    <input type="text" class="form-control" id="reviewDescription" aria-describedby="reviewDescription" />
                 </div>
                 <SubmitReviewBtn />
             </form>
@@ -45,6 +30,3 @@ const AddReview = () => {
 
 
     );
-
-}
-export default AddReview;
