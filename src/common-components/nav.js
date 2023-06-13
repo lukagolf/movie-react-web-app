@@ -17,8 +17,8 @@ function MyNav({
   },
 }) {
   return (
-    <Navbar fluid>
-      <Nav className="container-fluid ps-5 pe-5">
+    <Navbar>
+      <Nav className="container-fluid ps-5 pe-5 ">
         <Nav.Item>
           <Navbar.Brand as={Link} to="/home">
             {options.homePage ? (
