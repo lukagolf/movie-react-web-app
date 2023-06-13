@@ -8,8 +8,9 @@ import { useSelector } from "react-redux";
 import SearchResult from "./searchResult";
 
 function Search() {
-  const { search } = useSelector((state) => state.search);
-  
+  const {search} = useSelector((state) => state.search);
+
+
   return (
     <>
       <MyNav

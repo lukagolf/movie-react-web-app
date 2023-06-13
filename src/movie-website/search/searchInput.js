@@ -6,7 +6,7 @@ import filterArray from "./filters.json";
 import genreArray from "./genres.json";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateSearch } from "../../reducers/searchReducer";
+import { updateSearch } from "../reducers/search-reducer";
 
 function SearchInput() {
 
