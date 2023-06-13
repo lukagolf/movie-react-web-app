@@ -17,15 +17,15 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/profile/*" element={<Profile />} />
-          <Route path="/details" element={<Details />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/profile/*" element={<Profile />} />
+        <Route path="/details" element={<Details />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
     </Provider>
   );
 }
