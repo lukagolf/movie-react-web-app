@@ -2,14 +2,15 @@ import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route, Navigate } from "react-router";
 import MovieWebsite from "./movie-website";
-import userReducer from "./movie-website/reducers/user-reducer";
-import searchReducer from "./movie-website/reducers/search-reducer";
+import authReducer from "./movie-website/reducers/auth-reducer";
+import reviewsReducer from "./movie-website/reducers/reviews-reducer";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 
 const store = configureStore({
   reducer: {
-    user: userReducer, search: searchReducer
+    reviews: reviewsReducer,
+    user: authReducer
   },
 });
 

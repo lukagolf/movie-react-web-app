@@ -55,7 +55,7 @@ function HomeCarousel() {
     return (
       <div>
         <div className="wd-carousel-title position-relative">
-          <div class="wd-text-container">
+          <div className="wd-text-container">
             <h3 className="wd-purpleText">Latest Releases</h3>
           </div>
         </div>
@@ -81,7 +81,7 @@ function HomeCarousel() {
           </Carousel>
         </div>
         <div className="wd-carousel-title position-relative">
-          <div class="wd-text-container">
+          <div className="wd-text-container">
             <h3 className="wd-purpleText">Top Picks</h3>
           </div>
         </div>

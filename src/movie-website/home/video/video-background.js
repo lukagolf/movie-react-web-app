@@ -22,7 +22,7 @@ function VideoBackground() {
                 Your browser does not support the video tag.
             </video>
             <div className="position-absolute" style={divStyle}>
-                <div class="wd-text-container">
+                <div className="wd-text-container">
                     <div className="position-relative">
                         <div className="wd-vline" />
                     </div>

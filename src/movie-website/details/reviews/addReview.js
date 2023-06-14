@@ -22,7 +22,7 @@ function AddReview() {
                 </div>
                 <div className="mb-3">
                     <label for="reviewDescription" className="form-label">Description</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <SubmitReviewBtn />
             </form>

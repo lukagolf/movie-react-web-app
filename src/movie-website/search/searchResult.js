@@ -14,24 +14,24 @@ function SearchResult() {
       <div className="">
         <div className="container">
           <div className="wd-margin">
-            <div class="list-group ">
+            <div className="list-group ">
               {resultArray.map(result => {
                 return (
                   <a
                     href={result.link}
-                    class="list-group-item list-group-item-action flex-column align-items-start"
+                    className="list-group-item list-group-item-action flex-column align-items-start"
                   >
-                    <div class="row p-3 ">
+                    <div className="row p-3 ">
                       <div className="col-md-5 col-lg-4">
                         <img
                           src={result.imgSrc}
                           height="5px"
-                          class="img-fluid float-left mr-3"
+                          className="img-fluid float-left mr-3"
                         />
                       </div>
                       <div className="col-md-7 col-lg-8">
                         <h3>{result.title}</h3>
-                        <div class="wd-search-result-text d-none d-md-block">
+                        <div className="wd-search-result-text d-none d-md-block">
                           {result.year}
                           <br />
                           {result.cast}

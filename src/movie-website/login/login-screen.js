@@ -3,7 +3,6 @@ import "../../ui-styling/index.css";
 import "./index.css";
 import BlackTextBtn from "../../ui-styling/buttons/text/blackTextBtn";
 import Banner from "./banner";
-import { updateUser } from "../reducers/user-reducer";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { loginThunk } from "../services/auth-thunks";
@@ -16,25 +15,11 @@ function LoginScreen() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    // display banner and store username and password in state
-    const submitBtn = () => {
-        setDisplayBanner(true);
-        dispatch(
-            updateUser({
-                signedIn: true,
-                id: "",
-                username: username,
-                password: password,
-                email: "",
-                role: "",
-            })
-        );
-    };
-
     const handleLogin = async () => {
+        setDisplayBanner(true);
         try {
             await dispatch(loginThunk({ username, password }));
-            navigate("/movie-website/profile");
+            navigate("/profile");
         } catch (e) {
             alert(e);
         }
@@ -46,20 +31,20 @@ function LoginScreen() {
                 <h4 className="text-center">Sign In</h4>
                 <br />
                 <div id="loginForm" className="wd-margin" onChange={() => setDisplayBanner(false)}>
-                    <label for="usernameLogin" className="mt-2">
+                    <label htmlFor="usernameLogin" className="mt-2">
                         Username
                     </label>
                     <br />
                     <input className="form-control" id="usernameLogin" type="text" value={username}
                         onChange={(event) => setUsername(event.target.value)} />
-                    <label for="passwordLogin" className="mt-2">
+                    <label htmlFor="passwordLogin" className="mt-2">
                         Password
                     </label>
                     <br />
                     <input className="form-control" id="passwordLogin" type="password" value={password}
                         onChange={(event) => setPassword(event.target.value)} />
                     <br />
-                    <BlackTextBtn text={"Sign In"} onClick={handleLogin} fn={submitBtn} />
+                    <BlackTextBtn text={"Sign In"} fn={handleLogin}/>
                 </div>
                 <br />
                 {displayBanner ? <Banner success={username && password} /> : ""}

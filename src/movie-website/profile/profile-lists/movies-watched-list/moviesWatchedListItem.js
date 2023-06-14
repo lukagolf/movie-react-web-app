@@ -6,12 +6,12 @@ function MovieWatchedListItem({ title, rating, summary }) {
     return (
         <a
             href="#"
-            class="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
+            className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
         >
-            <div class="row p-3 wd-movie-list-row">
+            <div className="row p-3 wd-movie-list-row">
                 <div className="col-3 wd-movie-list-image">
                     <img src={MovieThumbnail}
-                    class="float-left mr-3"
+                    className="float-left mr-3"
                     />
                 </div>
                 <div className="col-9 wd-movie-list-info">
