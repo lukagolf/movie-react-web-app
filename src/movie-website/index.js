@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
 import reviewsReducer from "./reducers/reviews-reducer";
 import authReducer from "./reducers/auth-reducer";
+import searchReducer from "./reducers/search-reducer";
 import Profile from "./profile/index";
 import Search from "./search/index";
 import Home from "./home/index";
@@ -11,7 +12,8 @@ import Login from "./login/index";
 const store = configureStore({
     reducer: {
         reviews: reviewsReducer,
-        user: authReducer
+        user: authReducer,
+        search: searchReducer
     },
 });
 

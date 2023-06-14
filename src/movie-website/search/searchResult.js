@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./index.css";
 import NextBtn from "../../ui-styling/buttons/icons/nextBtn";
-import resultArray from "./results.json";
+import { useSelector, useDispatch } from "react-redux";
+import { findMoviesThunk } from "../services/search-thunks";
 
 
 function SearchResult() {
-  // TODO:
+  const { currentUser } = useSelector((state) => state.user);
+  const [movies, setSearch] = useState(currentUser);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getMovies = async () => {
+      const { payload } = await dispatch(findMoviesThunk());
+      setSearch(payload);
+    };
+    getMovies();
+  }, []);
+
   const getNextPage = () => {
     console.log("retrieves results for next page")
   }
@@ -15,33 +26,35 @@ function SearchResult() {
         <div className="container">
           <div className="wd-margin">
             <div className="list-group ">
-              {resultArray.map(result => {
-                return (
-                  <a
-                    href={result.link}
-                    className="list-group-item list-group-item-action flex-column align-items-start"
-                  >
-                    <div className="row p-3 ">
-                      <div className="col-md-5 col-lg-4">
-                        <img
-                          src={result.imgSrc}
-                          height="5px"
-                          className="img-fluid float-left mr-3"
-                        />
-                      </div>
-                      <div className="col-md-7 col-lg-8">
-                        <h3>{result.title}</h3>
-                        <div className="wd-search-result-text d-none d-md-block">
-                          {result.year}
-                          <br />
-                          {result.cast}
-                          <br />
+
+              {movies && (
+                <div className="list-group ">
+                  {movies.map((movie) => {
+                    return (
+                      <a className="list-group-item list-group-item-action flex-column align-items-start">
+                        <div className="row p-3">
+                          <div className="col-md-5 col-lg-4">
+                            <img
+                              src={movie.image}
+                              height="5px"
+                              className="img-fluid float-left mr-3"
+                            />
+                          </div>
+                          <div className="col-md-7 col-lg-8">
+                            <h3>{movie.title}</h3>
+                            <div className="wd-search-result-text d-none d-md-block">
+                              {movie.year}
+                              <br />
+                              {movie.actors}
+                              <br />
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </a>
-                );
-              })}
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
             </div>
             <label className="float-end">100 results</label>
             <br />
