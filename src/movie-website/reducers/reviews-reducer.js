@@ -59,6 +59,5 @@ const reviewsSlice = createSlice({
     },
 });
 
-/* export const { createReview, deleteReview, likeTuit, increaseLikes, decreaseLikes } = tuitsSlice.actions; */
 export default reviewsSlice.reducer;
 

@@ -47,7 +47,7 @@ function SearchInput() {
           <div id="filterForm">
             <div className="form-group row">
               <label
-                for="actorFilter"
+                htmlFor="actorFilter"
                 className="col-sm-3 col-md-2 col-form-label mt-2"
               >
                 Actor
@@ -63,7 +63,7 @@ function SearchInput() {
             </div>
             <div className="form-group row">
               <label
-                for="directorFilter"
+                htmlFor="directorFilter"
                 className="col-sm-3 col-md-2 col-form-label mt-2"
               >
                 Director
@@ -79,7 +79,7 @@ function SearchInput() {
             </div>
             <div className="form-group row">
               <label
-                for="yearFilter"
+                htmlFor="yearFilter"
                 className="col-sm-3 col-md-2 col-form-label mt-2"
               >
                 Year
@@ -95,7 +95,7 @@ function SearchInput() {
             </div>
             <div className="form-group row">
               <label
-                for="genreFilter"
+                htmlFor="genreFilter"
                 className="col-sm-3 col-md-2 col-form-label mt-2"
               >
                 Genre

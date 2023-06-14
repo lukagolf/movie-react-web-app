@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findReviewsThunk } from "../../services/reviews-thunks";
 import "./reviews.css"
-import reviewArray from "./reviews.json"
 import ReviewItem from "./reviewItem";
 
 const ReviewList = () => {
@@ -13,6 +12,7 @@ const ReviewList = () => {
     }, [])
     return (
         <div className="wd-review-list-div">
+            {/* <pre>{JSON.stringify(reviews, null, 2)}</pre> */}
             <ul className="list-group wd-review-list">
                 {loading &&
                     <li className="list-group-item">
@@ -24,7 +24,7 @@ const ReviewList = () => {
                     <h3>User Reviews</h3><br />
                 </li>
                 {
-                    reviewArray.map(review =>
+                    reviews.map(review =>
                         <ReviewItem
                             key={review._id}
                             review={review} />

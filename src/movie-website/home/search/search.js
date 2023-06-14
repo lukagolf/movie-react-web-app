@@ -22,7 +22,7 @@ function HomeSearch() {
           <div className="wd-inner-div">
             <h3 className="mb-4 wd-purpleText">Add movie</h3>
             <div className="form-group row mb-2">
-              <label for="cast" className="col-sm-1 col-form-label me-5">
+              <label htmlFor="cast" className="col-sm-1 col-form-label me-5">
                 Name
               </label>
               <div className="col-sm-10">
@@ -35,7 +35,7 @@ function HomeSearch() {
               </div>
             </div>
             <div className="form-group row mb-2">
-              <label for="year" className="col-sm-1 col-form-label me-5">
+              <label htmlFor="year" className="col-sm-1 col-form-label me-5">
                 Year
               </label>
               <div className="col-sm-10">
@@ -48,7 +48,7 @@ function HomeSearch() {
               </div>
             </div>
             <div className="form-group row mb-2">
-              <label for="genre" className="col-sm-1 col-form-label me-5">
+              <label htmlFor="genre" className="col-sm-1 col-form-label me-5">
                 Cast
               </label>
               <div className="col-sm-10">
@@ -61,7 +61,7 @@ function HomeSearch() {
               </div>
             </div>
             <div className="form-group row mb-2">
-              <label for="genre" className="col-sm-1 col-form-label me-5">
+              <label htmlFor="genre" className="col-sm-1 col-form-label me-5">
                 Synopsis
               </label>
               <div className="col-sm-10">
@@ -74,7 +74,7 @@ function HomeSearch() {
               </div>
             </div>
             <div className="form-group row">
-              <label for="genre" className="col-sm-1 col-form-label me-5">
+              <label htmlFor="genre" className="col-sm-1 col-form-label me-5">
                 Rating
               </label>
               <div className="col-sm-10">

@@ -31,13 +31,13 @@ function LoginScreen() {
                 <h4 className="text-center">Sign In</h4>
                 <br />
                 <div id="loginForm" className="wd-margin" onChange={() => setDisplayBanner(false)}>
-                    <label htmlFor="usernameLogin" className="mt-2">
+                    <label htmlhtmlFor="usernameLogin" className="mt-2">
                         Username
                     </label>
                     <br />
                     <input className="form-control" id="usernameLogin" type="text" value={username}
                         onChange={(event) => setUsername(event.target.value)} />
-                    <label htmlFor="passwordLogin" className="mt-2">
+                    <label htmlhtmlFor="passwordLogin" className="mt-2">
                         Password
                     </label>
                     <br />
