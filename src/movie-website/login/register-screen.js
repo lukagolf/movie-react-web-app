@@ -42,19 +42,19 @@ function RegisterScreen() {
                 <br />
                 <div id="signUpForm" className="wd-margin"
                     onChange={() => setDisplayBanner(false)}>
-                    <label htmlFor="usernameRegister" className="mt-2">
+                    <label htmlhtmlFor="usernameRegister" className="mt-2">
                         Username
                     </label>
                     <br />
                     <input className="form-control" id="usernameRegister" type="text" value={username}
                         onChange={(event) => setUsername(event.target.value)} />
-                    <label htmlFor="passwordRegister" className="mt-2">
+                    <label htmlhtmlFor="passwordRegister" className="mt-2">
                         Password
                     </label>
                     <br />
                     <input className="form-control" id="passwordRegister" type="password" value={password}
                         onChange={(event) => setPassword(event.target.value)} />
-                    <label htmlFor="firstNameRegister" className="mt-2">
+                    <label htmlhtmlFor="firstNameRegister" className="mt-2">
                         First Name
                     </label>
                     <br />
@@ -64,7 +64,7 @@ function RegisterScreen() {
                         className="form-control"
                         onChange={(event) => setFirstName(event.target.value)}
                     />
-                    <label htmlFor="lastNameRegister" className="mt-2">
+                    <label htmlhtmlFor="lastNameRegister" className="mt-2">
                         Last Name
                     </label>
                     <br />
@@ -74,7 +74,7 @@ function RegisterScreen() {
                         className="form-control"
                         onChange={(event) => setLastName(event.target.value)}
                     />
-                    <label htmlFor="emailRegister" className="mt-2">
+                    <label htmlhtmlFor="emailRegister" className="mt-2">
                         Email
                     </label>
                     <br />
@@ -84,7 +84,7 @@ function RegisterScreen() {
                         className="form-control"
                         onChange={(event) => setEmail(event.target.value)}
                     />
-                    <label htmlFor="role" className="mt-2">
+                    <label htmlhtmlFor="role" className="mt-2">
                         Role
                     </label>
                     <br />
