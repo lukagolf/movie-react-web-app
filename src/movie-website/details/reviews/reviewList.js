@@ -21,7 +21,7 @@ const ReviewList = () => {
                 }
 
                 <li >
-                    <h3>User Reviews</h3><br />
+                    <h3>Critic Reviews</h3><br />
                 </li>
                 {
                     reviews.map(review =>
