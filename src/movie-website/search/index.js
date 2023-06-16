@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import MyNav from "../../common-components/nav";
 import BackBar from "../../common-components/backBar";
 import "../../ui-styling/index.css";
@@ -9,6 +9,11 @@ import SearchResult from "./searchResult";
 
 function Search() {
   const {search} = useSelector((state) => state.search);
+  const [results, setResults] = useState([]);
+
+  const handleSearch = (results) => {
+    setResults(results);
+  };
 
 
   return (
@@ -23,11 +28,11 @@ function Search() {
         }}
       />
 
-      <SearchInput />
+      <SearchInput onSearch={handleSearch}/>
       <br />
       <hr />
 
-      {search !== "" ? <SearchResult /> : ""}
+      {search !== "" ? <SearchResult results={results}/> : ""}
 
       <BackBar />
     </>
