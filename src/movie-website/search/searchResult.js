@@ -6,29 +6,26 @@ import { findMoviesThunk } from "../services/search-thunks";
 
 
 function SearchResult() {
-  const { currentUser } = useSelector((state) => state.user);
-  const [movies, setSearch] = useState(currentUser);
+  const movies = useSelector((state) => state.search.data);
+  const status = useSelector((state) => state.search.status);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    const getMovies = async () => {
-      const { payload } = await dispatch(findMoviesThunk());
-      setSearch(payload);
-      console.log("Movies result: ", payload);
-    };
-    getMovies();
-  }, []);
+    dispatch(findMoviesThunk());
+  }, [dispatch]);
 
   const getNextPage = () => {
-    console.log("retrieves results for next page")
-  }
+    console.log("retrieves results for next page");
+  };
   return (
     <>
       <div className="">
         <div className="container">
           <div className="wd-margin">
             <div className="list-group ">
-
-              {movies && (
+              {status === 'loading' && <div>Loading...</div>}
+              {status === 'failed' && <div>Error loading movies</div>}
+              {status === 'succeeded' && movies && (
                 <div className="list-group ">
                   {movies.results.map((movie) => {
                     return (
@@ -44,9 +41,7 @@ function SearchResult() {
                           <div className="col-md-7 col-lg-8">
                             <h3>{movie.title}</h3>
                             <div className="wd-search-result-text d-none d-md-block">
-                              {movie.release_date}
-                              {/* <br />
-                              {movie.actors} */}
+                              Release date: {movie.release_date}
                               <br />
                             </div>
                           </div>
