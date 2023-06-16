@@ -3,7 +3,7 @@
 ## Plan
 https://docs.google.com/document/d/1tYJLnQkKFlXBifnOB4-2YerHBUJm00Dv58PXaHBBo6M/edit?usp=sharing
 
-## Prototypes for user types:
+## Basic Prototypes for user types:
 
 https://kzeng24.wixsite.com/cinescope-anonymous
 
@@ -12,6 +12,10 @@ https://kzeng24.wixsite.com/cinescope-viewer
 https://kzeng24.wixsite.com/cinescope-critic
 
 https://kzeng24.wixsite.com/cinescope-admin
+
+
+## Connects to node server
+https://github.com/kzeng24/movie-node-server-app
 
 ---------------------------------------------------------------------------------------------------
 
