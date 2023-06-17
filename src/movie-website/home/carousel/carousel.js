@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from "react-router-dom"
-
+import React, { useEffect } from 'react';
 import "./index.css";
 import "../../../ui-styling/index.css";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { findTopMovies } from '../../services/movies-service';
-/* import CardFlip from 'react-card-flip'; */
+import { useDispatch, useSelector } from 'react-redux';
+import { findNewMoviesThunk } from '../../services/new-movies-thunks';
 
 function HomeCarousel() {
-  const divStyle = {
-    left: '6%',
-    padding: '10px',
-  };
 
   const responsive = {
     desktop: {
@@ -33,6 +26,13 @@ function HomeCarousel() {
     }
   };
 
+
+  const { newMovies } = useSelector((state) => state.newMovies);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(findNewMoviesThunk());
+  }, [dispatch]);
+
   const [topMovies, setTopMovies] = useState([]);
   useEffect(() => {
     const TOP_MOVIES_API = 'https://api.themoviedb.org/3/movie/popular';
@@ -48,36 +48,11 @@ function HomeCarousel() {
 
   }, [])
 
-
-
-  const sliderImageUrl = [
-    {
-      url:
-        "https://i2.wp.com/www.geeksaresexy.net/wp-content/uploads/2020/04/movie1.jpg?resize=600%2C892&ssl=1"
-    },
-    {
-      url:
-        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-kids-movies-2020-call-of-the-wild-1579042974.jpg?crop=0.9760858955588091xw:1xh;center,top&resize=480:*"
-    },
-    {
-      url:
-        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-movies-for-kids-2020-sonic-the-hedgehog-1571173983.jpg?crop=0.9871668311944719xw:1xh;center,top&resize=480:*"
-    },
-    {
-      url:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQS82ET2bq9oTNwPOL8gqyoLoLfeqJJJWJmKQ&usqp=CAU"
-    },
-    {
-      url:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTdvuww0JDC7nFRxiFL6yFiAxRJgM-1tvJTxA&usqp=CAU"
-    }
-  ];
-
   return (
     <div>
       <div className="wd-carousel-title position-relative">
         <div className="wd-text-container">
-          <h3 className="wd-purpleText">Latest Releases</h3>
+          <h3 className="wd-purpleText">Watchlist</h3>
         </div>
       </div>
       <div className="wd-carousel-parent">
@@ -90,23 +65,23 @@ function HomeCarousel() {
           infinite={true}
           partialVisible={false}
         >
-          {sliderImageUrl.map((imageUrl, index) => {
+          {newMovies.map((movie, index) => {
             return (
-              // <CardFlip>
-              <Link to="">
-                <div className="wd-slider p-0 m-0" key={index}>
-                  <img src={imageUrl.url} alt="movie" />
-                </div>
-              </Link>
-
-              // </CardFlip>
+              <div className="wd-slider p-0 m-0" key={index}>
+                <img
+                  src={
+                    "http://image.tmdb.org/t/p/w500/" + movie.backdrop_path
+                  }
+                  alt="movie"
+                />
+              </div>
             );
           })}
         </Carousel>
       </div>
       <div className="wd-carousel-title position-relative">
         <div className="wd-text-container">
-          <h3 className="wd-purpleText">Top Picks</h3>
+          <h3 className="wd-purpleText">Latest Releases</h3>
         </div>
       </div>
       <div className="wd-carousel-parent">
@@ -134,17 +109,9 @@ function HomeCarousel() {
             )
 
           }
-          {/* {sliderImageUrl.map((imageUrl, index) => {
-              return (
-                // <CardFlip>
-                <div className="wd-slider p-0 m-0" key={index}>
-                  <img src={imageUrl.url} alt="movie" />
-                </div>
-                // </CardFlip>
-              );
-            })} */}
         </Carousel>
       </div>
+
     </div>
   );
 }
