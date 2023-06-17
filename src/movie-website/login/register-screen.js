@@ -29,7 +29,7 @@ function RegisterScreen() {
         setDisplayBanner(true);
         try {
             await dispatch(registerThunk({ username, password, firstName, lastName, email, role }));
-            navigate("/profile");
+            navigate(`/profile/${username}`);
         } catch (e) {
             alert(e);
         }

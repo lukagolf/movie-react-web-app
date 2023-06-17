@@ -33,3 +33,19 @@ export const register = async ({ username, password, firstName, lastName, email,
     console.log(user);
     return user;
 };
+
+export const getProfileByUsername = async (username) => {
+    const response = await api.get(`${USERS_URL}/${username}`);
+    return response;
+};
+
+export const followUser = async (username) => {
+    const response = await api.post(`${USERS_URL}/${username}/follow`);
+    return response;
+};
+
+export const unfollowUser = async (username) => {
+    const response = await api.post(`${USERS_URL}/${username}/unfollow`);
+    return response;
+};
+

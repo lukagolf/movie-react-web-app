@@ -19,7 +19,7 @@ function LoginScreen() {
         setDisplayBanner(true);
         try {
             await dispatch(loginThunk({ username, password }));
-            navigate("/profile");
+            navigate(`/profile/${username}`);
         } catch (e) {
             alert(e);
         }

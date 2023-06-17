@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import * as searchService from "./search-service";
-
+import * as moviesService from "./movies-service";
 
 export const findMoviesThunk = createAsyncThunk(
     "search/findMovies",
-    async (info) => await searchService.findMovies(info)
+    async (searchParams) => await moviesService.findMovies(searchParams)
 );
