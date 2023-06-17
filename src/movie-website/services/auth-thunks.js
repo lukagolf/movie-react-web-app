@@ -42,20 +42,3 @@ export const fetchProfileByUsernameThunk = createAsyncThunk(
         return response.data;
     }
 );
-
-export const followUserThunk = createAsyncThunk(
-    "user/follow",
-    async (username) => {
-        const response = await authService.followUser(username);
-        return response.data;
-    }
-);
-
-export const unfollowUserThunk = createAsyncThunk(
-    "user/unfollow",
-    async (username) => {
-        const response = await authService.unfollowUser(username);
-        return response.data;
-    }
-);
-

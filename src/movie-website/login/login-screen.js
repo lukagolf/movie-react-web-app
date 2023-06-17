@@ -5,7 +5,8 @@ import BlackTextBtn from "../../ui-styling/buttons/text/blackTextBtn";
 import Banner from "./banner";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { loginThunk } from "../services/auth-thunks";
+import { loginThunk, storeUserInLocalStorage } from "../services/auth-thunks";
+import { setUser } from "../reducers/auth-reducer";
 
 function LoginScreen() {
     const [username, setUsername] = useState("");
@@ -18,8 +19,13 @@ function LoginScreen() {
     const handleLogin = async () => {
         setDisplayBanner(true);
         try {
-            await dispatch(loginThunk({ username, password }));
-            navigate(`/profile/${username}`);
+            const actionResult = await dispatch(loginThunk({ username, password }));
+            if (loginThunk.fulfilled.match(actionResult)) {
+                dispatch(setUser(actionResult.payload));
+                navigate(`/profile/${username}`);
+            } else {
+                throw new Error(actionResult.error.message);
+            }
         } catch (e) {
             alert(e);
         }
@@ -44,7 +50,7 @@ function LoginScreen() {
                     <input className="form-control" id="passwordLogin" type="password" value={password}
                         onChange={(event) => setPassword(event.target.value)} />
                     <br />
-                    <BlackTextBtn text={"Sign In"} fn={handleLogin}/>
+                    <BlackTextBtn text={"Sign In"} fn={handleLogin} />
                 </div>
                 <br />
                 {displayBanner ? <Banner success={username && password} /> : ""}
