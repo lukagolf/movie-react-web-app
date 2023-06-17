@@ -3,9 +3,9 @@ import { FaBookmark } from "react-icons/fa";
 import "../../index.css";
 import "bootstrap/dist/css/bootstrap.css";
 
-function SavedBtn({className}) {
+function SavedBtn({className, fn}) {
   return (
-    <button
+    <button onClick={fn} 
       className={`square rounded-circle wd-purpleBackground wd-circleBtn wd-whiteText ${className}`}
     >
       <FaBookmark size={25} />

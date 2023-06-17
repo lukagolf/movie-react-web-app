@@ -1,13 +1,27 @@
-import MyNav from "../../common-components/nav";
+import MyNav from "../../nav-components/nav";
 import ProfileInfo from "./profileInfo";
 import ProfileLists from "./profile-lists/profileLists";
+import { useSelector } from "react-redux";
 
 function Profile() {
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <>
-      <MyNav />
-      <ProfileInfo/>
-      <ProfileLists/>
+      {currentUser ? (
+        <MyNav
+          options={{
+            homePage: false,
+            search: true,
+            signIn: false,
+            profile: false,
+            signOut: true,
+          }}
+        />
+      ) : (
+        <MyNav />
+      )}
+      <ProfileInfo />
+      <ProfileLists />
     </>
   );
 }

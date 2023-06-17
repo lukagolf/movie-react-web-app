@@ -1,16 +1,17 @@
 import React from "react";
-import { AiFillDelete } from "react-icons/ai";
+import { RxCross2 } from "react-icons/rx";
 import "../../index.css";
 import "bootstrap/dist/css/bootstrap.css";
 
-function DeleteBtn({addWhiteBorder}) {
+function DeleteBtn({addWhiteBorder, className, fn}) {
   return (
     <button
+      onClick={fn}
       className={`square rounded-circle ${
         addWhiteBorder ? "wd-whiteBorder wd-circleBorderBtn" : "wd-circleBtn"
-      } wd-blackBackground wd-whiteText`}
+      } wd-blackBackground wd-whiteText ${className}`}
     >
-      <AiFillDelete size={25} />
+      <RxCross2 size={25} />
     </button>
   );
 }
