@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 import "./index.css";
 import "../../../ui-styling/index.css";
 import Carousel from 'react-multi-carousel';

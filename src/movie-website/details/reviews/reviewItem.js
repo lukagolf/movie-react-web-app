@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteReviewThunk } from "../../services/reviews-thunks";
 import DeleteBtn from "../../../ui-styling/buttons/icons/deleteBtn";
 import { NavLink } from 'react-router-dom'; // Import NavLink
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const ReviewItem = ({ review }) => {
     const dispatch = useDispatch();
