@@ -6,7 +6,7 @@ import "../../ui-styling/index.css"
 import TagBtn from "../../ui-styling/buttons/icons/tagBtn";
 import { FaUserCircle } from "react-icons/fa";
 
-import { profileThunk, logoutThunk, updateUserThunk, fetchProfileByUsernameThunk }
+import { profileThunk, logoutThunk, updateUserThunk, fetchProfileByUsernameThunk, removeUserFromLocalStorage }
     from "../services/auth-thunks";
 
 function ProfileInfo() {
@@ -31,7 +31,7 @@ function ProfileInfo() {
             setIsLoading(false);
         };
         getProfile();
-    }, [username]); // Recompute when the username changes
+    }, [username, dispatch]); // Recompute when the username changes
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -41,14 +41,28 @@ function ProfileInfo() {
                 <div className="wd-left-col col-2"></div>
                 <div className="wd-details-col col-5">
                     <label className="pe-2">First Name</label>
-                    <input type="text" value={profile.firstName} readOnly={!isCurrentUserProfile} />
+                    <input 
+                        type="text"
+                        value={profile.firstName}
+                        readOnly={!isCurrentUserProfile}
+                        onChange={e => setProfile({ ...profile, firstName: e.target.value })} // Added this line
+                    />
                     <br />
                     <label className="pe-2 mb-2">Last Name</label>
-                    <input type="text" value={profile.lastName} readOnly={!isCurrentUserProfile} />
+                    <input 
+                        type="text"
+                        value={profile.lastName}
+                        readOnly={!isCurrentUserProfile}
+                        onChange={e => setProfile({ ...profile, lastName: e.target.value })} // Added this line
+                    />
                     <br />
                     {isCurrentUserProfile && (
                         <>
-                            <button onClick={() => { dispatch(logoutThunk()); navigate("/login"); }}>Logout</button>
+                            <button onClick={() => {
+                                dispatch(logoutThunk());
+                                localStorage.removeItem('user'); // Remove user from local storage
+                                navigate("/login");
+                            }}>Logout</button>
                             <button onClick={save}>Save</button>
                             <br /><br />
                         </>
