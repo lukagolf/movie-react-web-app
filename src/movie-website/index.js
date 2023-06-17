@@ -9,13 +9,20 @@ import Search from "./search/index";
 import Home from "./home/index";
 import Details from "./details/index";
 import Login from "./login/index";
+import newMoviesReducer from "./reducers/new-movies-reducer";
+import movieVideoReducer from "./reducers/movie-video-reducer";
+import savedMoviesReducer from "./reducers/saved-movie-reducer";
+
 import ScrollToTop from "./scroll-to-top";
 const store = configureStore({
-    reducer: {
-        reviews: reviewsReducer,
-        user: authReducer,
-        search: searchReducer
-    },
+  reducer: {
+    reviews: reviewsReducer,
+    user: authReducer,
+    search: searchReducer,
+    newMovies: newMoviesReducer,
+    video: movieVideoReducer,
+    savedMovies: savedMoviesReducer
+  },
 });
 
 

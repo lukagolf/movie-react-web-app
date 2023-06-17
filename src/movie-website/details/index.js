@@ -1,16 +1,30 @@
 import React from "react";
-import MyNav from "../../common-components/nav";
+import MyNav from "../../nav-components/nav";
 import MovieListItem from "./movie-info";
 import ReviewSection from "./reviews/reviewSection";
+import { useSelector } from "react-redux";
 
 function Details() {
-    return (
+  const { currentUser } = useSelector((state) => state.user);
+  return (
     <div>
+      {currentUser ? (
+        <MyNav
+          options={{
+            homePage: false,
+            search: true,
+            signIn: false,
+            profile: true,
+            signOut: true,
+          }}
+        />
+      ) : (
         <MyNav />
-        <MovieListItem/>
-        <ReviewSection/>
+      )}
+      <MovieListItem />
+      <ReviewSection />
     </div>
-    );
+  );
 }
 
 export default Details;

@@ -45,7 +45,6 @@ function HomeCarousel() {
       setTopMovies(response.data.results);
     };
     findTopMovies();
-
   }, [])
 
   return (
@@ -83,6 +82,7 @@ function HomeCarousel() {
         <div className="wd-text-container">
           <h3 className="wd-purpleText">Latest Releases</h3>
         </div>
+
       </div>
       <div className="wd-carousel-parent">
         <Carousel

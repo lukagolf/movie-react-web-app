@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import MyNav from "../../common-components/nav";
-import BackBar from "../../common-components/backBar";
+import MyNav from "../../nav-components/nav";
+import BackBar from "../../nav-components/backBar";
 import "../../ui-styling/index.css";
 import "./index.css";
 import { useNavigate } from "react-router";
