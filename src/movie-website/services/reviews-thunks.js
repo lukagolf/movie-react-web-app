@@ -7,6 +7,11 @@ export const findReviewsThunk = createAsyncThunk(
     async () => await service.findReviews()
 );
 
+export const findCriticReviewsThunk = createAsyncThunk(
+    "reviews/findCriticReviews",
+    async (criticUsername) => await service.findCriticReviews(criticUsername)
+);
+
 export const deleteReviewThunk = createAsyncThunk(
     'reviews/deleteReview',
     async (reviewId) => {
