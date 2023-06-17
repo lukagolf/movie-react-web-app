@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { findReviewsThunk } from "../../services/reviews-thunks";
+import { findCriticReviewsThunk } from "../../services/reviews-thunks";
 import "./reviews.css"
 import ReviewItem from "./reviewItem";
 
 const ReviewList = () => {
-    const { reviews, loading } = useSelector(state => state.reviews)
+    const { reviews, loading } = useSelector(state => state.reviews);
+    const { currentUser } = useSelector((state) => state.user);
+    
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(findReviewsThunk())
+        dispatch(findCriticReviewsThunk(currentUser.username));
     }, [])
     return (
         <div className="wd-review-list-div">

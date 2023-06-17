@@ -68,16 +68,50 @@ function HomeCarousel() {
         >
           {newMovies.map((movie, index) => {
             return (
-              <div className="wd-slider p-0 m-0" key={index}>
-                <img
-                  src={
-                    "http://image.tmdb.org/t/p/w500/" + movie.backdrop_path
-                  }
-                  alt="movie"
-                />
-              </div>
+              <Link to="">
+                <div className="wd-slider p-0 m-0" key={index}>
+                  <img
+                    src={
+                      "http://image.tmdb.org/t/p/w500/" + movie.backdrop_path
+                    }
+                    alt="movie"
+                  />
+                </div>
+              </Link>
             );
           })}
+        </Carousel>
+      </div>
+      <div className="wd-carousel-title position-relative">
+        <div className="wd-text-container">
+          <h3 className="wd-purpleText">Top Picks</h3>
+        </div>
+      </div>
+      <div className="wd-carousel-parent">
+        <Carousel
+          responsive={responsive}
+          autoPlay={true}
+          swipeable={true}
+          draggable={true}
+          showDots={false}
+          infinite={true}
+          partialVisible={false}
+        >
+          {
+            topMovies.map(
+              movie => {
+                return (
+                  <Link to="">
+                    <div className="wd-slider p-0 m-0" key={movie.id}>
+                      <img src={`http://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} alt="movie" />
+                    </div>
+                  </Link>
+
+                )
+              }
+            )
+
+          }
         </Carousel>
       </div>
       <div className="wd-carousel-title position-relative">
