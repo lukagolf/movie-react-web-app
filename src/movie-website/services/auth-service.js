@@ -7,6 +7,7 @@ const api = axios.create({ withCredentials: true });
 
 export const login = async ({ username, password }) => {
     const response = await api.post(`${USERS_URL}/login`, { username, password });
+    console.log("LOGIN RESPONSE:", response);  // Log the full response
     const user = response.data;
     return user;
 };
@@ -33,3 +34,19 @@ export const register = async ({ username, password, firstName, lastName, email,
     console.log(user);
     return user;
 };
+
+export const getProfileByUsername = async (username) => {
+    const response = await api.get(`${USERS_URL}/${username}`);
+    return response;
+};
+
+export const followUser = async (username) => {
+    const response = await api.post(`${USERS_URL}/${username}/follow`);
+    return response;
+};
+
+export const unfollowUser = async (username) => {
+    const response = await api.post(`${USERS_URL}/${username}/unfollow`);
+    return response;
+};
+

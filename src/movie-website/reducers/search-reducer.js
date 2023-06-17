@@ -1,33 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { findMoviesThunk } from "../services/search-thunks";
 
-const initialState = {
-    title: "",
-    actor: "",
-    director: "",
-    year: "",
-    genre: ""
-};
-
 const searchSlice = createSlice({
     name: "search",
-    initialState,
-    extraReducers: {
-        [findMoviesThunk.pending]:
-            (state) => {
-                state.loading = true
-                state.movies = []
-            },
-        [findMoviesThunk.fulfilled]:
-            (state, { payload }) => {
-                state.loading = false
-                state.movies = payload
-            },
-        [findMoviesThunk.rejected]:
-            (state, action) => {
-                state.loading = false
-                state.error = action.error
-            },
+    initialState: { data: [], status: 'idle', error: null },
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(findMoviesThunk.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(findMoviesThunk.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.data = action.payload;
+            })
+            .addCase(findMoviesThunk.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            });
     },
 });
 export default searchSlice.reducer;

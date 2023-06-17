@@ -34,3 +34,11 @@ export const registerThunk = createAsyncThunk(
         return user;
     }
 );
+
+export const fetchProfileByUsernameThunk = createAsyncThunk(
+    "auth/fetchProfileByUsername",
+    async (username) => {
+        const response = await authService.getProfileByUsername(username);
+        return response.data;
+    }
+);

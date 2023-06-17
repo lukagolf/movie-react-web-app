@@ -13,6 +13,7 @@ import newMoviesReducer from "./reducers/new-movies-reducer";
 import movieVideoReducer from "./reducers/movie-video-reducer";
 import savedMoviesReducer from "./reducers/saved-movie-reducer";
 
+import ScrollToTop from "./scroll-to-top";
 const store = configureStore({
   reducer: {
     reviews: reviewsReducer,
@@ -28,14 +29,15 @@ const store = configureStore({
 function MovieWebsite() {
     return (
         <Provider store={store}>
-                <Routes>
-                    <Route path="/" element={<Navigate to="/home" />} />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/search" element={<Search />} />
-                    <Route path="/profile/*" element={<Profile />} />
-                    <Route path="/details" element={<Details />} />
-                    <Route path="/login" element={<Login />} />
-                </Routes>
+            <ScrollToTop />
+            <Routes>
+                <Route path="/" element={<Navigate to="/home" />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/search" element={<Search />} />
+                <Route path="/profile/:username" element={<Profile />} />
+                <Route path="/details/:id" element={<Details />} />
+                <Route path="/login" element={<Login />} />
+            </Routes>
         </Provider>
     );
 }
