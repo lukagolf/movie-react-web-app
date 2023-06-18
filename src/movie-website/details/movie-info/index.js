@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from "react";
-import "./details.css"
-import "../../../ui-styling/index.css"
+import axios from "axios";
+import "./details.css";
+import "../../../ui-styling/index.css";
 import SavedBtn from "../../../ui-styling/buttons/icons/savedBtn";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { createSavedMovieThunk, deleteSavedMovieThunk } from "../../services/saved-movies-thunks";
 import { useDispatch } from "react-redux";
 
 const MovieListItem = () => {
     const { id } = useParams();
-    const location = useLocation();
-    const movie = location.state?.movie;
+    const [movie, setMovie] = useState(null);
+
+    useEffect(() => {
+        const fetchMovie = async () => {
+            const response = await axios.get(
+                `https://api.themoviedb.org/3/movie/${id}?api_key=ffdfb660a1488ae7f304368f73e0e7ec`
+            );
+            setMovie(response.data);
+        };
+        fetchMovie();
+    }, [id]);
 
     /* KATHERINE KNOWS WHAT IS THE PROBLEM HERE AND IT SHOULD BE HANDLED */
     // const [savingMovie, setSavingMovie] = useState(false);
@@ -32,7 +42,7 @@ const MovieListItem = () => {
 
     // Check if movie exists
     if (!movie) {
-        return <div>No movie selected</div>;
+        return <div>Loading...</div>;
     }
 
     return (
