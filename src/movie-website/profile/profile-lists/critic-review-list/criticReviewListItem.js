@@ -1,8 +1,10 @@
 import React from "react";
 import MovieThumbnail from "../movieStockImg.jpg"
 import "../../index.css"
+import Rating from '@mui/material/Rating';
 
-function CriticReviewListItem({ title, rating, summary }) {
+
+function CriticReviewListItem({ title, rating, description }) {
     return (
         <a
             href="#"
@@ -15,10 +17,11 @@ function CriticReviewListItem({ title, rating, summary }) {
                     />
                 </div>
                 <div className="col-9 wd-movie-list-info">
-                    <h3>Title</h3>
+                    <h3> {title}</h3>
                     <div>
-                        Review Rating:
+                        <Rating name="read-only" value={rating} readOnly />
                         <br />
+                        {description}
                     </div>
                 </div>
             </div>

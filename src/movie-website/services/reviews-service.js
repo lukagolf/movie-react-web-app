@@ -16,7 +16,7 @@ export const findReviews = async () => {
 }
 
 export const findCriticReviews = async (criticUsername) => {
-    const response = await axios.get(`${REVIEWS_API}/${criticUsername}`)
+    const response = await axios.get(`${REVIEWS_API}/findCriticReviews/${criticUsername}`)
     const reviews = response.data
     return reviews;
 }
