@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { findCriticReviewsThunk } from "../../services/reviews-thunks";
+import { findReviewsThunk } from "../../services/reviews-thunks";
 import "./reviews.css"
 import ReviewItem from "./reviewItem";
-
 const ReviewList = () => {
-    const { reviews, loading } = useSelector(state => state.reviews);
-    const { currentUser } = useSelector((state) => state.user);
-    
+    const { reviews, loading } = useSelector(state => state.reviews)
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(findCriticReviewsThunk(currentUser.username));
+        dispatch(findReviewsThunk())
     }, [])
     return (
         <div className="wd-review-list-div">
@@ -21,7 +18,6 @@ const ReviewList = () => {
                         Loading...
                     </li>
                 }
-
                 <li >
                     <h3>Critic Reviews</h3><br />
                 </li>
@@ -35,6 +31,5 @@ const ReviewList = () => {
             </ul>
         </div>
     );
-
 }
 export default ReviewList;

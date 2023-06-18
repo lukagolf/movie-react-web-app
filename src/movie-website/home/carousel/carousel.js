@@ -7,6 +7,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { findNewMoviesThunk } from '../../services/new-movies-thunks';
+import { findTopMoviesThunk } from '../../services/top-movies-thunks';
 
 function HomeCarousel() {
 
@@ -30,24 +31,14 @@ function HomeCarousel() {
 
 
   const { newMovies } = useSelector((state) => state.newMovies);
+  const { topMovies } = useSelector((state) => state.topMovies);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(findNewMoviesThunk());
+    dispatch(findTopMoviesThunk());
   }, [dispatch]);
 
-  const [topMovies, setTopMovies] = useState([]);
-  useEffect(() => {
-    const TOP_MOVIES_API = 'https://api.themoviedb.org/3/movie/popular';
-    const findTopMovies = async () => {
-      const response = await axios.get(TOP_MOVIES_API, {
-        params: {
-          api_key: 'ffdfb660a1488ae7f304368f73e0e7ec',
-        },
-      })
-      setTopMovies(response.data.results);
-    };
-    findTopMovies();
-  }, [])
+
 
   return (
     <div>
@@ -131,7 +122,7 @@ function HomeCarousel() {
           partialVisible={false}
         >
           {
-            topMovies.map(
+            newMovies.map(
               movie => {
                 return (
                   <Link to="">

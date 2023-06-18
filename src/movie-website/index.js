@@ -12,6 +12,7 @@ import Login from "./login/index";
 import newMoviesReducer from "./reducers/new-movies-reducer";
 import movieVideoReducer from "./reducers/movie-video-reducer";
 import savedMoviesReducer from "./reducers/saved-movie-reducer";
+import topMoviesReducer from "./reducers/top-movies-reducer";
 
 import ScrollToTop from "./scroll-to-top";
 const store = configureStore({
@@ -21,7 +22,8 @@ const store = configureStore({
     search: searchReducer,
     newMovies: newMoviesReducer,
     video: movieVideoReducer,
-    savedMovies: savedMoviesReducer
+    savedMovies: savedMoviesReducer,
+    topMovies: topMoviesReducer,
   },
 });
 

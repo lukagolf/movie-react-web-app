@@ -1,87 +1,58 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./details.css"
-import testPhoto from "./flower.jpg"
 import "../../../ui-styling/index.css"
 import SavedBtn from "../../../ui-styling/buttons/icons/savedBtn";
-import TagBtn from "../../../ui-styling/buttons/icons/tagBtn";
+import { useParams, useLocation } from "react-router-dom";
+import { createSavedMovieThunk, deleteSavedMovieThunk } from "../../services/saved-movies-thunks";
+import { useDispatch } from "react-redux";
 
-function leftCol({ isAnonymous }) {
-    if (isAnonymous) {
-        return (
-            <></>
-        )
-    }
-    else {
-        return (
-            <SavedBtn />
-        )
-    }
-}
+const MovieListItem = () => {
+    const { id } = useParams();
+    const location = useLocation();
+    const movie = location.state?.movie;
 
-const MovieListItem = ({
-    movie = {
-        title: 'Title',
-        genres: 'Drama, Romance',
-        rating: 9.3,
-        numWatchers: 6800,
-        year: 1990,
-        cast: 'person1, person2',
-        director: 'Christopher Nolan',
-        summary: 'Every website has a story, and your visitors want to hear yours. This space is a great opportunity to give a full background on who you are and what your site has to offer. Double click on the text box to start editing your content and make sure to add all the relevant details you want site visitors to know.',
-        img: ''
+    /* KATHERINE KNOWS WHAT IS THE PROBLEM HERE AND IT SHOULD BE HANDLED */
+    // const [savingMovie, setSavingMovie] = useState(false);
+    // const handleSaveBtn = () => {
+    //     console.log("INIT", savingMovie);
+    //     alert("button has been clicked");
+    //     setSavingMovie(!savingMovie);
+    // }
+    // const dispatch = useDispatch();
+    // useEffect(() => {
+    //     if (savingMovie) {
+    //         console.log(savingMovie);
+    //         dispatch(createSavedMovieThunk(movie));
+    //     } else {
+    //         console.log(savingMovie);
+    //         dispatch(deleteSavedMovieThunk(movie.mid));
+    //     }
+
+    // }, [savingMovie]);
+
+    // Check if movie exists
+    if (!movie) {
+        return <div>No movie selected</div>;
     }
-}) => {
+
     return (
         <div>
             <div className="wd-video-details-background row">
                 <div className="d-none d-lg-flex row">
                     <div className="wd-left-col col-1">
-                        <SavedBtn />
+                        <SavedBtn /* fn={handleSaveBtn} */ />
                     </div>
                     <div className="wd-details-col col-5">
-                        <div className="wd-title-text">{movie.title}</div>
-                        <form>
-                            {movie.genres.split(",").map((genre, index) => (
-                                <TagBtn key={index} text={genre} />
-                            ))}
-                        </form>
+                        <div className="wd-title-text">{movie.original_title}</div>
                         <br />
-                        <div><b>Rating:</b> {movie.rating}/10</div>
-                        <div><b>Number of Watchers:</b> {movie.numWatchers}</div>
+                        <div><b>Rating:</b> {movie.vote_average}</div>
                         <br />
-                        <div><b>Year:</b> {movie.year}</div>
-                        <div><b>Cast:</b> {movie.cast}</div>
-                        <div><b>Director:</b> {movie.director}</div>
+                        <div><b>Release date:</b> {movie.release_date}</div>
                         <br />
-                        <div><b>Summary:</b> {movie.summary}</div>
+                        <div><b>Summary:</b> {movie.overview}</div>
                     </div>
                     <div className="wd-photo-col col-5">
-                        <img src={testPhoto} alt="Movie Poster" />
-                    </div>
-                    <div className="wd-right-col col-1"></div>
-                </div>
-                <div className="d-lg-none">
-                    <div className="col-1"></div>
-                    <div className="wd-details-col col-10">
-                        <SavedBtn />
-                        <div className="wd-title-text">{movie.title}</div>
-                        <form>
-                            {movie.genres.split(",").map((genre, index) => (
-                                <TagBtn key={index} text={genre} />
-                            ))}
-                        </form>
-                        <br />
-                        <div><b>Rating:</b> {movie.rating}/10</div>
-                        <div><b>Number of Watchers:</b> {movie.numWatchers}</div>
-                        <br />
-                        <div><b>Year:</b> {movie.year}</div>
-                        <div><b>Cast:</b> {movie.cast}</div>
-                        <div><b>Director:</b> {movie.director}</div>
-                        <br />
-                        <div><b>Summary:</b> {movie.summary}</div>
-                        <div className="wd-photo-col wd-photo-small-screen">
-                            <img src={testPhoto} alt="Movie Poster" height={24} />
-                        </div>
+                        <img src={"https://image.tmdb.org/t/p/w440_and_h660_face/" + movie.poster_path} alt="Movie Poster" />
                     </div>
                     <div className="wd-right-col col-1"></div>
                 </div>
@@ -89,5 +60,4 @@ const MovieListItem = ({
         </div>
     );
 };
-
 export default MovieListItem;
