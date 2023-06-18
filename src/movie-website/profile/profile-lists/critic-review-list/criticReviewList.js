@@ -1,23 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CriticReviewListItem from "./criticReviewListItem";
 import "../../index.css"
 import NextBtn from "../../../../ui-styling/buttons/icons/nextBtn";
+import { findCriticReviewsThunk } from "../../../services/reviews-thunks";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router";
 
 function CriticReviewList() {
+    const [criticReviews, setCriticReviews] = useState([]);
+    let {username } = useParams();
+    const dispatch = useDispatch();
+    useEffect( () => {
+        const loadCriticReviews = async () => {
+            const {payload} = await dispatch(findCriticReviewsThunk(username));
+            setCriticReviews(payload);
+        }
+        loadCriticReviews();
+    })
     return (
         <div>
             <ul className="wd-profile-list list-group">
                 <li >
                     <h3>Your Reviews</h3><br />
                 </li>
-                {/* {
-                    reviewArray.map(review =>
-                        <ReviewItem
+                {
+                    criticReviews.map(review =>
+                        <CriticReviewListItem
                             key={review._id}
-                            review={review} />
+                            title={review.title}
+                            rating={review.rating}
+                            description={review.description} />
                     )
-                } */}
-                <CriticReviewListItem />
+                }
             </ul>
             <div className="wd-list-results">
                 <label className="float-end">100 results</label>
