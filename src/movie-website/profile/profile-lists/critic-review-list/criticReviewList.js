@@ -33,15 +33,6 @@ function CriticReviewList() {
                     )
                 }
             </ul>
-            <div className="wd-list-results">
-                <label className="float-end">100 results</label>
-                <br />
-                <NextBtn />
-                <br />
-                <br />
-                <label className="float-end">1 of 10 pages</label>
-            </div>
-
         </div>
     );
 

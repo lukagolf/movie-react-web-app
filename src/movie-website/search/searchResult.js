@@ -53,14 +53,6 @@ function SearchResult() {
                 </div>
               )}
             </div>
-            <label className="float-end">100 results</label>
-            <br />
-            <NextBtn fn={getNextPage} />
-            <br />
-            <br />
-            <label className="float-end">1 of 10 pages</label>
-            <br />
-            <br />
           </div>
         </div>
       </div>
