@@ -5,8 +5,8 @@ import "./index.css"
 import "../../ui-styling/index.css"
 import TagBtn from "../../ui-styling/buttons/icons/tagBtn";
 import { FaUserCircle } from "react-icons/fa";
-
-import { profileThunk, logoutThunk, updateUserThunk, fetchProfileByUsernameThunk, removeUserFromLocalStorage }
+import { removeUserFromLocalStorage } from "../reducers/auth-reducer";
+import { profileThunk, logoutThunk, updateUserThunk, fetchProfileByUsernameThunk }
     from "../services/auth-thunks";
 
 function ProfileInfo() {
@@ -22,6 +22,20 @@ function ProfileInfo() {
         console.log(profile);
         dispatch(updateUserThunk(profile));
     };
+    const handleLogout = async () => {
+        try {
+            const actionResult = await dispatch(logoutThunk());
+            if (logoutThunk.fulfilled.match(actionResult)) {
+                dispatch(removeUserFromLocalStorage());
+                navigate("/login");
+            } else {
+                throw new Error(actionResult.error.message);
+            }
+        }
+        catch (e) {
+            alert(e);
+        }
+    };
 
     useEffect(() => {
         const getProfile = async () => {
@@ -31,7 +45,7 @@ function ProfileInfo() {
             setIsLoading(false);
         };
         getProfile();
-    }, [username, dispatch]); // Recompute when the username changes
+    }, [username]); // Recompute when the username changes
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -41,7 +55,7 @@ function ProfileInfo() {
                 <div className="wd-left-col col-2"></div>
                 <div className="wd-details-col col-5">
                     <label className="pe-2">First Name</label>
-                    <input 
+                    <input
                         type="text"
                         value={profile.firstName}
                         readOnly={!isCurrentUserProfile}
@@ -49,7 +63,7 @@ function ProfileInfo() {
                     />
                     <br />
                     <label className="pe-2 mb-2">Last Name</label>
-                    <input 
+                    <input
                         type="text"
                         value={profile.lastName}
                         readOnly={!isCurrentUserProfile}
@@ -58,11 +72,7 @@ function ProfileInfo() {
                     <br />
                     {isCurrentUserProfile && (
                         <>
-                            <button onClick={() => {
-                                dispatch(logoutThunk());
-                                localStorage.removeItem('user'); // Remove user from local storage
-                                navigate("/login");
-                            }}>Logout</button>
+                            <button onClick={handleLogout}>Logout</button>
                             <button onClick={save}>Save</button>
                             <br /><br />
                         </>

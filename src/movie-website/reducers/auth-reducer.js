@@ -13,7 +13,7 @@ const authSlice = createSlice({
             localStorage.removeItem('user');
             state.currentUser = null;
         },
-        setUser: (state, action) => {  // <== Add this
+        setUser: (state, action) => {
             state.currentUser = action.payload;
         },
     },

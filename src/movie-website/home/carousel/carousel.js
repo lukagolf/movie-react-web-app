@@ -59,7 +59,10 @@ function HomeCarousel() {
         >
           {newMovies.map((movie, index) => {
             return (
-              <Link to="">
+              <Link to={{
+                pathname: `/details/${movie.id}`,
+                state: { movie: movie }
+              }}>
                 <div className="wd-slider p-0 m-0" key={index}>
                   <img
                     src={
@@ -92,16 +95,17 @@ function HomeCarousel() {
             topMovies.map(
               movie => {
                 return (
-                  <Link to="">
+                  <Link to={{
+                    pathname: `/details/${movie.id}`,
+                    state: { movie: movie }
+                  }}>
                     <div className="wd-slider p-0 m-0" key={movie.id}>
                       <img src={`http://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} alt="movie" />
                     </div>
                   </Link>
-
                 )
               }
             )
-
           }
         </Carousel>
       </div>
@@ -109,7 +113,6 @@ function HomeCarousel() {
         <div className="wd-text-container">
           <h3 className="wd-purpleText">Latest Releases</h3>
         </div>
-
       </div>
       <div className="wd-carousel-parent">
         <Carousel
@@ -125,21 +128,22 @@ function HomeCarousel() {
             newMovies.map(
               movie => {
                 return (
-                  <Link to="">
+                  <Link to={{
+                    pathname: `/details/${movie.id}`,
+                    state: { movie: movie }
+                  }}>
                     <div className="wd-slider p-0 m-0" key={movie.id}>
                       <img src={`http://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} alt="movie" />
                     </div>
                   </Link>
-
                 )
               }
             )
-
           }
         </Carousel>
       </div>
-
     </div>
   );
 }
+
 export default HomeCarousel;

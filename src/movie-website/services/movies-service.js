@@ -4,7 +4,7 @@ const MOVIES_API = 'https://api.themoviedb.org/3/search/movie';
 const TOP_MOVIES_API = 'https://api.themoviedb.org/3/movie/popular';
 
 export const findMovies = async (searchParams) => {
-  const { title, actor, director, year, genre } = searchParams;
+  const { title } = searchParams;
 
   const response = await axios.get(MOVIES_API, {
     params: {

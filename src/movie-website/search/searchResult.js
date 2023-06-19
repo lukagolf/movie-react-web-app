@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "./index.css";
-import NextBtn from "../../ui-styling/buttons/icons/nextBtn";
 import { useSelector, useDispatch } from "react-redux";
 import { findMoviesThunk } from "../services/search-thunks";
 import { NavLink } from "react-router-dom";
@@ -13,10 +12,6 @@ function SearchResult() {
   useEffect(() => {
     dispatch(findMoviesThunk());
   }, [dispatch]);
-
-  const getNextPage = () => {
-    console.log("retrieves results for next page");
-  };
 
   return (
     <>
@@ -53,14 +48,6 @@ function SearchResult() {
                 </div>
               )}
             </div>
-            <label className="float-end">100 results</label>
-            <br />
-            <NextBtn fn={getNextPage} />
-            <br />
-            <br />
-            <label className="float-end">1 of 10 pages</label>
-            <br />
-            <br />
           </div>
         </div>
       </div>

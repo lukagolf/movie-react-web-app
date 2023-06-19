@@ -6,8 +6,9 @@ import Banner from "./banner";
 import roleArray from "./roles.json";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { registerThunk, storeUserInLocalStorage } from "../services/auth-thunks";
+import { registerThunk } from "../services/auth-thunks";
 import { setUser } from "../reducers/auth-reducer";
+import { storeUserInLocalStorage } from "../reducers/auth-reducer";
 
 function RegisterScreen() {
     const [username, setUsername] = useState("");
@@ -32,6 +33,7 @@ function RegisterScreen() {
             const actionResult = await dispatch(registerThunk({ username, password, firstName, lastName, email, role }));
             if (registerThunk.fulfilled.match(actionResult)) {
                 dispatch(setUser(actionResult.payload));
+                dispatch(storeUserInLocalStorage(actionResult.payload));
                 navigate(`/profile/${username}`);
               } else {
                 throw new Error(actionResult.error.message);
