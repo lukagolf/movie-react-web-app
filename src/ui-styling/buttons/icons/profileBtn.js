@@ -1,6 +1,5 @@
 import React from "react";
 import { BsFillPersonFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
 import "../../index.css";
 import "bootstrap/dist/css/bootstrap.css";
 

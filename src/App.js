@@ -10,7 +10,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider, useDispatch } from "react-redux";
 import { setUser } from "./movie-website/reducers/auth-reducer";
 import { getProfileByUsername } from "./movie-website/services/auth-service";
-import newMoviesReducer from "./movie-website/reducers/new-movies-reducer";
 
 const store = configureStore({
   reducer: {

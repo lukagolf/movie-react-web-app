@@ -5,10 +5,11 @@ import ExploreBtn from "../../../ui-styling/buttons/text/exploreBtn";
 import ReactPlayer from "react-player";
 import { useSelector, useDispatch } from "react-redux";
 import { findMovieVideoThunk } from "../../services/movie-video-thunks";
-import SearchBtn from "../../../ui-styling/buttons/icons/searchBtn";
 
 function VideoBackground() {
 
+
+  const { currentUser } = useSelector((state) => state.user);
     const { firstMovie } = useSelector((state) => state.newMovies);
     const {video} = useSelector(state => state.video);
 
@@ -55,16 +56,10 @@ function VideoBackground() {
             </div>
           </div>
           <div className="ps-4">
+            <h4
+              style={{ textTransform: "lowercase" }}
+            >{`- Welcome ${currentUser? currentUser.role : ""} -`}</h4>
             <ExploreBtn />
-            {/* <div className="d-flex justify-content-center w-50">
-              <input
-                type="text"
-                className="form-control"
-                id="search-bar"
-                placeholder="Search movies, actors, directors..."
-              />
-              <SearchBtn />
-            </div> */}
           </div>
         </div>
       </div>

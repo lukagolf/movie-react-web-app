@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import MyNav from "../../nav-components/nav";
 import BackBar from "../../nav-components/backBar";
 import "../../ui-styling/index.css";
 import "./index.css";
-import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
-import { loginThunk } from "../services/auth-thunks";
 import LoginScreen from "./login-screen";
 import RegisterScreen from "./register-screen";
 
