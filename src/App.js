@@ -13,6 +13,7 @@ import { getProfileByUsername } from "./movie-website/services/auth-service";
 import movieVideoReducer from "./movie-website/reducers/movie-video-reducer";
 import savedMoviesReducer from "./movie-website/reducers/saved-movie-reducer";
 import topMoviesReducer from "./movie-website/reducers/top-movies-reducer";
+import newMoviesReducer from "./movie-website/reducers/new-movies-reducer";
 
 const store = configureStore({
   reducer: {
