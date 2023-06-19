@@ -8,14 +8,11 @@ const ReviewList = () => {
     const [movieReviews, setMovieReviews] = useState([]);
     let { id } = useParams();
 
-    console.log("movieId: ", id);
-
     const dispatch = useDispatch();
     useEffect(() => {
         const loadMovieReviews = async () => {
             const { payload } = await dispatch(findMovieReviewsThunk(id));
             setMovieReviews(payload);
-            console.log("PAYLOAD", payload)
         }
         loadMovieReviews();
     }, [])
@@ -27,7 +24,7 @@ const ReviewList = () => {
                     <h3>Critic Reviews</h3><br />
                 </li>
                 {
-                    movieReviews.map(review =>
+                    movieReviews && movieReviews.map((review) =>
                         <ReviewItem
                             key={review._id}
                             review={review} />
