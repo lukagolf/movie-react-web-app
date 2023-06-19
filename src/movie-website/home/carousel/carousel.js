@@ -53,48 +53,52 @@ function HomeCarousel() {
 
   return (
     <div>
-      {currentUser && currentUser.role === "VIEWER" && savedMovies.length > 0 && (
-        <div>
-          <div className="wd-carousel-title position-relative">
-            <div className="wd-text-container">
-              <h3 className="wd-purpleText">Saved Movies</h3>
+      {currentUser &&
+        currentUser.role === "VIEWER" &&
+        savedMovies.length > 0 && (
+          <div>
+            <div className="wd-carousel-title position-relative">
+              <div className="wd-text-container">
+                <h3 className="wd-purpleText">Saved Movies</h3>
+              </div>
+            </div>
+            <div className="wd-carousel-parent">
+              <Carousel
+                responsive={responsive}
+                autoPlay={true}
+                swipeable={true}
+                draggable={true}
+                showDots={false}
+                infinite={true}
+                partialVisible={false}
+              >
+                {savedMovies.map((movie, index) => {
+                  return (
+                    <Link to="">
+                      <div
+                        className="wd-slider p-0 m-0"
+                        key={movie.id}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                      >
+                        {displayOverlay && (
+                          <h4 className="wd-centerTextOverlay">
+                            {movie.title}
+                          </h4>
+                        )}
+                        <img
+                          src={`http://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+                          alt="movie"
+                        />
+                      </div>
+                    </Link>
+                  );
+                })}
+              </Carousel>
             </div>
           </div>
-          <div className="wd-carousel-parent">
-            <Carousel
-              responsive={responsive}
-              autoPlay={true}
-              swipeable={true}
-              draggable={true}
-              showDots={false}
-              infinite={true}
-              partialVisible={false}
-            >
-              {savedMovies.map((movie, index) => {
-                return (
-                  <Link to="">
-                    <div
-                      className="wd-slider p-0 m-0"
-                      key={movie.id}
-                      onMouseEnter={handleMouseEnter}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      {displayOverlay && (
-                        <h4 className="wd-centerTextOverlay">{movie.title}</h4>
-                      )}
-                      <img
-                        src={`http://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
-                        alt="movie"
-                      />
-                    </div>
-                  </Link>
-                );
-              })}
-            </Carousel>
-          </div>
-        </div>
-      )}
-
+        )}
+      <br />
       <div className="wd-carousel-title position-relative">
         <div className="wd-text-container">
           <h3 className="wd-purpleText">Top Picks</h3>
@@ -171,6 +175,7 @@ function HomeCarousel() {
           })}
         </Carousel>
       </div>
+      <br />
     </div>
   );
 }
