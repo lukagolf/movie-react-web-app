@@ -4,9 +4,11 @@ import { createReviewThunk } from "../../services/reviews-thunks";
 import "./reviews.css";
 import Rating from '@mui/material/Rating';
 import SubmitReviewBtn from "../../../ui-styling/buttons/icons/submitReviewButton";
+import { useParams } from "react-router";
 
 const AddReview = () => {
     const { currentUser } = useSelector((state) => state.user); // Get the currentUser from Redux state
+    const {id } = useParams();
 
     let [title, setTitle] = useState('');
     let [rating, setRating] = useState(0);
@@ -16,7 +18,7 @@ const AddReview = () => {
     const reviewClickHandler = () => {
         console.log('Button clicked!');
         const newReview = {
-            movieId: "615f9f3b8b3b3f0b3c0c9b1e", // This will come from the database
+            movieId: id,
             username: currentUser.username, // Use the currentUser's username
             title: title,
             rating: rating,

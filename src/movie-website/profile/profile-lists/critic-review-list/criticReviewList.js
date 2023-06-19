@@ -8,6 +8,8 @@ import { useParams } from "react-router";
 
 function CriticReviewList() {
     const [criticReviews, setCriticReviews] = useState([]);
+    const [movieReviewed, setMovieReviewed] = useState([]);
+
     let {username } = useParams();
     const dispatch = useDispatch();
     useEffect( () => {
@@ -16,7 +18,7 @@ function CriticReviewList() {
             setCriticReviews(payload);
         }
         loadCriticReviews();
-    })
+    });
     return (
         <div>
             <ul className="wd-profile-list list-group">
@@ -29,7 +31,8 @@ function CriticReviewList() {
                             key={review._id}
                             title={review.title}
                             rating={review.rating}
-                            description={review.description} />
+                            description={review.description}
+                            movieId={review.movieId} />
                     )
                 }
             </ul>
