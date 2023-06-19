@@ -8,7 +8,6 @@ import { useParams } from "react-router";
 
 function CriticReviewList() {
     const [criticReviews, setCriticReviews] = useState([]);
-    const [movieReviewed, setMovieReviewed] = useState([]);
 
     let {username } = useParams();
     const dispatch = useDispatch();
