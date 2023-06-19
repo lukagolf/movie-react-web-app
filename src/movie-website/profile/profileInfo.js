@@ -31,7 +31,7 @@ function ProfileInfo() {
             setIsLoading(false);
         };
         getProfile();
-    }, [username, dispatch]); // Recompute when the username changes
+    }, [username]); // Recompute when the username changes
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -41,7 +41,7 @@ function ProfileInfo() {
                 <div className="wd-left-col col-2"></div>
                 <div className="wd-details-col col-5">
                     <label className="pe-2">First Name</label>
-                    <input 
+                    <input
                         type="text"
                         value={profile.firstName}
                         readOnly={!isCurrentUserProfile}
@@ -49,7 +49,7 @@ function ProfileInfo() {
                     />
                     <br />
                     <label className="pe-2 mb-2">Last Name</label>
-                    <input 
+                    <input
                         type="text"
                         value={profile.lastName}
                         readOnly={!isCurrentUserProfile}

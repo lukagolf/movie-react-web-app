@@ -11,12 +11,19 @@ import { Provider, useDispatch } from "react-redux";
 import { setUser } from "./movie-website/reducers/auth-reducer";
 import { getProfileByUsername } from "./movie-website/services/auth-service";
 import newMoviesReducer from "./movie-website/reducers/new-movies-reducer";
+import movieVideoReducer from "./movie-website/reducers/movie-video-reducer";
+import savedMoviesReducer from "./movie-website/reducers/saved-movie-reducer";
+import topMoviesReducer from "./movie-website/reducers/top-movies-reducer";
 
 const store = configureStore({
   reducer: {
     reviews: reviewsReducer,
     user: authReducer,
-    search: searchReducer
+    search: searchReducer,
+    newMovies: newMoviesReducer,
+    video: movieVideoReducer,
+    savedMovies: savedMoviesReducer,
+    topMovies: topMoviesReducer,
   },
 });
 
@@ -32,7 +39,7 @@ function InnerApp() {
           // Fetch the profile using the username from localStorage
           const user = await getProfileByUsername(storedUserData.username);
           if (user) {
-            dispatch(setUser(user));
+            dispatch(setUser(user.data));
           }
         }
       } catch (error) {
