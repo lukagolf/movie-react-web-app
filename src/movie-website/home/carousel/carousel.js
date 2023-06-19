@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import "./index.css";
 import "../../../ui-styling/index.css";
@@ -8,6 +7,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { findNewMoviesThunk } from '../../services/new-movies-thunks';
 import { findTopMoviesThunk } from '../../services/top-movies-thunks';
+import { findAllSavedMoviesThunk } from '../../services/saved-movies-thunks';
 
 function HomeCarousel() {
 
@@ -28,17 +28,28 @@ function HomeCarousel() {
       slidesToSlide: 1
     }
   };
-
-
+  const [displayOverlay, setDisplayOverlay] = useState(false);
+  const {currentUser} = useSelector(state => state.user);
   const { newMovies } = useSelector((state) => state.newMovies);
   const { topMovies } = useSelector((state) => state.topMovies);
+  const {savedMovies} = useSelector((state) => state.savedMovies);
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log("CURRENT LOGGED IN ", currentUser);
+    if (currentUser) {
+      dispatch(findAllSavedMoviesThunk(currentUser._id));
+    }
     dispatch(findNewMoviesThunk());
     dispatch(findTopMoviesThunk());
-  }, [dispatch]);
+  }, [dispatch, currentUser]);
 
+  const handleMouseEnter = () => {
+    setDisplayOverlay(true);
+  };
 
+  const handleMouseLeave = () => {
+    setDisplayOverlay(false);
+  };
 
   return (
     <div>
@@ -103,9 +114,11 @@ function HomeCarousel() {
                       <img src={`http://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} alt="movie" />
                     </div>
                   </Link>
+
                 )
               }
             )
+
           }
         </Carousel>
       </div>
@@ -136,12 +149,15 @@ function HomeCarousel() {
                       <img src={`http://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} alt="movie" />
                     </div>
                   </Link>
+
                 )
               }
             )
+
           }
         </Carousel>
       </div>
+      <br />
     </div>
   );
 }

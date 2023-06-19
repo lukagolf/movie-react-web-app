@@ -11,8 +11,8 @@ export const findSavedMovieThunk = createAsyncThunk(
 
 export const findAllSavedMoviesThunk = createAsyncThunk(
     "savedMovies/findAllSavedMovies",
-    async () => {
-        const response = await savedMoviesService.findAllSavedMovies();
+    async (userId) => {
+        const response = await savedMoviesService.findAllSavedMovies(userId);
         return response;
     }
 );
@@ -27,8 +27,8 @@ export const deleteSavedMovieThunk = createAsyncThunk(
 
 export const createSavedMovieThunk = createAsyncThunk(
     "savedMovies/createSavedMovie",
-    async (movie) => {
-        const response = await savedMoviesService.createSavedMovie(movie);
+    async (userAndMovie) => {
+        const response = await savedMoviesService.createSavedMovie(userAndMovie);
         return response;
     }
 );

@@ -16,7 +16,10 @@ const topMoviesSlice = createSlice({
         },
         [findTopMoviesThunk.fulfilled]: (state, {payload}) => {
             state.loading = false;
-            state.topMovies = payload.slice(0, 10);
+            const filterMovies = payload.filter(
+              (movie) => !movie.genre_ids.includes(27)
+            );
+            state.topMovies = filterMovies.slice(0, 10);
         },
         [findTopMoviesThunk.rejected]: (state, action) => {
             state.loading = false;

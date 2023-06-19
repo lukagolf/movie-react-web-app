@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import ProfileBtn from "../ui-styling/buttons/icons/profileBtn";
 import SearchBtn from "../ui-styling/buttons/icons/searchBtn";
 import WhiteTextBtn from "../ui-styling/buttons/text/whiteTextBtn";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutThunk } from "../movie-website/services/auth-thunks";
 
 function MyNav({
   options = {
@@ -16,6 +18,9 @@ function MyNav({
     signOut: false,
   },
 }) {
+  const {currentUser} = useSelector(state => state.user);
+  console.log("LOGGED IN NAV", currentUser);
+  const dispatch = useDispatch();
   return (
     <Navbar>
       <Nav className="container-fluid ps-5 pe-5 ">
@@ -38,7 +43,9 @@ function MyNav({
           )}
           {options.profile ? (
             <Nav.Item>
-              <ProfileBtn />
+              <Nav.Link as={Link} to={`/profile/${currentUser.username}`}>
+                <ProfileBtn />
+              </Nav.Link>
             </Nav.Item>
           ) : (
             ""
@@ -55,7 +62,7 @@ function MyNav({
           {options.signOut ? (
             <Nav.Item>
               <Nav.Link as={Link} to="/home">
-                <WhiteTextBtn text={"Sign Out"} />
+                <WhiteTextBtn text={"Sign Out"} fn={() => {dispatch(logoutThunk())}} />
               </Nav.Link>
             </Nav.Item>
           ) : (

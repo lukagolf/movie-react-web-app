@@ -1,26 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../index.css"
 import MovieBucketListItem from "./moviesBucketListItem";
 import NextBtn from "../../../../ui-styling/buttons/icons/nextBtn";
+import { useSelector, useDispatch } from "react-redux";
+import { findAllSavedMoviesThunk } from "../../../services/saved-movies-thunks";
 
 function MoviesBucketList() {
+    const { currentUser } = useSelector((state) => state.user);
+    const { savedMovies } = useSelector((state) => state.savedMovies);
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(findAllSavedMoviesThunk(currentUser._id));
+    }, []);
     return (
-        <div>
-            <ul className="wd-profile-list list-group">
-                <li >
-                    <h3>Movies On Bucket List</h3><br />
-                </li>
-                <MovieBucketListItem />
-            </ul>
-            <div className="wd-list-results">
-                <label className="float-end">100 results</label>
-                <br />
-                <NextBtn />
-                <br />
-                <br />
-                <label className="float-end">1 of 10 pages</label>
-            </div>
-        </div>
+      <div>
+        <ul className="wd-profile-list list-group">
+          <h3>Saved Movies List</h3>
+          <br />
+          {savedMovies.map((movie) => (
+            <li>
+              <MovieBucketListItem movieInfo={movie}/>
+            </li>
+          ))}
+        </ul>
+      </div>
     );
 
 }

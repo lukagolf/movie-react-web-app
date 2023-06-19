@@ -22,6 +22,7 @@ function Profile() {
       )}
       <ProfileInfo />
       <ProfileLists />
+
     </>
   );
 }

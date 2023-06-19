@@ -1,5 +1,5 @@
 import React from "react";
-import { FaNapster, FaSearch } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "../../index.css";
 import "bootstrap/dist/css/bootstrap.css";

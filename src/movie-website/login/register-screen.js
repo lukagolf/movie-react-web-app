@@ -18,24 +18,22 @@ function RegisterScreen() {
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
     const [displayBanner, setDisplayBanner] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-    const validEmail = () => {
-        let format = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        return email !== "" && email.match(format);
-    };
 
     const handleRegister = async () => {
         setDisplayBanner(true);
         try {
             const actionResult = await dispatch(registerThunk({ username, password, firstName, lastName, email, role }));
             if (registerThunk.fulfilled.match(actionResult)) {
+                setSuccess(true);
                 dispatch(setUser(actionResult.payload));
                 dispatch(storeUserInLocalStorage(actionResult.payload));
                 navigate(`/profile/${username}`);
               } else {
+                setSuccess(false);
                 throw new Error(actionResult.error.message);
             }
         } catch (e) {
@@ -113,7 +111,7 @@ function RegisterScreen() {
                 </div>
                 <br />
                 {displayBanner ? (
-                    <Banner success={username && password && validEmail && role} />
+                    <Banner success={success} />
                 ) : (
                     ""
                 )}
