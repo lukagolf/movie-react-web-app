@@ -14,6 +14,7 @@ function VideoBackground() {
 
     const dispatch = useDispatch();
     useEffect(() => {
+        console.log("FIRST", firstMovie)
         dispatch(findMovieVideoThunk(firstMovie.id));
     }, [firstMovie]);
 

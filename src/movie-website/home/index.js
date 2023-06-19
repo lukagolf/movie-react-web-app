@@ -6,6 +6,7 @@ import HomeSearch from "./search/search";
 import { useSelector } from "react-redux";
 function Home() {
   const { currentUser } = useSelector((state) => state.user);
+  console.log("CURRENT USER HOME", currentUser);
   return (
     <div style={{ "overflow-x": "hidden" }}>
       {currentUser ? (

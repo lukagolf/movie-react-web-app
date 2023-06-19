@@ -4,7 +4,6 @@ import { fetchProfileByUsernameThunk } from "../../services/auth-thunks";
 
 import CriticReviewList from "./critic-review-list/criticReviewList";
 import MoviesBucketList from "./movie-bucket-list/moviesBucketList";
-import MoviesWatchList from "./movies-watched-list/moviesWatchesList";
 import BackBtn from "../../../ui-styling/buttons/icons/backBtn";
 import "../index.css"
 import { useParams } from "react-router";
@@ -34,7 +33,6 @@ function ProfileLists() {
                                 {profileUser && profileUser.role == "VIEWER" && (
                                     <div>
                                         <MoviesBucketList />
-                                        <MoviesWatchList />
                                     </div>
                                 )}
                                 {profileUser && profileUser.role == "CRITIC" && (
@@ -50,6 +48,7 @@ function ProfileLists() {
 
 
             </div>
+            <br />
             <BackBtn />
         </div>
     );
