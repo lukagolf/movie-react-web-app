@@ -21,6 +21,12 @@ export const findCriticReviews = async (criticUsername) => {
     return reviews;
 }
 
+export const findMovieReviews = async (mid) => {
+    const response = await axios.get(`${REVIEWS_API}/findMovieReviews/${mid}`)
+    const reviews = response.data;
+    return reviews;
+}
+
 export const deleteReview = async (rid) => {
     const response = await axios.delete(`${REVIEWS_API}/${rid}`)
     return response.data
