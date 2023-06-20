@@ -1,10 +1,8 @@
 .wd-review-div {
-    background-color: lightgrey;
     padding: 50px;
 }
 
 .wd-review-content {
-    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,6 +11,7 @@
 .wd-review-list-div {
     padding-top: 30px;
 }
+
 .wd-review-list {
     list-style: none;
 }

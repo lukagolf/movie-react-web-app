@@ -87,6 +87,7 @@ function HomeCarousel() {
 
   return (
     <div>
+      <br />
       {currentUser &&
         currentUser.role === "VIEWER" &&
         savedMovies.length > 0 && (
@@ -161,28 +162,6 @@ function HomeCarousel() {
                   return (
                     <CriticCarouselComponent
                     movieId={mid} />
-                    // <Link to={{
-                    //   pathname: `/details/${movie.id}`,
-                    //   state: { movie: movie }
-                    // }}>
-                    //   <div className="wd-slider p-0 m-0"
-                    //     key={movie.id}
-                    //     onMouseEnter={handleMouseEnter}
-                    //     onMouseLeave={handleMouseLeave}
-                    //   >
-                    //     {displayOverlay && (
-                    //       <h4 className="wd-centerTextOverlay">
-                    //         {movie.title}
-                    //       </h4>
-                    //     )}
-                    //     <img
-                    //       src={
-                    //         "http://image.tmdb.org/t/p/w500/" + movie.backdrop_path
-                    //       }
-                    //       alt="movie"
-                    //     />
-                    //   </div>
-                    // </Link>
                   );
                 })}
               </Carousel>

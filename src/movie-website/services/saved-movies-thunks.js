@@ -19,9 +19,9 @@ export const findAllSavedMoviesThunk = createAsyncThunk(
 
 export const deleteSavedMovieThunk = createAsyncThunk(
     "savedMovies/deleteSavedMovie",
-    async (mid) => {
-        const response = await savedMoviesService.deleteSavedMovie(mid);
-        return mid;
+    async (userAndMovie) => {
+        const response = await savedMoviesService.deleteSavedMovie(userAndMovie);
+        return response;
     }
 );
 

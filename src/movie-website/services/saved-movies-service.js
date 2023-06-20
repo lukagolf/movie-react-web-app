@@ -20,6 +20,6 @@ export const findAllSavedMovies = async (userId) => {
 };
 
 export const deleteSavedMovie = async (mid) => {
-  const response = await axios.delete(`${SAVED_MOVIES_API}/${mid}`);
+  const response = await axios.delete({SAVED_MOVIES_API});
   return response.data;
 };

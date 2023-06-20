@@ -13,7 +13,7 @@ function Profile() {
             homePage: false,
             search: true,
             signIn: false,
-            profile: false,
+            profile: true,
             signOut: true,
           }}
         />

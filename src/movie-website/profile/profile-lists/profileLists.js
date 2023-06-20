@@ -4,6 +4,7 @@ import { fetchProfileByUsernameThunk } from "../../services/auth-thunks";
 
 import CriticReviewList from "./critic-review-list/criticReviewList";
 import MoviesBucketList from "./movie-bucket-list/moviesBucketList";
+import FollowedCriticsList from "./followed-critics-list/followedCriticsList";
 import BackBtn from "../../../ui-styling/buttons/icons/backBtn";
 import "../index.css"
 import { useParams } from "react-router";
@@ -22,35 +23,31 @@ function ProfileLists() {
         loadProfileUser();
     })
     return (
-
-        <div className="wd-review-div">
-            <div className="wd-review-content">
-                {
-                    currentUser && (
-                        <div>
-                            <div className="col-2"></div>
-                            <div className="col-8 wd-list-col">
-                                {profileUser && profileUser.role == "VIEWER" && (
-                                    <div>
-                                        <MoviesBucketList />
-                                    </div>
-                                )}
-                                {profileUser && profileUser.role == "CRITIC" && (
-                                    <div>
-                                        <CriticReviewList />
-                                    </div>
-                                )}
-                            </div>
-                            <div className="col-2"></div>
-                        </div>
-                    )
-                }
-
-
+      <div className="wd-review-div">
+        <div className="wd-review-content">
+          {currentUser && (
+            <div>
+              <div className="col-2"></div>
+              <div className="col-8 wd-list-col">
+                {profileUser && profileUser.role == "VIEWER" && (
+                  <div>
+                    <MoviesBucketList />
+                    <FollowedCriticsList />
+                  </div>
+                )}
+                {profileUser && profileUser.role == "CRITIC" && (
+                  <div>
+                    <CriticReviewList />
+                  </div>
+                )}
+              </div>
+              <div className="col-2"></div>
             </div>
-            <br />
-            <BackBtn />
+          )}
         </div>
+        <br />
+        <BackBtn />
+      </div>
     );
 }
 

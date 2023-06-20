@@ -1,8 +1,16 @@
 .wd-profile-info-background {
     position: relative;
-    height: 50vh;
+    height: 35vh;
     color: white;
     padding: 56px;
+    display: "flex";
+    justify-content: "center";
+    background-color: rgb(204, 173, 234);
+}
+
+.wd-padding {
+    padding-left: 25%;
+    padding-right: 25%;
 }
 
 .wd-profile-list {
@@ -15,7 +23,6 @@
 }
 
 .wd-movie-list-item {
-    background-color: lightgray;
     color: black;
 }
 

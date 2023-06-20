@@ -21,7 +21,7 @@ function CriticReviewListItem({ title, rating, description, movieId }) {
     }, [])
 
     return (
-        <Link to={{ pathname: `/details/${movieReviewed.id}` }}           
+        <Link to={{ pathname: `/details/${movieReviewed.id}` }}
         className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
         >
             <div className="row p-3 wd-movie-list-row">
