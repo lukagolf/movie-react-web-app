@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CriticReviewListItem from "./criticReviewListItem";
 import "../../index.css"
-import NextBtn from "../../../../ui-styling/buttons/icons/nextBtn";
 import { findCriticReviewsThunk } from "../../../services/reviews-thunks";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";

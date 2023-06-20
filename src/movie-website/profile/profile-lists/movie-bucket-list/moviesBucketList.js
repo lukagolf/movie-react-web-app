@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "../../index.css"
 import MovieBucketListItem from "./moviesBucketListItem";
-import NextBtn from "../../../../ui-styling/buttons/icons/nextBtn";
 import { useSelector, useDispatch } from "react-redux";
 import { findAllSavedMoviesThunk } from "../../../services/saved-movies-thunks";
 

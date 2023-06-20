@@ -19,7 +19,7 @@ const saveMoviesSlice = createSlice({
     },
     [deleteSavedMovieThunk.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.savedMovies = state.savedMovies.filter((m) => m.id !== payload);
+      state.savedMovies = state.savedMovies.filter((m) => m.id !== payload.id && m.userId !== payload.userId);
     },
     [findAllSavedMoviesThunk.pending]: (state) => {
       state.loading = true;

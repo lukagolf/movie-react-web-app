@@ -40,13 +40,13 @@ export const getProfileByUsername = async (username) => {
     return response;
 };
 
-export const followUser = async (username) => {
-    const response = await api.post(`${USERS_URL}/${username}/follow`);
-    return response;
-};
+// export const followUser = async (username) => {
+//     const response = await api.post(`${USERS_URL}/${username}/follow`);
+//     return response;
+// };
 
-export const unfollowUser = async (username) => {
-    const response = await api.post(`${USERS_URL}/${username}/unfollow`);
-    return response;
-};
+// export const unfollowUser = async (username) => {
+//     const response = await api.post(`${USERS_URL}/${username}/unfollow`);
+//     return response;
+// };
 

@@ -12,19 +12,27 @@ const ReviewItem = ({ review }) => {
         dispatch(deleteReviewThunk(id));
     }
     return (
-        <li>
-            {currentUser && currentUser.role === 'ADMIN' && (
-                <DeleteBtn
-                    fn={() => deleteReviewHandler(review._id)}
-                    className={"float-end"}
-                />
-            )}
-            <NavLink to={`/profile/${review.username}`}><h3>{review.username}</h3></NavLink> {/* Make the username a link to their profile */}
-            <h4>{review.title}</h4>
-            <Rating name="read-only" value={review.rating} readOnly />
-            <p>Description: {review.description}</p><br />
-            <hr />
-        </li>
-    )
+      <li>
+        {currentUser && currentUser.role === "ADMIN" && (
+          <DeleteBtn
+            fn={() => deleteReviewHandler(review._id)}
+            className={"float-end"}
+          />
+        )}
+        {currentUser ? (
+          <NavLink to={`/profile/${review.username}`}>
+            <h3>{review.username}</h3>
+          </NavLink>
+        ) : (
+          <h3>{review.username}</h3>
+        )}
+
+        <h4>{review.title}</h4>
+        <Rating name="read-only" value={review.rating} readOnly />
+        <h5>Description: {review.description}</h5>
+        <br />
+        <hr />
+      </li>
+    );
 }
 export default ReviewItem;

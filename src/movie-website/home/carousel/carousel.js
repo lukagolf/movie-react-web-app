@@ -53,6 +53,7 @@ function HomeCarousel() {
 
   return (
     <div>
+      <br />
       {currentUser &&
         currentUser.role === "VIEWER" &&
         savedMovies.length > 0 && (
@@ -102,7 +103,6 @@ function HomeCarousel() {
             </div>
           </div>
         )}
-      <br />
       <div className="wd-carousel-title position-relative">
         <div className="wd-text-container">
           <h3 className="wd-purpleText">Top Picks</h3>

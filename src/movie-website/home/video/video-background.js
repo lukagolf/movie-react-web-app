@@ -50,9 +50,9 @@ function VideoBackground() {
               <div className="wd-vline" />
             </div>
             <div className="m-0">
-              <h5 className="ps-4">Out Now</h5>
+              <h4 className="ps-4">Out Now</h4>
               <h1 className="ps-4">{firstMovie.original_title}</h1>
-              <h6 className="ps-4 w-50">{firstMovie.overview}</h6>
+              <h5 className="ps-4 w-50">{firstMovie.overview}</h5>
             </div>
           </div>
           <div className="ps-4">

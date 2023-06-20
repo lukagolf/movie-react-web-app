@@ -6,7 +6,6 @@ import SavedBtn from "../../../ui-styling/buttons/icons/savedBtn";
 import { useParams } from "react-router-dom";
 import { createSavedMovieThunk, deleteSavedMovieThunk, findAllSavedMoviesThunk } from "../../services/saved-movies-thunks";
 import { useDispatch, useSelector } from "react-redux";
-import { findSavedMovie } from "../../services/saved-movies-service";
 
 const MovieListItem = () => {
   const { currentUser } = useSelector(state => state.user);
@@ -49,28 +48,28 @@ const MovieListItem = () => {
   return (
     <div>
       <div className="wd-video-details-background row">
-        <div className="d-none d-lg-flex row">
+        <div className="d-flex wd-details-row row">
           {currentUser && currentUser.role === "VIEWER" && (
             <div className="wd-left-col col-1">
               <SavedBtn fn={handleSaveBtn} />
             </div>
           )}
-          <div className="wd-details-col col-5">
-            <div className="wd-title-text">{movie.original_title}</div>
+          <div className="col-6">
+            <h1>{movie.original_title}</h1>
             <br />
-            <div>
+            <h5>
               <b>Rating:</b> {movie.vote_average}
-            </div>
+            </h5>
             <br />
-            <div>
+            <h5>
               <b>Release date:</b> {movie.release_date}
-            </div>
+            </h5>
             <br />
-            <div>
+            <h5>
               <b>Summary:</b> {movie.overview}
-            </div>
+            </h5>
           </div>
-          <div className="wd-photo-col col-5">
+          <div className="wd-photo-col col-sm-4 col-md-5">
             <img
               src={
                 "https://image.tmdb.org/t/p/w440_and_h660_face/" +
@@ -79,7 +78,6 @@ const MovieListItem = () => {
               alt="Movie Poster"
             />
           </div>
-          <div className="wd-right-col col-1"></div>
         </div>
       </div>
     </div>
