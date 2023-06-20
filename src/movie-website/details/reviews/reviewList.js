@@ -15,7 +15,7 @@ const ReviewList = () => {
             setMovieReviews(payload);
         }
         loadMovieReviews();
-    }, [id])
+    })
     return (
         <div className="wd-review-list-div">
             {/* <pre>{JSON.stringify(reviews, null, 2)}</pre> */}
