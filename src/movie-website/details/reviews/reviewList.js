@@ -1,28 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { findReviewsThunk } from "../../services/reviews-thunks";
+import { findMovieReviewsThunk } from "../../services/reviews-thunks";
 import "./reviews.css"
 import ReviewItem from "./reviewItem";
+import { useParams } from "react-router";
 const ReviewList = () => {
-    const { reviews, loading } = useSelector(state => state.reviews)
+    const [movieReviews, setMovieReviews] = useState([]);
+    let { id } = useParams();
+
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(findReviewsThunk())
+        const loadMovieReviews = async () => {
+            const { payload } = await dispatch(findMovieReviewsThunk(id));
+            setMovieReviews(payload);
+        }
+        loadMovieReviews();
     }, [])
     return (
         <div className="wd-review-list-div">
             {/* <pre>{JSON.stringify(reviews, null, 2)}</pre> */}
             <ul className="list-group wd-review-list">
-                {loading &&
-                    <li className="list-group-item">
-                        Loading...
-                    </li>
-                }
                 <li >
                     <h3>Critic Reviews</h3><br />
                 </li>
                 {
-                    reviews.map(review =>
+                    movieReviews && movieReviews.map((review) =>
                         <ReviewItem
                             key={review._id}
                             review={review} />
