@@ -71,13 +71,15 @@ function ProfileInfo() {
       setIsLoading(false);
     };
     getProfile();
+  }, [username]); // Recompute only when username changes
 
+  useEffect(() => {
     // if the current user is a viewer, load the critics that they follow
     if (isAnotherViewer) {
       setFollowedCritics(currentUser.followedCritics);
     }
+  }, [currentUser, isAnotherViewer]); // Recompute only when currentUser changes or isAnotherViewer changes
 
-  }, [username, currentUser]); // Recompute when these variables change
 
   if (isLoading) {
     return <div>Loading...</div>;

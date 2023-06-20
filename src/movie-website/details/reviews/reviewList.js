@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { findMovieReviewsThunk } from "../../services/reviews-thunks";
 import "./reviews.css"
 import ReviewItem from "./reviewItem";
@@ -15,7 +15,7 @@ const ReviewList = () => {
             setMovieReviews(payload);
         }
         loadMovieReviews();
-    }, [])
+    }, [id])
     return (
         <div className="wd-review-list-div">
             {/* <pre>{JSON.stringify(reviews, null, 2)}</pre> */}

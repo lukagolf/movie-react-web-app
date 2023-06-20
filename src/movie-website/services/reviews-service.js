@@ -3,7 +3,6 @@ import axios from 'axios';
 const REVIEWS_API = 'http://localhost:4000/api/reviews';
 
 export const createReview = async (review) => {
-    console.log("My Review!!!", review);
     const response = await axios.post(REVIEWS_API, review)
     console.log(response);
     return response.data;
@@ -16,10 +15,11 @@ export const findReviews = async () => {
 }
 
 export const findCriticReviews = async (criticUsername) => {
-    const response = await axios.get(`${REVIEWS_API}/findCriticReviews/${criticUsername}`)
-    const reviews = response.data
+    const response = await axios.get(`${REVIEWS_API}/findCriticReviews/${criticUsername}`);
+    const reviews = response.data;
     return reviews;
 }
+
 
 export const findMovieReviews = async (mid) => {
     const response = await axios.get(`${REVIEWS_API}/findMovieReviews/${mid}`)

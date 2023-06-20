@@ -41,7 +41,6 @@ function HomeCarousel() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("CURRENT LOGGED IN ", currentUser);
     if (currentUser) {
       dispatch(findAllSavedMoviesThunk(currentUser._id));
     }
@@ -52,30 +51,20 @@ function HomeCarousel() {
   useEffect(() => {
     const loadReviewedMovies = async () => {
       let movieIds = [];
-      // let movies = [];
       if (currentUser) {
         const { payload } = await dispatch(findCriticReviewsThunk(currentUser.username));
         payload.map(review => {
           movieIds.push(review.movieId);
         })
-        movieIds = movieIds.filter(function(item, pos){
-          return movieIds.indexOf(item)== pos;
+        movieIds = movieIds.filter(function (item, pos) {
+          return movieIds.indexOf(item) == pos;
         })
-
-        // movieIds.map(mid => {
-        //   let returnedMovie = findMovieById(mid).then((response) => {
-        //     return response;
-        //   });
-
-        //   returnedMovie.then((m) => {
-        //     movies.push(m);
-        //   })
-        // })
       }
       setReviewedMovies(movieIds);
     }
     loadReviewedMovies();
-  })
+  }, [currentUser, dispatch])
+
 
   const handleMouseEnter = () => {
     setDisplayOverlay(true);
@@ -139,7 +128,7 @@ function HomeCarousel() {
         )}
       {/* <br /> */}
 
-       { currentUser &&
+      {currentUser &&
         currentUser.role === "CRITIC" &&
         reviewedMovies.length >= 0 && (
           <div>
@@ -161,7 +150,7 @@ function HomeCarousel() {
                 {reviewedMovies.map((mid) => {
                   return (
                     <CriticCarouselComponent
-                    movieId={mid} />
+                      movieId={mid} />
                   );
                 })}
               </Carousel>
