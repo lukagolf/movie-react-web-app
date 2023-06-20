@@ -137,7 +137,7 @@ function HomeCarousel() {
             </div>
           </div>
         )}
-      <br />
+      {/* <br /> */}
 
        { currentUser &&
         currentUser.role === "CRITIC" &&
@@ -168,7 +168,7 @@ function HomeCarousel() {
             </div>
           </div>
         )}
-      <br />
+      {/* <br /> */}
 
       <div className="wd-carousel-title position-relative">
         <div className="wd-text-container">
