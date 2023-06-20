@@ -7,8 +7,8 @@ import SubmitReviewBtn from "../../../ui-styling/buttons/icons/submitReviewButto
 import { useParams } from "react-router";
 
 const AddReview = () => {
-    const { currentUser } = useSelector((state) => state.user); // Get the currentUser from Redux state
-    const {id } = useParams();
+    const { currentUser } = useSelector((state) => state.user);
+    const { id } = useParams();
 
     let [title, setTitle] = useState('');
     let [rating, setRating] = useState(0);
@@ -18,7 +18,7 @@ const AddReview = () => {
     const reviewClickHandler = () => {
         const newReview = {
             movieId: id,
-            username: currentUser.username, // Use the currentUser's username
+            username: currentUser.username,
             title: title,
             rating: rating,
             description: description
@@ -34,7 +34,7 @@ const AddReview = () => {
             <form className="wd-add-review-form">
                 <div className="mb-3">
                     <label htmlFor="reviewTitle" className="form-label">Title</label>
-                    <input type="text" className="form-control" id="reviewTitle" aria-describedby="reviewTitle"
+                    <input type="text" className="form-control" id="reviewTitle" aria-describedby="reviewTitle" value={title}
                         onChange={(event) => setTitle(event.target.value)}>
                     </input>
                 </div>
