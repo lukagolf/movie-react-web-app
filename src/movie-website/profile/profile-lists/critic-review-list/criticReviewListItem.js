@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import MovieThumbnail from "../movieStockImg.jpg"
 import "../../index.css"
 import Rating from '@mui/material/Rating';
 import axios from "axios";
