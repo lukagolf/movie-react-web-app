@@ -16,7 +16,6 @@ const AddReview = () => {
     const dispatch = useDispatch();
 
     const reviewClickHandler = () => {
-        console.log('Button clicked!');
         const newReview = {
             movieId: id,
             username: currentUser.username, // Use the currentUser's username
