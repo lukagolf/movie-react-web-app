@@ -121,13 +121,13 @@ const HomeCarousel = forwardRef((props, ref) => {
           </div>
         )}
 
-      <div ref={ref} >
-        <div className="wd-carousel-title position-relative" >
-          <div className="wd-text-container" >
+      <div ref={ref}>
+        <div className="wd-carousel-title position-relative">
+          <div className="wd-text-container">
             <h3 className="wd-purpleText">Top Picks</h3>
           </div>
         </div>
-        <div className="wd-carousel-parent" >
+        <div className="wd-carousel-parent">
           <Carousel
             responsive={responsive}
             autoPlay={true}
@@ -137,7 +137,7 @@ const HomeCarousel = forwardRef((props, ref) => {
             infinite={true}
             partialVisible={false}
           >
-            {
+            {/* {
               topMovies.map(
                 movie => {
                   return (
@@ -164,8 +164,10 @@ const HomeCarousel = forwardRef((props, ref) => {
                   )
                 }
               )
-
-            }
+            } */}
+            {topMovies.map((movie) => {
+              return <CarouselComponent movie={movie} />;
+            })}
           </Carousel>
         </div>
       </div>
