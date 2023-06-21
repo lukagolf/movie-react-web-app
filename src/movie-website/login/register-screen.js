@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../ui-styling/index.css";
 import "./index.css";
 import BlackTextBtn from "../../ui-styling/buttons/text/blackTextBtn";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { registerThunk } from "../services/auth-thunks";
 import { setUser, storeUserInLocalStorage } from "../reducers/auth-reducer";
+import Multiselect from 'multiselect-react-dropdown';
 
 const allRoles = [
     { value: 'ADMIN', label: 'Admin' },
@@ -62,6 +63,27 @@ function RegisterScreen() {
         }
     };
 
+    const [previousRole, setPreviousRole] = useState([]);
+    
+    const onSelect = (selectedList, selectedItem) => {
+        setPreviousRole(role);
+        setRole([...selectedList]);
+    }
+
+    const onRemove = (selectedList, removedItem) => {
+        setPreviousRole(role);
+        setRole([...selectedList]);
+    }
+
+    useEffect(() => {
+        if (role.length > 2 || 
+            (role.find(item => item.value === 'VIEWER') && role.find(item => item.value === 'CRITIC')) || 
+            (role.length === 2 && !role.find(item => item.value === 'ADMIN'))) {
+                alert('You cannot select Viewer and Critic together!');
+                setRole(previousRole);
+        }
+    }, [role]);
+
     return (
         <>
             <div className="wd-vline col-6">
@@ -114,16 +136,17 @@ function RegisterScreen() {
                     <label htmlFor="role" className="mt-2">
                         Role
                     </label>
-                    {/* <br />
-                    {allRoles.map((roleOption) => {
-                        return (
-                            <div key={roleOption.value}>
-                                <input type="checkbox" id={roleOption.value} value={roleOption.value} onChange={handleRoleChange} checked={role.includes(roleOption.value)} />
-                                <label htmlFor={roleOption.value}>{roleOption.label}</label>
-                            </div>
-                        );
-                    })}
-                    <br /> */}
+                    <Multiselect
+                        options={allRoles}
+                        isObject={true}
+                        onSelect={onSelect}
+                        onRemove={onRemove}
+                        displayValue="label"
+                        id="role"
+                        placeholder="Pick your role(s)"
+                        selectedValues={role}
+                    />
+                    <br />
                     <BlackTextBtn text="Register" fn={handleRegister} />
                 </div>
                 <br />
