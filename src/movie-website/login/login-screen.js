@@ -24,7 +24,7 @@ function LoginScreen() {
             if (loginThunk.fulfilled.match(actionResult)) {
                 dispatch(setUser(actionResult.payload));
                 dispatch(storeUserInLocalStorage(actionResult.payload));
-                navigate(`/profile/${username}`);
+                navigate(`/profile`);
             } else {
                 throw new Error(actionResult.error.message);
             }

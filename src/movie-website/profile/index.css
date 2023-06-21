@@ -1,6 +1,6 @@
 .wd-profile-info-background {
     position: relative;
-    height: 45vh;
+    height: auto;
     color: white;
     padding: 56px;
     display: "flex";
@@ -49,4 +49,8 @@
 
 .wd-list-results {
     padding-top: 20px;
+}
+
+.wd-md-screen-size-img {
+    max-width: 100%;
 }
