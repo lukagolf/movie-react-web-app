@@ -9,8 +9,11 @@ export const findReviewsThunk = createAsyncThunk(
 
 export const findCriticReviewsThunk = createAsyncThunk(
     "reviews/findCriticReviews",
-    async (criticUsername) => await service.findCriticReviews(criticUsername)
+    async (criticUsername) => {
+        return await service.findCriticReviews(criticUsername);
+    }
 );
+
 
 export const findMovieReviewsThunk = createAsyncThunk(
     "reviews/findMovieReviews",

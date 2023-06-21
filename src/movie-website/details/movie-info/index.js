@@ -14,10 +14,15 @@ const MovieListItem = () => {
 
   useEffect(() => {
     const fetchMovie = async () => {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=ffdfb660a1488ae7f304368f73e0e7ec`
-      );
-      setMovie(response.data);
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/movie/${id}?api_key=ffdfb660a1488ae7f304368f73e0e7ec`
+        );
+        setMovie(response.data);
+      } catch (error) {
+        console.error('Failed to fetch movie:', error.response);
+        alert("This search is currently unavailable. Please try again later.")
+      }
     };
     fetchMovie();
   }, [id]);

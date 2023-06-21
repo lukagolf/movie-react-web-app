@@ -21,7 +21,7 @@ function ProfileLists() {
             setProfileUser(payload);
         }
         loadProfileUser();
-    })
+    }, [username])
     return (
       <div className="wd-review-div">
         <div className="wd-review-content">

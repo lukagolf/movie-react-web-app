@@ -12,26 +12,26 @@ function CriticReviewListItem({ title, rating, description, movieId }) {
         const loadMovie = async () => {
             const response = await axios.get(GET_MOVIE_API, {
                 params: {
-                  api_key: 'ffdfb660a1488ae7f304368f73e0e7ec',
+                    api_key: 'ffdfb660a1488ae7f304368f73e0e7ec',
                 },
             })
             setMovieReviewed(response.data);
         }
         loadMovie();
-    }, [])
+    }, [movieId])
 
     return (
         <Link to={{ pathname: `/details/${movieReviewed.id}` }}
-        className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
+            className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
         >
             <div className="row p-3 wd-movie-list-row">
                 <div className="col-3 wd-movie-list-image">
-                    <img  src={`http://image.tmdb.org/t/p/w500/${movieReviewed.backdrop_path}`}
-                    className="float-left mr-3"
+                    <img src={`http://image.tmdb.org/t/p/w500/${movieReviewed.backdrop_path}`}
+                        className="float-left mr-3"
                     />
                 </div>
                 <div className="col-9 wd-movie-list-info">
-                    <h3>{movieReviewed.title}</h3><br/>
+                    <h3>{movieReviewed.title}</h3><br />
                     <h4> {title}</h4>
                     <div>
                         <Rating name="read-only" value={rating} readOnly />

@@ -2,7 +2,7 @@ import React from "react";
 import Rating from "@mui/material/Rating";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteReviewThunk } from "../../services/reviews-thunks";
-import { NavLink } from 'react-router-dom'; // Import NavLink
+import { NavLink } from 'react-router-dom';
 import DeleteBtn from "../../../ui-styling/buttons/icons/deleteBtn";
 
 const ReviewItem = ({ review }) => {

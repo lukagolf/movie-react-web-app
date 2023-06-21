@@ -8,15 +8,26 @@ import { useParams } from "react-router";
 function CriticReviewList() {
     const [criticReviews, setCriticReviews] = useState([]);
 
-    let {username } = useParams();
+    let { username } = useParams();
     const dispatch = useDispatch();
-    useEffect( () => {
+
+    useEffect(() => {
         const loadCriticReviews = async () => {
-            const {payload} = await dispatch(findCriticReviewsThunk(username));
-            setCriticReviews(payload);
+            try {
+                const actionResult = await dispatch(findCriticReviewsThunk(username));
+                if (actionResult.type.endsWith('fulfilled')) {
+                    setCriticReviews(actionResult.payload);
+                } else {
+                    console.error('Failed to load critic reviews:', actionResult);
+                }
+            } catch (error) {
+                console.error('Error loading critic reviews:', error);
+            }
         }
         loadCriticReviews();
-    });
+    }, [username, dispatch]);
+
+
     return (
         <div>
             <ul className="wd-profile-list list-group">

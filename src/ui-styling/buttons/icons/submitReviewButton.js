@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 function SubmitReviewBtn({className, fn}) {
   return (
     <button
+      type="button"
       className={`square rounded-circle wd-greenBackground wd-circleBtn wd-whiteText ${className}`}
       onClick={fn}
     >
