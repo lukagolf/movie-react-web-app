@@ -6,7 +6,7 @@ import ReactPlayer from "react-player";
 import { useSelector, useDispatch } from "react-redux";
 import { findMovieVideoThunk } from "../../services/movie-video-thunks";
 
-function VideoBackground() {
+function VideoBackground({topMovieRef}) {
 
 
   const { currentUser } = useSelector((state) => state.user);
@@ -28,6 +28,12 @@ function VideoBackground() {
         padding: '10px',
         borderRadius: '5px',
     };
+
+    const onExplore = (e) => {
+      console.log("explore button clicked");
+      e.preventDefault();
+      topMovieRef.current.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+    }
 
     return (
       <div className="wd-video-background">
@@ -59,7 +65,10 @@ function VideoBackground() {
             <h4
               style={{ textTransform: "lowercase" }}
             >{`- Welcome ${currentUser? currentUser.role : ""} -`}</h4>
+            <span onClick={onExplore}>
             <ExploreBtn />
+            </span>
+            
           </div>
         </div>
       </div>

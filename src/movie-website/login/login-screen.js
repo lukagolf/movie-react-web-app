@@ -13,20 +13,22 @@ function LoginScreen() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [displayBanner, setDisplayBanner] = useState(false);
+    const [isValid, setIsValid] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleLogin = async () => {
-        setDisplayBanner(true);
         try {
             const actionResult = await dispatch(loginThunk({ username, password }));
             if (loginThunk.fulfilled.match(actionResult)) {
+                setDisplayBanner(true);
+                setIsValid(true);
                 dispatch(setUser(actionResult.payload));
                 dispatch(storeUserInLocalStorage(actionResult.payload));
                 navigate(`/profile`);
             } else {
-                throw new Error(actionResult.error.message);
+                setDisplayBanner(true);
             }
         } catch (e) {
             alert(e);
@@ -55,7 +57,7 @@ function LoginScreen() {
                     <BlackTextBtn text={"Sign In"} fn={handleLogin} />
                 </div>
                 <br />
-                {displayBanner ? <Banner success={username && password} /> : ""}
+                {displayBanner ? <Banner success={isValid} /> : ""}
             </div>
         </>
     );

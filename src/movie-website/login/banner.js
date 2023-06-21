@@ -1,5 +1,5 @@
 import React from "react";
-const Banner = ({success}) => {
+const Banner = ({success, message}) => {
     return (
       <div
         className={`card mt-3 wd-margin ${
