@@ -43,7 +43,8 @@ function MyNav({
           )}
           {options.profile ? (
             <Nav.Item>
-              <Nav.Link as={Link} to={`/profile/${currentUser.username}`}>
+              {/* <Nav.Link as={Link} to={`/profile/${currentUser.username}`}> */}
+              <Nav.Link as={Link} to={`/profile`}>
                 <ProfileBtn />
               </Nav.Link>
             </Nav.Item>
