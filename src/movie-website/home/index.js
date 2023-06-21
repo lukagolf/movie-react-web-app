@@ -22,11 +22,19 @@ function Home() {
           }}
         />
       ) : (
-        <MyNav />
+        <MyNav
+          options={{
+            homePage: true,
+            search: true,
+            signIn: true,
+            profile: false,
+            signOut: false,
+          }}
+        />
       )}
 
-      <VideoBackground topMovieRef={topMoviesRef}/>
-      <HomeCarousel ref={topMoviesRef}/>
+      <VideoBackground topMovieRef={topMoviesRef} />
+      <HomeCarousel ref={topMoviesRef} />
       <HomeSearch />
     </div>
   );
