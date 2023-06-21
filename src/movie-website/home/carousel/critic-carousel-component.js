@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Rating from '@mui/material/Rating';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import "./index.css"
@@ -11,7 +10,7 @@ function CriticCarouselComponent({ movieId }) {
     const handleMouseEnter = () => {
         setDisplayOverlay(true);
       };
-    
+
       const handleMouseLeave = () => {
         setDisplayOverlay(false);
       };

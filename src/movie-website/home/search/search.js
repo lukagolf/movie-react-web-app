@@ -23,12 +23,15 @@ function HomeSearch() {
     <>
       <div className="wd-outer-div">
         <div className="wd-inner-div">
-          <h3 className="mb-4 wd-purpleText">Search for movies</h3>
+          <label for="search-bar-home">
+            <h3 className="mb-4 wd-purpleText">Search for movies</h3>
+          </label>
+
           <div className="d-flex justify-content-center">
             <input
               type="text"
               className="form-control"
-              id="search-bar"
+              id="search-bar-home"
               placeholder="Search movies"
               onChange={(event) => setTitle(event.target.value)}
             />

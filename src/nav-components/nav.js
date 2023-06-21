@@ -8,6 +8,7 @@ import SearchBtn from "../ui-styling/buttons/icons/searchBtn";
 import WhiteTextBtn from "../ui-styling/buttons/text/whiteTextBtn";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutThunk } from "../movie-website/services/auth-thunks";
+import HomeBtn from "../ui-styling/buttons/icons/homeBtn";
 
 function MyNav({
   options = {
@@ -26,14 +27,19 @@ function MyNav({
       <Nav className="container-fluid ps-5 pe-5 ">
         <Nav.Item>
           <Navbar.Brand as={Link} to="/home">
-            {options.homePage ? (
-              <h2 className="d-inline wd-whiteText">CineScope</h2>
-            ) : (
-              <h2 className="d-inline wd-purpleText">CineScope</h2>
-            )}
+            <h2 className="d-inline wd-purpleText">CineScope</h2>
           </Navbar.Brand>
         </Nav.Item>
         <Navbar.Collapse className="justify-content-end">
+          {options.homePage ? (
+            ""
+          ) : (
+            <Nav.Item>
+              <Nav.Link as={Link} to={"/home"}>
+                <HomeBtn />
+              </Nav.Link>
+            </Nav.Item>
+          )}
           {options.search ? (
             <Nav.Item>
               <SearchBtn />
@@ -63,7 +69,12 @@ function MyNav({
           {options.signOut ? (
             <Nav.Item>
               <Nav.Link as={Link} to="/home">
-                <WhiteTextBtn text={"Sign Out"} fn={() => {dispatch(logoutThunk())}} />
+                <WhiteTextBtn
+                  text={"Sign Out"}
+                  fn={() => {
+                    dispatch(logoutThunk());
+                  }}
+                />
               </Nav.Link>
             </Nav.Item>
           ) : (

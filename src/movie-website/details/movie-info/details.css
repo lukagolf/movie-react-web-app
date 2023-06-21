@@ -20,19 +20,21 @@
 }
 
 .wd-details-row {
-    display: flex;
-    flex-direction: row;
-    padding-left: 10%;
-    padding-right: 10%;
+    /* display: flex;
+    flex-direction: row; */
+    padding-left: 3%;
+    padding-right: 3%;
 }
 
 .wd-photo-col {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
+    align-items: center;
 }
 
 .wd-photo-col img {
-    height: 95%;
+    width: 100%;
+    /* display: flex; */
 }
 
 .wd-photo-small-screen {
