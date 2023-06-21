@@ -28,8 +28,8 @@ export const updateUser = async (user) => {
     return response.data;
 };
 
-export const register = async ({ username, password, firstName, lastName, email, role }) => {
-    const response = await api.post(`${USERS_URL}/register`, { username, password, firstName, lastName, email, role });
+export const register = async ({ username, password, firstName, lastName, email, roles }) => {
+    const response = await api.post(`${USERS_URL}/register`, { username, password, firstName, lastName, email, roles });
     const user = response.data;
     console.log(user);
     return user;
@@ -39,14 +39,4 @@ export const getProfileByUsername = async (username) => {
     const response = await api.get(`${USERS_URL}/${username}`);
     return response;
 };
-
-// export const followUser = async (username) => {
-//     const response = await api.post(`${USERS_URL}/${username}/follow`);
-//     return response;
-// };
-
-// export const unfollowUser = async (username) => {
-//     const response = await api.post(`${USERS_URL}/${username}/unfollow`);
-//     return response;
-// };
 

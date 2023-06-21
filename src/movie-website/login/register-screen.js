@@ -24,6 +24,7 @@ function RegisterScreen() {
     const [role, setRole] = useState([]);
     const [displayBanner, setDisplayBanner] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [previousRole, setPreviousRole] = useState([]);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -32,7 +33,8 @@ function RegisterScreen() {
         console.log('Register button clicked');
         setDisplayBanner(true);
         try {
-            const actionResult = await dispatch(registerThunk({ username, password, firstName, lastName, email, role }));
+            const roles = role.map(r => r.value);
+            const actionResult = await dispatch(registerThunk({ username, password, firstName, lastName, email, roles }));
             if (registerThunk.fulfilled.match(actionResult)) {
                 setSuccess(true);
                 dispatch(setUser(actionResult.payload));
@@ -47,24 +49,8 @@ function RegisterScreen() {
         }
     };
 
-    const handleRoleChange = (event) => {
-        if (role.includes(event.target.value)) {
-            setRole(role.filter(r => r !== event.target.value));
-        } else {
-            if (event.target.value === 'CRITIC' && role.includes('VIEWER')) {
-                alert('You cannot select both VIEWER and CRITIC roles!');
-                return;
-            }
-            if (event.target.value === 'VIEWER' && role.includes('CRITIC')) {
-                alert('You cannot select both VIEWER and CRITIC roles!');
-                return;
-            }
-            setRole([...role, event.target.value]);
-        }
-    };
 
-    const [previousRole, setPreviousRole] = useState([]);
-    
+
     const onSelect = (selectedList, selectedItem) => {
         setPreviousRole(role);
         setRole([...selectedList]);
@@ -76,11 +62,11 @@ function RegisterScreen() {
     }
 
     useEffect(() => {
-        if (role.length > 2 || 
-            (role.find(item => item.value === 'VIEWER') && role.find(item => item.value === 'CRITIC')) || 
+        if (role.length > 2 ||
+            (role.find(item => item.value === 'VIEWER') && role.find(item => item.value === 'CRITIC')) ||
             (role.length === 2 && !role.find(item => item.value === 'ADMIN'))) {
-                alert('You cannot select Viewer and Critic together!');
-                setRole(previousRole);
+            alert('You cannot select Viewer and Critic together!');
+            setRole(previousRole);
         }
     }, [role]);
 
