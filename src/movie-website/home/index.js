@@ -12,7 +12,7 @@ function Home() {
       {currentUser ? (
         <MyNav
           options={{
-            homePage: false,
+            homePage: true,
             search: true,
             signIn: false,
             profile: true,

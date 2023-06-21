@@ -6,11 +6,13 @@ import SavedBtn from "../../../ui-styling/buttons/icons/savedBtn";
 import { useParams } from "react-router-dom";
 import { createSavedMovieThunk, deleteSavedMovieThunk, findAllSavedMoviesThunk } from "../../services/saved-movies-thunks";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const MovieListItem = () => {
   const { currentUser } = useSelector(state => state.user);
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -45,6 +47,11 @@ const MovieListItem = () => {
     }
   };
 
+  const forceLogin = () => {
+    alert("Create an account to proceed");
+    navigate("/login");
+  }
+
   // Check if movie exists
   if (!movie) {
     return <div>Loading...</div>;
@@ -53,35 +60,54 @@ const MovieListItem = () => {
   return (
     <div>
       <div className="wd-video-details-background row">
-        <div className="d-flex wd-details-row row">
-          {currentUser && currentUser.role === "VIEWER" && (
-            <div className="wd-left-col col-1">
-              <SavedBtn fn={handleSaveBtn} />
+        <div className="wd-details-row">
+          <div className="row">
+            {currentUser && currentUser.role === "VIEWER" && (
+              <div className="wd-left-col col-sm-3 col-md-2">
+                <SavedBtn fn={handleSaveBtn} />
+              </div>
+            )}
+            {!currentUser && (
+              <div className="wd-left-col col-sm-3 col-md-2">
+                <SavedBtn fn={forceLogin} />
+              </div>
+            )}
+            <div className="col-sm-9 col-md-5">
+              <h1>{movie.original_title}</h1>
+              <br />
+              <h5>
+                <b>Rating:</b> {movie.vote_average}
+              </h5>
+              <br />
+              <h5>
+                <b>Release date:</b> {movie.release_date}
+              </h5>
+              <br />
+              <h5>
+                <b>Summary:</b> {movie.overview}
+              </h5>
+
+              <div className="d-sm-block d-md-none wd-details-row">
+                <img
+                  className="w-100"
+                  src={
+                    "https://image.tmdb.org/t/p/w440_and_h660_face/" +
+                    movie.poster_path
+                  }
+                  alt="Movie Poster"
+                />
+              </div>
             </div>
-          )}
-          <div className="col-6">
-            <h1>{movie.original_title}</h1>
-            <br />
-            <h5>
-              <b>Rating:</b> {movie.vote_average}
-            </h5>
-            <br />
-            <h5>
-              <b>Release date:</b> {movie.release_date}
-            </h5>
-            <br />
-            <h5>
-              <b>Summary:</b> {movie.overview}
-            </h5>
-          </div>
-          <div className="wd-photo-col col-sm-4 col-md-5">
-            <img
-              src={
-                "https://image.tmdb.org/t/p/w440_and_h660_face/" +
-                movie.poster_path
-              }
-              alt="Movie Poster"
-            />
+            <div className="wd-photo-col d-none d-md-block col-md-5">
+              <img
+                className="w-100 mx-3"
+                src={
+                  "https://image.tmdb.org/t/p/w440_and_h660_face/" +
+                  movie.poster_path
+                }
+                alt="Movie Poster"
+              />
+            </div>
           </div>
         </div>
       </div>

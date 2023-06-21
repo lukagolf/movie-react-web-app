@@ -52,14 +52,18 @@ function VideoBackground() {
             <div className="m-0">
               <h4 className="ps-4">Out Now</h4>
               <h1 className="ps-4">{firstMovie.original_title}</h1>
-              <h5 className="ps-4 w-50">{firstMovie.overview}</h5>
+              <h5 className="ps-4 w-50 d-none d-sm-block">{firstMovie.overview}</h5>
             </div>
           </div>
           <div className="ps-4">
-            <h4
-              style={{ textTransform: "lowercase" }}
-            >{`- Welcome ${currentUser? currentUser.role : ""} -`}</h4>
-            <ExploreBtn />
+            <h4 style={{ textTransform: "lowercase" }}>{`- Welcome ${
+              currentUser
+                ? currentUser.username + " (" + currentUser.role + ")"
+                : ""
+            } -`}</h4>
+            <div className="d-none d-sm-block">
+              <ExploreBtn />
+            </div>
           </div>
         </div>
       </div>

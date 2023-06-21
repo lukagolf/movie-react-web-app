@@ -23,14 +23,19 @@ function SearchInput() {
   return (
     <>
       <div className="container">
-        <h2 className="text-center wd-pinkText">Search Movie</h2>
+        <div className="row justify-content-center">
+          <label for="search-bar-search" className="text-center ">
+            <h2 className="wd-pinkText">Search Movie</h2>
+          </label>
+        </div>
+
         <br />
         <div className="wd-margin">
           <div className="d-flex ">
             <input
               type="text"
               className="form-control"
-              id="search-bar"
+              id="search-bar-search"
               placeholder="Search movies"
               onChange={(event) => setSearch(event.target.value)}
             />

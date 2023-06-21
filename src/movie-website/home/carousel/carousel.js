@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import "./index.css";
 import "../../../ui-styling/index.css";
 import Carousel from 'react-multi-carousel';
@@ -9,9 +8,8 @@ import { findNewMoviesThunk } from '../../services/new-movies-thunks';
 import { findTopMoviesThunk } from '../../services/top-movies-thunks';
 import { findAllSavedMoviesThunk } from '../../services/saved-movies-thunks';
 import { findCriticReviewsThunk } from '../../services/reviews-thunks';
-import { findMovieById } from '../../services/movies-service';
-import axios from 'axios';
 import CriticCarouselComponent from './critic-carousel-component';
+import CarouselComponent from './carousel-component';
 
 function HomeCarousel() {
 
@@ -32,13 +30,13 @@ function HomeCarousel() {
       slidesToSlide: 1
     }
   };
-  const [displayOverlay, setDisplayOverlay] = useState(false);
   const { currentUser } = useSelector(state => state.user);
   const { newMovies } = useSelector((state) => state.newMovies);
   const { topMovies } = useSelector((state) => state.topMovies);
   const { savedMovies } = useSelector((state) => state.savedMovies);
   const [reviewedMovies, setReviewedMovies] = useState([]);
 
+  // loads movie lists
   const dispatch = useDispatch();
   useEffect(() => {
     if (currentUser) {
@@ -46,40 +44,31 @@ function HomeCarousel() {
     }
     dispatch(findNewMoviesThunk());
     dispatch(findTopMoviesThunk());
-  }, [dispatch, currentUser]);
 
-  useEffect(() => {
     const loadReviewedMovies = async () => {
       let movieIds = [];
       if (currentUser) {
-        const { payload } = await dispatch(findCriticReviewsThunk(currentUser.username));
-        payload.map(review => {
+        const { payload } = await dispatch(
+          findCriticReviewsThunk(currentUser.username)
+        );
+        payload.map((review) => {
           movieIds.push(review.movieId);
-        })
+        });
         movieIds = movieIds.filter(function (item, pos) {
           return movieIds.indexOf(item) == pos;
-        })
+        });
       }
       setReviewedMovies(movieIds);
-    }
+    };
     loadReviewedMovies();
-  }, [currentUser, dispatch])
-
-
-  const handleMouseEnter = () => {
-    setDisplayOverlay(true);
-  };
-
-  const handleMouseLeave = () => {
-    setDisplayOverlay(false);
-  };
+  }, [dispatch, currentUser]);
 
   return (
     <div>
       <br />
       {currentUser &&
         currentUser.role === "VIEWER" &&
-        savedMovies.length > 0 && (
+        savedMovies.length >= 0 && (
           <div>
             <div className="wd-carousel-title position-relative">
               <div className="wd-text-container">
@@ -97,36 +86,12 @@ function HomeCarousel() {
                 partialVisible={false}
               >
                 {savedMovies.map((movie) => {
-                  return (
-                    <Link to={{
-                      pathname: `/details/${movie.id}`,
-                      state: { movie: movie }
-                    }}>
-                      <div className="wd-slider p-0 m-0"
-                        key={movie.id}
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                      >
-                        {displayOverlay && (
-                          <h4 className="wd-centerTextOverlay">
-                            {movie.title}
-                          </h4>
-                        )}
-                        <img
-                          src={
-                            "http://image.tmdb.org/t/p/w500/" + movie.backdrop_path
-                          }
-                          alt="movie"
-                        />
-                      </div>
-                    </Link>
-                  );
+                  return <CarouselComponent movie={movie} />;
                 })}
               </Carousel>
             </div>
           </div>
         )}
-      {/* <br /> */}
 
       {currentUser &&
         currentUser.role === "CRITIC" &&
@@ -148,16 +113,12 @@ function HomeCarousel() {
                 partialVisible={false}
               >
                 {reviewedMovies.map((mid) => {
-                  return (
-                    <CriticCarouselComponent
-                      movieId={mid} />
-                  );
+                  return <CriticCarouselComponent movieId={mid} />;
                 })}
               </Carousel>
             </div>
           </div>
         )}
-      {/* <br /> */}
 
       <div className="wd-carousel-title position-relative">
         <div className="wd-text-container">
@@ -174,35 +135,9 @@ function HomeCarousel() {
           infinite={true}
           partialVisible={false}
         >
-          {
-            topMovies.map(
-              movie => {
-                return (
-                  <Link to={{
-                    pathname: `/details/${movie.id}`,
-                    state: { movie: movie }
-                  }}>
-                    <div
-                      className={`wd-slider p-0 m-0 ${displayOverlay && "wd-overlayBgColor"
-                        }`}
-                      key={movie.id}
-                      onMouseEnter={handleMouseEnter}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      {displayOverlay && (
-                        <h4 className="wd-centerTextOverlay">{movie.title}</h4>
-                      )}
-                      <div className="wd-slider p-0 m-0" key={movie.id}>
-                        <img src={`http://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} alt="movie" />
-                      </div>
-                    </div>
-                  </Link>
-
-                )
-              }
-            )
-
-          }
+          {topMovies.map((movie) => {
+            return <CarouselComponent movie={movie} />;
+          })}
         </Carousel>
       </div>
       <div className="wd-carousel-title position-relative">
@@ -220,34 +155,9 @@ function HomeCarousel() {
           infinite={true}
           partialVisible={false}
         >
-          {
-            newMovies.map(
-              movie => {
-                return (
-                  <Link to={{
-                    pathname: `/details/${movie.id}`,
-                    state: { movie: movie }
-                  }}>
-                    <div
-                      className={`wd-slider p-0 m-0 ${displayOverlay && "wd-overlayBgColor"
-                        }`}
-                      key={movie.id}
-                      onMouseEnter={handleMouseEnter}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      {displayOverlay && (
-                        <h4 className="wd-centerTextOverlay">{movie.title}</h4>
-                      )}
-                      <div className="wd-slider p-0 m-0" key={movie.id}>
-                        <img src={`http://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} alt="movie" />
-                      </div>
-                    </div>
-                  </Link>
-                )
-              }
-            )
-
-          }
+          {newMovies.map((movie) => {
+            return <CarouselComponent movie={movie} />;
+          })}
         </Carousel>
       </div>
       <br />

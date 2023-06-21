@@ -35,8 +35,5 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-}
-
-.wd-overlayBgColor {
     opacity: 0.9;
 }

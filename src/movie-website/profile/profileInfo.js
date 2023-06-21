@@ -95,19 +95,27 @@ function ProfileInfo() {
           <h4>@{profile.username}</h4>
           {isCurrentUserProfile && (
             <>
-              <label className="pe-2">First Name</label>
+              <label className="pe-2" for="firstNameEdit">
+                First Name
+              </label>
               <input
+                id="firstNameEdit"
                 type="text"
                 value={profile.firstName}
+                className="form-control w-75"
                 onChange={(e) =>
                   setProfile({ ...profile, firstName: e.target.value })
                 } // Added this line
               />
               <br />
-              <label className="pe-2 mb-2">Last Name</label>
+              <label className="pe-2 mb-2" for="lastNameEdit">
+                Last Name
+              </label>
               <input
+                id="lastNameEdit"
                 type="text"
                 value={profile.lastName}
+                className="form-control w-75"
                 onChange={(e) =>
                   setProfile({ ...profile, lastName: e.target.value })
                 } // Added this line

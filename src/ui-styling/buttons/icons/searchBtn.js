@@ -8,9 +8,9 @@ function SearchBtn({className, fn}) {
   return (
     <Link to="/search">
       <button
-        className={`square rounded-circle wd-pinkBackground wd-circleBtn wd-whiteText ${className}`}
+        className={`square rounded-circle wd-pinkBackground wd-circleBtn wd-whiteText wd-marginLeft10 ${className}`}
         onClick={fn}
-        >
+      >
         <FaSearch size={25} />
       </button>
     </Link>
