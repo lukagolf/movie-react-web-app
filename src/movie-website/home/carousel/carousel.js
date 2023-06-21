@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import "./index.css";
 import "../../../ui-styling/index.css";
@@ -13,7 +13,7 @@ import { findMovieById } from '../../services/movies-service';
 import axios from 'axios';
 import CriticCarouselComponent from './critic-carousel-component';
 
-function HomeCarousel() {
+const HomeCarousel = forwardRef((props, ref) => {
 
   const responsive = {
     desktop: {
@@ -159,52 +159,55 @@ function HomeCarousel() {
         )}
       {/* <br /> */}
 
-      <div className="wd-carousel-title position-relative">
-        <div className="wd-text-container">
-          <h3 className="wd-purpleText">Top Picks</h3>
+      <div ref={ref} >
+        <div className="wd-carousel-title position-relative" >
+          <div className="wd-text-container" >
+            <h3 className="wd-purpleText">Top Picks</h3>
+          </div>
+        </div>
+        <div className="wd-carousel-parent" >
+          <Carousel
+            responsive={responsive}
+            autoPlay={true}
+            swipeable={true}
+            draggable={true}
+            showDots={false}
+            infinite={true}
+            partialVisible={false}
+          >
+            {
+              topMovies.map(
+                movie => {
+                  return (
+                    <Link to={{
+                      pathname: `/details/${movie.id}`,
+                      state: { movie: movie }
+                    }}>
+                      <div
+                        className={`wd-slider p-0 m-0 ${displayOverlay && "wd-overlayBgColor"
+                          }`}
+                        key={movie.id}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                      >
+                        {displayOverlay && (
+                          <h4 className="wd-centerTextOverlay">{movie.title}</h4>
+                        )}
+                        <div className="wd-slider p-0 m-0" key={movie.id}>
+                          <img src={`http://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} alt="movie" />
+                        </div>
+                      </div>
+                    </Link>
+
+                  )
+                }
+              )
+
+            }
+          </Carousel>
         </div>
       </div>
-      <div className="wd-carousel-parent">
-        <Carousel
-          responsive={responsive}
-          autoPlay={true}
-          swipeable={true}
-          draggable={true}
-          showDots={false}
-          infinite={true}
-          partialVisible={false}
-        >
-          {
-            topMovies.map(
-              movie => {
-                return (
-                  <Link to={{
-                    pathname: `/details/${movie.id}`,
-                    state: { movie: movie }
-                  }}>
-                    <div
-                      className={`wd-slider p-0 m-0 ${displayOverlay && "wd-overlayBgColor"
-                        }`}
-                      key={movie.id}
-                      onMouseEnter={handleMouseEnter}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      {displayOverlay && (
-                        <h4 className="wd-centerTextOverlay">{movie.title}</h4>
-                      )}
-                      <div className="wd-slider p-0 m-0" key={movie.id}>
-                        <img src={`http://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} alt="movie" />
-                      </div>
-                    </div>
-                  </Link>
 
-                )
-              }
-            )
-
-          }
-        </Carousel>
-      </div>
       <div className="wd-carousel-title position-relative">
         <div className="wd-text-container">
           <h3 className="wd-purpleText">Latest Releases</h3>
@@ -253,6 +256,6 @@ function HomeCarousel() {
       <br />
     </div>
   );
-}
+});
 
 export default HomeCarousel;
