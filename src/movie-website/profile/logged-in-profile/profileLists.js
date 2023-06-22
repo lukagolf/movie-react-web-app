@@ -8,46 +8,47 @@ import "../index.css"
 import { fetchProfileByUsernameThunk } from "../../services/auth-thunks";
 
 function CurrentUserProfileLists() {
-    const { currentUser } = useSelector((state) => state.user);
-    let username = currentUser?.username;
-    const [profileUser, setProfileUser] = useState([]);
-    const dispatch = useDispatch()
+  const { currentUser } = useSelector((state) => state.user);
+  let username = currentUser?.username;
+  const [profileUser, setProfileUser] = useState([]);
+  const dispatch = useDispatch()
 
-    useEffect(() => {
-        const loadProfileUser = async () => {
-            const { payload } = await dispatch(fetchProfileByUsernameThunk(username));
-            setProfileUser(payload);
-        }
-        loadProfileUser();
-    }, [username])
+  useEffect(() => {
+    const loadProfileUser = async () => {
+      const { payload } = await dispatch(fetchProfileByUsernameThunk(username));
+      setProfileUser(payload);
+    }
+    loadProfileUser();
+  }, [username])
 
-    return (
-        <div className="wd-review-div">
-          <div className="wd-review-content">
-            {currentUser && (
-              <div>
-                <div className="col-2"></div>
-                <div className="col-8 wd-list-col">
-                  {profileUser && profileUser.role == "VIEWER" && (
-                    <div>
-                      <MoviesBucketList />
-                      <FollowedCriticsList />
-                    </div>
-                  )}
-                  {profileUser && profileUser.role == "CRITIC" && (
-                    <div>
-                      <CriticReviewList />
-                    </div>
-                  )}
+  return (
+    <div className="wd-review-div">
+      <div className="wd-review-content">
+        {currentUser && (
+          <div>
+            <div className="col-2"></div>
+            <div className="col-8 wd-list-col">
+              {profileUser && profileUser.roles && profileUser.roles[0] === "VIEWER" && (
+                <div>
+                  <MoviesBucketList />
+                  <FollowedCriticsList />
                 </div>
-                <div className="col-2"></div>
-              </div>
-            )}
+              )}
+              {profileUser && profileUser.roles && profileUser.roles[0] === "CRITIC" && (
+                <div>
+                  <CriticReviewList />
+                </div>
+              )}
+
+            </div>
+            <div className="col-2"></div>
           </div>
-          <br />
-          <BackBtn />
-        </div>
-      );
+        )}
+      </div>
+      <br />
+      <BackBtn />
+    </div>
+  );
 }
 
 export default CurrentUserProfileLists;
