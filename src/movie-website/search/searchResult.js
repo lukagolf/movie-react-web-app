@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import { useSelector, useDispatch } from "react-redux";
 import { findMoviesThunk } from "../services/search-thunks";
-import { NavLink } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 
 function SearchResult() {
   const movies = useSelector((state) => state.search.data);
   const status = useSelector((state) => state.search.status);
+  const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(findMoviesThunk());
+    dispatch(findMoviesThunk({title: searchParams.get("q")}));
   }, [dispatch]);
 
   return (

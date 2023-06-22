@@ -5,16 +5,25 @@ import "./index.css"
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { findMoviesThunk } from "../services/search-thunks";
+import { useNavigate } from "react-router";
+import { createSearchParams } from "react-router-dom";
 
 function SearchInput() {
 
   const [title, setSearch] = useState("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSearch = async () => {
     try {
         await dispatch(findMoviesThunk({ title }));
+        navigate({
+          pathname: '/search/',
+          search: `?${createSearchParams({
+            q: title
+          }).toString()}`
+        })
     } catch (e) {
         alert(e);
     }
