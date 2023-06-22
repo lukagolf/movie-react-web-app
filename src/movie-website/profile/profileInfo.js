@@ -5,8 +5,8 @@ import "./index.css"
 import "../../ui-styling/index.css"
 import TagBtn from "../../ui-styling/buttons/text/tagBtn";
 import { FaUserCircle } from "react-icons/fa";
-import { removeUserFromLocalStorage } from "../reducers/auth-reducer";
-import { profileThunk, logoutThunk, updateUserThunk, fetchProfileByUsernameThunk }
+import { removeUserFromLocalStorage, setUser, storeUserInLocalStorage } from "../reducers/auth-reducer";
+import { logoutThunk, updateUserThunk, fetchProfileByUsernameThunk }
   from "../services/auth-thunks";
 import FollowBtn from "../../ui-styling/buttons/text/followBtn";
 import BlackTextBtn from "../../ui-styling/buttons/text/blackTextBtn";
@@ -18,15 +18,42 @@ function ProfileInfo() {
   const [followedCritics, setFollowedCritics] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { username } = useParams(); // Get the username from the URL
-  const isCurrentUserProfile = currentUser?.username === username; // Check if it's the currentUser's profile
-  const isAnotherViewer = currentUser?.role === "VIEWER"; // Check if it's another viewer seeing this profile
+  const { username } = useParams();
+  const isCurrentUserProfile = currentUser?.username === username;
+  const isAnotherViewer = currentUser?.roles.includes("VIEWER");
 
+  const initSelectedRole = () => {
+    if (currentUser?.roles?.includes('VIEWER')) {
+      return 'VIEWER';
+    } else if (currentUser?.roles?.includes('CRITIC')) {
+      return 'CRITIC';
+    } else {
+      return currentUser?.roles?.[0];
+    }
+  };
+
+  const [selectedRole, setSelectedRole] = useState(null);
+
+  const [selectedButton, setSelectedButton] = useState(initSelectedRole());
+
+  const handleRoleSelection = (role) => {
+    const otherRoles = currentUser.roles.filter(r => r !== role);
+    const updatedRoles = [role, ...otherRoles];
+    const updatedUser = { ...currentUser, roles: updatedRoles };
+
+    dispatch(setUser(updatedUser));
+    dispatch(storeUserInLocalStorage(updatedUser));
+    dispatch(updateUserThunk(updatedUser));
+    setSelectedButton(role);
+    setSelectedRole(role);  // set selectedRole state
+    window.localStorage.setItem('selectedRole', role);  // set selectedRole in local storage here
+  };
 
   const save = () => {
     console.log(profile);
     dispatch(updateUserThunk(profile));
   };
+
   const handleLogout = async () => {
     try {
       const actionResult = await dispatch(logoutThunk());
@@ -65,21 +92,29 @@ function ProfileInfo() {
 
   useEffect(() => {
     const getProfile = async () => {
-      // Fetch the profile based on the username in the URL
       const { payload } = await dispatch(fetchProfileByUsernameThunk(username));
-      setProfile(payload);
+      let { roles } = payload;
+
+      // Check if roles is not an array and convert it to an array
+      if (typeof roles === 'string') {
+        roles = [roles];
+      }
+
+      setProfile({ ...payload, roles });
       setIsLoading(false);
+
+      // Get the selected role from the local storage
+      const savedRole = window.localStorage.getItem('selectedRole');
+      setSelectedRole(savedRole ? savedRole : initSelectedRole());
     };
     getProfile();
-  }, [username]); // Recompute only when username changes
+  }, [username, dispatch, selectedRole]);
 
   useEffect(() => {
-    // if the current user is a viewer, load the critics that they follow
-    if (isAnotherViewer) {
+    if (currentUser && isAnotherViewer) {
       setFollowedCritics(currentUser.followedCritics);
     }
-  }, [currentUser, isAnotherViewer]); // Recompute only when currentUser changes or isAnotherViewer changes
-
+  }, [currentUser, isAnotherViewer]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -105,7 +140,7 @@ function ProfileInfo() {
                 className="form-control w-75"
                 onChange={(e) =>
                   setProfile({ ...profile, firstName: e.target.value })
-                } // Added this line
+                }
               />
               <br />
               <label className="pe-2 mb-2" for="lastNameEdit">
@@ -118,7 +153,7 @@ function ProfileInfo() {
                 className="form-control w-75"
                 onChange={(e) =>
                   setProfile({ ...profile, lastName: e.target.value })
-                } // Added this line
+                }
               />
             </>
           )}
@@ -126,7 +161,14 @@ function ProfileInfo() {
           <br />
           <br />
           <span>
-            <TagBtn text={profile.role} />
+            {profile.roles.map((role, index) => (
+              <TagBtn
+                key={index}
+                text={role}
+                fn={isCurrentUserProfile ? () => handleRoleSelection(role) : null}
+                selected={selectedButton === role}
+              />
+            ))}
             {!isCurrentUserProfile && isAnotherViewer && (
               <FollowBtn
                 text={"FOLLOW"}

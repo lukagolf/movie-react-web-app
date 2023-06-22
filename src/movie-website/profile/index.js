@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 function Profile() {
   const { currentUser } = useSelector((state) => state.user);
+
   return (
     <>
       {currentUser ? (
@@ -21,7 +22,7 @@ function Profile() {
         <MyNav />
       )}
       <ProfileInfo />
-      <ProfileLists />
+      {currentUser && <ProfileLists key={currentUser.roles ? currentUser.roles.join() : ''} />}
 
     </>
   );

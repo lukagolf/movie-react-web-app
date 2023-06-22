@@ -24,7 +24,7 @@ const ReviewItem = ({ review }) => {
             className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
           >
             <div>
-              {currentUser.role === "ADMIN" && (
+              {currentUser.roles[0] === "ADMIN" && (
                 <DeleteBtn
                   fn={() => deleteReviewHandler(review._id)}
                   className={"float-end"}

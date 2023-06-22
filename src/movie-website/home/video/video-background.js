@@ -64,7 +64,7 @@ function VideoBackground({topMovieRef}) {
           <div className="ps-4">
             <h4 style={{ textTransform: "lowercase" }}>{`- Welcome ${
               currentUser
-                ? currentUser.username + " (" + currentUser.role + ")"
+                ? currentUser.username + " (" + currentUser.roles[0] + ")"
                 : ""
             } -`}</h4>
             <div className="d-none d-sm-block">

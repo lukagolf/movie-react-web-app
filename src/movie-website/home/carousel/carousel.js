@@ -68,7 +68,7 @@ const HomeCarousel = forwardRef((props, ref) => {
     <div>
       <br />
       {currentUser &&
-        currentUser.role === "VIEWER" &&
+        currentUser.roles[0] === "VIEWER" &&
         savedMovies.length >= 0 && (
           <div>
             <div className="wd-carousel-title position-relative">
@@ -95,7 +95,7 @@ const HomeCarousel = forwardRef((props, ref) => {
         )}
 
       {currentUser &&
-        currentUser.role === "CRITIC" &&
+        currentUser.roles[0] === "CRITIC" &&
         reviewedMovies.length >= 0 && (
           <div>
             <div className="wd-carousel-title position-relative">
