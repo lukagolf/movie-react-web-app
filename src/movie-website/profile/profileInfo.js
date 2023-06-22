@@ -6,7 +6,7 @@ import "../../ui-styling/index.css"
 import TagBtn from "../../ui-styling/buttons/text/tagBtn";
 import { FaUserCircle } from "react-icons/fa";
 import { removeUserFromLocalStorage, setUser, storeUserInLocalStorage } from "../reducers/auth-reducer";
-import { profileThunk, logoutThunk, updateUserThunk, fetchProfileByUsernameThunk }
+import { logoutThunk, updateUserThunk, fetchProfileByUsernameThunk }
   from "../services/auth-thunks";
 import FollowBtn from "../../ui-styling/buttons/text/followBtn";
 import BlackTextBtn from "../../ui-styling/buttons/text/blackTextBtn";
@@ -14,7 +14,6 @@ import BlackTextBtn from "../../ui-styling/buttons/text/blackTextBtn";
 function ProfileInfo() {
   const { currentUser } = useSelector((state) => state.user);
   const [profile, setProfile] = useState(currentUser);
-  const [selectedRole, setSelectedRole] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [followedCritics, setFollowedCritics] = useState([]);
   const dispatch = useDispatch();
@@ -23,22 +22,31 @@ function ProfileInfo() {
   const isCurrentUserProfile = currentUser?.username === username;
   const isAnotherViewer = currentUser?.roles.includes("VIEWER");
 
-  useEffect(() => {
-    if (currentUser && currentUser.roles.includes('VIEWER')) {
-      setSelectedRole('VIEWER');
-    } else if (currentUser && currentUser.roles.includes('CRITIC')) {
-      setSelectedRole('CRITIC');
-    } else if (currentUser) {
-      setSelectedRole(currentUser.roles[0]);
+  const initSelectedRole = () => {
+    if (currentUser?.roles?.includes('VIEWER')) {
+      return 'VIEWER';
+    } else if (currentUser?.roles?.includes('CRITIC')) {
+      return 'CRITIC';
+    } else {
+      return currentUser?.roles?.[0];
     }
-  }, [currentUser]);
+  };
 
+  const [selectedRole, setSelectedRole] = useState(null);
 
-  const handleRoleSelection = async (role) => {
-    const updatedUser = { ...currentUser, roles: [role] };
+  const [selectedButton, setSelectedButton] = useState(initSelectedRole());
+
+  const handleRoleSelection = (role) => {
+    const otherRoles = currentUser.roles.filter(r => r !== role);
+    const updatedRoles = [role, ...otherRoles];
+    const updatedUser = { ...currentUser, roles: updatedRoles };
+
     dispatch(setUser(updatedUser));
     dispatch(storeUserInLocalStorage(updatedUser));
-    setSelectedRole(role);
+    dispatch(updateUserThunk(updatedUser));
+    setSelectedButton(role);
+    setSelectedRole(role);  // set selectedRole state
+    window.localStorage.setItem('selectedRole', role);  // set selectedRole in local storage here
   };
 
   const save = () => {
@@ -94,16 +102,19 @@ function ProfileInfo() {
 
       setProfile({ ...payload, roles });
       setIsLoading(false);
+
+      // Get the selected role from the local storage
+      const savedRole = window.localStorage.getItem('selectedRole');
+      setSelectedRole(savedRole ? savedRole : initSelectedRole());
     };
     getProfile();
-  }, [username, dispatch]);
+  }, [username, dispatch, selectedRole]);
 
   useEffect(() => {
     if (currentUser && isAnotherViewer) {
       setFollowedCritics(currentUser.followedCritics);
     }
   }, [currentUser, isAnotherViewer]);
-
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -146,8 +157,8 @@ function ProfileInfo() {
               <TagBtn
                 key={index}
                 text={role}
-                fn={() => handleRoleSelection(role)}
-                selected={selectedRole === role}
+                fn={isCurrentUserProfile ? () => handleRoleSelection(role) : null}
+                selected={selectedButton === role}
               />
             ))}
             {!isCurrentUserProfile && isAnotherViewer && (
