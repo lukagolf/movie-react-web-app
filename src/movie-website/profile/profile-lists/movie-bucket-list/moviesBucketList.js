@@ -16,21 +16,21 @@ function MoviesBucketList() {
   useEffect(() => {
     const loadProfileUser = async () => {
       if (location.pathname.endsWith("/profile") || location.pathname.endsWith(`/profile/${currentUser.username}`)) {
-      setProfileUser(currentUser);
+        setProfileUser(currentUser);
       } else if (urlUsername && urlUsername !== currentUser.username) {
         const { payload } = await dispatch(fetchProfileByUsernameThunk(urlUsername));
         setProfileUser(payload);
       }
     }
     loadProfileUser();
-  }, [username, dispatch]);
+  }, [urlUsername, location.pathname, currentUser]);
 
   return (
     <div>
       <ul className="wd-profile-list list-group">
         <h3>Saved Movies List</h3>
         <br />
-        {savedMovies.map((movie) => (
+        {savedMovies?.map((movie) => (
           <li>
             <MovieBucketListItem movieInfo={movie} />
           </li>
