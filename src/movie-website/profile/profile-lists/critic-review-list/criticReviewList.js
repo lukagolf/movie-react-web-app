@@ -13,7 +13,6 @@ function CriticReviewList() {
 
     let criticUsername = username ? username : currentUser?.username;
 
-    console.log(criticUsername);
 
     useEffect(() => {
         const loadCriticReviews = async () => {

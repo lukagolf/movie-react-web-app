@@ -11,20 +11,22 @@ import { profileThunk, logoutThunk, updateUserThunk, fetchProfileByUsernameThunk
 import FollowBtn from "../../ui-styling/buttons/text/followBtn";
 import BlackTextBtn from "../../ui-styling/buttons/text/blackTextBtn";
 
-function ProfileInfo() {
+function ProfileInfo({ isCurUser }) {
   const { currentUser } = useSelector((state) => state.user);
   const [profile, setProfile] = useState(currentUser);
   const [isLoading, setIsLoading] = useState(true);
   const [followedCritics, setFollowedCritics] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { username } = useParams(); // Get the username from the URL
+  let {username} = useParams(); // Get the username from the URL
+  if (isCurUser) {
+    username = currentUser?.username;
+  }
   const isCurrentUserProfile = currentUser?.username === username; // Check if it's the currentUser's profile
   const isAnotherViewer = currentUser?.role === "VIEWER"; // Check if it's another viewer seeing this profile
 
-
   const save = () => {
-    console.log(profile);
+
     dispatch(updateUserThunk(profile));
   };
   const handleLogout = async () => {
@@ -36,31 +38,31 @@ function ProfileInfo() {
       } else {
         throw new Error(actionResult.error.message);
       }
-    }
-    catch (e) {
+    } catch (e) {
       alert(e);
     }
   };
 
   const handleFollow = async () => {
-    try {
-      if (isAnotherViewer) {
-        console.log(followedCritics.filter((critic) => critic._id === profile._id));
-        if (followedCritics.filter(critic => critic._id === profile._id).length === 0) {
-          alert("Followed this critic");
-          const newFollowingList = followedCritics.concat(profile);
-          const updatedViewer = {
-            ...currentUser,
-            followedCritics: newFollowingList,
-          };
-          dispatch(updateUserThunk(updatedViewer));
-        } else {
-          throw new Error("Already following this critic");
-        }
-      }
-    } catch (e) {
-      alert(e);
-    }
+    const newFollowingList = followedCritics.concat(profile);
+    const updatedViewer = {
+      ...currentUser,
+      followedCritics: newFollowingList,
+    };
+    dispatch(updateUserThunk(updatedViewer));
+    alert("Followed this critic");
+  };
+
+  const handleUnFollow = async() => {
+    const newFollowingList = followedCritics.filter(
+      (critic) => critic._id !== profile._id
+    );
+    const updatedViewer = {
+      ...currentUser,
+      followedCritics: newFollowingList,
+    };
+    dispatch(updateUserThunk(updatedViewer));
+    alert("Unfollowed this critic");
   };
 
   useEffect(() => {
@@ -80,10 +82,9 @@ function ProfileInfo() {
     }
   }, [currentUser, isAnotherViewer]); // Recompute only when currentUser changes or isAnotherViewer changes
 
-
   if (isLoading) {
     return <div>Loading...</div>;
-  } else {
+  } else if (profile) {
     return (
       <div className="wd-profile-info-background row wd-padding">
         <div className="wd-details-col col-6">
@@ -128,11 +129,22 @@ function ProfileInfo() {
           <span>
             <TagBtn text={profile.role} />
             {!isCurrentUserProfile && isAnotherViewer && (
-              <FollowBtn
-                text={"FOLLOW"}
-                followed={false}
-                fn={() => handleFollow()}
-              />
+              <>
+                {followedCritics.filter((critic) => critic._id === profile._id)
+                  .length === 0 ? (
+                  <FollowBtn
+                    text={"FOLLOW"}
+                    isFollowed={false}
+                    fn={() => handleFollow()}
+                  />
+                ) : (
+                  <FollowBtn
+                    text={"UNFOLLOW"}
+                    isFollowed={true}
+                    fn={() => handleUnFollow()}
+                  />
+                )}
+              </>
             )}
           </span>
           <br />

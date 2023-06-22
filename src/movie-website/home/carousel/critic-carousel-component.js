@@ -28,29 +28,30 @@ function CriticCarouselComponent({ movieId }) {
     }, [])
 
     return (
-        <Link to={{
-            pathname: `/details/${movieReviewed.id}`,
-            state: { movie: movieReviewed }
-        }}>
-            <div className="wd-slider p-0 m-0"
-                key={movieReviewed.id}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-            >
-                {displayOverlay && (
-                    <h4 className="wd-centerTextOverlay">
-                        {movieReviewed.title}
-                    </h4>
-                )}
-                <img
-                    src={
-                        "http://image.tmdb.org/t/p/w500/" + movieReviewed.backdrop_path
-                    }
-                    alt="movie"
-                />
-            </div>
-        </Link>
-    )
+      <Link
+        to={{
+          pathname: `/details/${movieReviewed.id}`,
+          state: { movie: movieReviewed },
+        }}
+      >
+        <div
+          className="wd-slider p-0 m-0"
+          key={movieReviewed.id}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {displayOverlay && (
+            <h4 className="wd-centerTextOverlay">{movieReviewed.title}</h4>
+          )}
+          <img
+            src={
+              "http://image.tmdb.org/t/p/w500/" + movieReviewed.backdrop_path
+            }
+            alt="movie"
+          />
+        </div>
+      </Link>
+    );
 };
 
 export default CriticCarouselComponent;

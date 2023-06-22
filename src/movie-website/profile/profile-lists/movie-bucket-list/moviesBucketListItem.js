@@ -1,8 +1,27 @@
 import React from "react";
 import "../../index.css";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { updateUserThunk } from "../../../services/auth-thunks";
+import DeleteBtn from "../../../../ui-styling/buttons/icons/deleteBtn";
 
 function MovieBucketListItem({ movieInfo }) {
+  const {currentUser} = useSelector(state => state.user);
+  const userSavedMovies = currentUser?.savedMovies;
+
+  const dispatch = useDispatch();
+   const handleUnSaveBtn = async () => {
+     const newSavedMoviesList = userSavedMovies.filter(
+       (savedMovie) => savedMovie.id !== movieInfo.id
+     );
+     const updatedViewer = {
+       ...currentUser,
+       savedMovies: newSavedMoviesList,
+     };
+     dispatch(updateUserThunk(updatedViewer));
+     alert("Un-saving movie: " + movieInfo.title);
+   };
   return (
     <>
       <NavLink
@@ -10,6 +29,10 @@ function MovieBucketListItem({ movieInfo }) {
         state={{ movieInfo }}
         className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
       >
+        <DeleteBtn
+          fn={() => handleUnSaveBtn()}
+          className={"float-end"}
+        />
         <div className="row p-3 wd-movie-list-row">
           <div className="col-3 wd-movie-list-image d-none d-lg-block">
             <img
@@ -25,7 +48,7 @@ function MovieBucketListItem({ movieInfo }) {
             </div>
           </div>
           <div className="d-lg-none col-12">
-          <img
+            <img
               src={`http://image.tmdb.org/t/p/w500/${movieInfo.backdrop_path}`}
               className="float-left mr-3 wd-md-screen-size-img"
             />

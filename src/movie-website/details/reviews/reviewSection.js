@@ -14,6 +14,7 @@ function ReviewSection() {
                 <div className="col-2"></div>
                 <div className="col-8">
                     <ReviewList />
+                    <br/>
                     <br />
                     {currentUser && currentUser.role === 'CRITIC' && <AddReview />}
                 </div>

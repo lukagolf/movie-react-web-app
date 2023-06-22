@@ -20,7 +20,6 @@ function MyNav({
   },
 }) {
   const {currentUser} = useSelector(state => state.user);
-  console.log("LOGGED IN NAV", currentUser);
   const dispatch = useDispatch();
   return (
     <Navbar>

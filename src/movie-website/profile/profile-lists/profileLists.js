@@ -9,9 +9,12 @@ import BackBtn from "../../../ui-styling/buttons/icons/backBtn";
 import "../index.css"
 import { useParams } from "react-router";
 
-function ProfileLists() {
+function ProfileLists({isCurUser}) {
     const { currentUser } = useSelector((state) => state.user);
-    let { username } = useParams();
+    let {username} = useParams();
+    if (isCurUser) {
+      username = currentUser?.username;
+    }
     const [profileUser, setProfileUser] = useState([]);
     const dispatch = useDispatch();
 

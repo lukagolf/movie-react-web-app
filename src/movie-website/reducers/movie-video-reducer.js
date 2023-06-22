@@ -17,7 +17,6 @@ const movieVideoSlice = createSlice({
     [findMovieVideoThunk.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.video = "https://www.youtube.com/watch?v=" + payload;
-      console.log(state.video);
     },
     [findMovieVideoThunk.rejected]: (state, action) => {
       state.loading = false;

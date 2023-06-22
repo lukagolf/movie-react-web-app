@@ -15,11 +15,13 @@ const ReviewItem = ({ review }) => {
       alert("Create an account to proceed");
     };
 
+    const reviewedByCurrentUser = review.username === currentUser?.username;
+
     return (
       <div>
         {currentUser ? (
           <NavLink
-            to={`/profile/${review.username}`}
+            to={`/profile${reviewedByCurrentUser ? "" : "/" + review.username}`}
             state={{ review }}
             className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
           >
@@ -30,7 +32,9 @@ const ReviewItem = ({ review }) => {
                   className={"float-end"}
                 />
               )}
-              <h3>{review.username}</h3>
+              <h3>
+                {review.username} {reviewedByCurrentUser && " (You)"}
+              </h3>
 
               <h4>{review.title}</h4>
               <Rating name="read-only" value={review.rating} readOnly />

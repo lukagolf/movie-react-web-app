@@ -14,7 +14,7 @@ export const findMovies = async (searchParams) => {
   })
 
   const movies = response.data;
-  console.log("Service Movies", movies);
+
   return movies;
 }
 

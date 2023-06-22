@@ -9,6 +9,5 @@ export const findMovieVideo = async (movieId) => {
       },
     }
   );
-  console.log(response.data.results[0]);
   return response.data.results[0].key;
 };

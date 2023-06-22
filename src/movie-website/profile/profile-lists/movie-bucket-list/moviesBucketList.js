@@ -2,17 +2,11 @@ import React, { useEffect } from "react";
 import "../../index.css"
 import MovieBucketListItem from "./moviesBucketListItem";
 import { useSelector, useDispatch } from "react-redux";
-import { findAllSavedMoviesThunk } from "../../../services/saved-movies-thunks";
 
 function MoviesBucketList() {
   const { currentUser } = useSelector((state) => state.user);
-  const { savedMovies } = useSelector((state) => state.savedMovies);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (currentUser) {
-      dispatch(findAllSavedMoviesThunk(currentUser._id));
-    }
-  }, []);
+
+  const savedMovies = currentUser?.savedMovies;
   return (
     <div>
       <ul className="wd-profile-list list-group">

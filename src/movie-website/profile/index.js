@@ -20,9 +20,8 @@ function Profile() {
       ) : (
         <MyNav />
       )}
-      <ProfileInfo />
-      <ProfileLists />
-
+      <ProfileInfo isCurUser={false} />
+      <ProfileLists isCurUser={false} />
     </>
   );
 }

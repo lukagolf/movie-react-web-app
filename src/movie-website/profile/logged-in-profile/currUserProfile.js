@@ -1,33 +1,25 @@
 import MyNav from "../../../nav-components/nav";
+import { useSelector } from "react-redux";
 import ProfileInfo from "../profileInfo";
 import ProfileLists from "../profile-lists/profileLists";
-import { useSelector } from "react-redux";
-import CurrentProfileInfo from "./profileInfo";
-import CurrentUserProfileLists from "./profileLists";
 
 function CurrentUserProfile() {
     const { currentUser } = useSelector((state) => state.user);
-    console.log("CURRENT: ", currentUser);
     return (
-        <>
-          {currentUser ? (
-            <MyNav
-              options={{
-                homePage: false,
-                search: true,
-                signIn: false,
-                profile: true,
-                signOut: true,
-              }}
-            />
-          ) : (
-            <MyNav />
-          )}
-          <CurrentProfileInfo/>
-          <CurrentUserProfileLists/>
-           </>
-
-    )
+      <>
+        <MyNav
+          options={{
+            homePage: false,
+            search: true,
+            signIn: false,
+            profile: true,
+            signOut: true,
+          }}
+        />
+        <ProfileInfo isCurUser={true}/>
+        <ProfileLists isCurUser={true} />
+      </>
+    );
 }
 
 export default CurrentUserProfile;
