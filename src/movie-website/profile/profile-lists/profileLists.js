@@ -12,7 +12,7 @@ import { useParams } from "react-router";
 function ProfileLists() {
   const { currentUser } = useSelector((state) => state.user);
   let { username } = useParams();
-  const [profileUser, setProfileUser] = useState([]);
+  const [profileUser, setProfileUser] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function ProfileLists() {
       setProfileUser(payload);
     }
     loadProfileUser();
-  }, [username])
+  }, [username, dispatch]);
 
   return (
     <div className="wd-review-div">
