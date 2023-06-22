@@ -35,5 +35,5 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    opacity: 0.9;
+    background-color: rgba(134, 21, 137, 0.246);
 }

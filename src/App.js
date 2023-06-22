@@ -11,7 +11,6 @@ import { Provider, useDispatch } from "react-redux";
 import { setUser } from "./movie-website/reducers/auth-reducer";
 import { getProfileByUsername } from "./movie-website/services/auth-service";
 import movieVideoReducer from "./movie-website/reducers/movie-video-reducer";
-import savedMoviesReducer from "./movie-website/reducers/saved-movie-reducer";
 import topMoviesReducer from "./movie-website/reducers/top-movies-reducer";
 import newMoviesReducer from "./movie-website/reducers/new-movies-reducer";
 
@@ -22,7 +21,6 @@ const store = configureStore({
     search: searchReducer,
     newMovies: newMoviesReducer,
     video: movieVideoReducer,
-    savedMovies: savedMoviesReducer,
     topMovies: topMoviesReducer,
   },
 });

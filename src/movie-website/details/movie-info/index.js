@@ -4,12 +4,14 @@ import "./details.css";
 import "../../../ui-styling/index.css";
 import SavedBtn from "../../../ui-styling/buttons/icons/savedBtn";
 import { useParams } from "react-router-dom";
-import { createSavedMovieThunk, deleteSavedMovieThunk, findAllSavedMoviesThunk } from "../../services/saved-movies-thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import DeleteBtn from "../../../ui-styling/buttons/icons/deleteBtn";
+import { updateUserThunk } from "../../services/auth-thunks";
 
 const MovieListItem = () => {
   const { currentUser } = useSelector(state => state.user);
+  const userSavedMovies = currentUser?.savedMovies;
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const navigate = useNavigate();
@@ -30,21 +32,27 @@ const MovieListItem = () => {
   }, [id]);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    console.log("CUR USER", currentUser);
-    if (currentUser) {
-      dispatch(findAllSavedMoviesThunk(currentUser._id));
-    }
-  }, [currentUser]);
 
   const handleSaveBtn = async () => {
-    try {
-      const userAndMovie = { userId: currentUser._id, ...movie };
-      await dispatch(createSavedMovieThunk(userAndMovie)).unwrap();
-      alert("Saving movie " + userAndMovie.title);
-    } catch (e) {
-      alert("Movie is already saved")
-    }
+    const newSavedMoviesList = userSavedMovies.concat(movie);
+    const updatedViewer = {
+      ...currentUser,
+      savedMovies: newSavedMoviesList,
+    };
+    dispatch(updateUserThunk(updatedViewer));
+    alert("Saving movie: " + movie.title);
+  };
+
+  const handleUnSaveBtn = async () => {
+    const newSavedMoviesList = userSavedMovies.filter(
+      (savedMovie) => savedMovie.id !== movie.id
+    );
+    const updatedViewer = {
+      ...currentUser,
+      savedMovies: newSavedMoviesList,
+    };
+    dispatch(updateUserThunk(updatedViewer));
+    alert("Un-saving movie: " + movie.title);
   };
 
   const forceLogin = () => {
@@ -57,21 +65,24 @@ const MovieListItem = () => {
     return <div>Loading...</div>;
   }
 
+
   return (
     <div>
       <div className="wd-video-details-background row">
         <div className="wd-details-row">
           <div className="row">
-            {currentUser && currentUser.roles[0] === "VIEWER" && (
-              <div className="wd-left-col col-sm-3 col-md-2">
-                <SavedBtn fn={handleSaveBtn} />
-              </div>
-            )}
-            {!currentUser && (
-              <div className="wd-left-col col-sm-3 col-md-2">
-                <SavedBtn fn={forceLogin} />
-              </div>
-            )}
+            <div className="wd-left-col col-sm-3 col-md-2 col-lg-1">
+              {currentUser && currentUser.roles[0] === "VIEWER" && (
+                <>
+                  {userSavedMovies.filter(
+                    (savedMovie) => savedMovie.id === movie.id
+                  ).length === 0 ?  <SavedBtn fn={handleSaveBtn} /> : <DeleteBtn fn={handleUnSaveBtn} addWhiteBorder={true} />}
+
+                </>
+              )}
+              {!currentUser && <SavedBtn fn={forceLogin} />}
+            </div>
+
             <div className="col-sm-9 col-md-5">
               <h1>{movie.original_title}</h1>
               <br />
@@ -89,7 +100,7 @@ const MovieListItem = () => {
 
               <div className="d-sm-block d-md-none wd-details-row">
                 <img
-                  className="w-100"
+                  className="w-75"
                   src={
                     "https://image.tmdb.org/t/p/w440_and_h660_face/" +
                     movie.poster_path
@@ -100,7 +111,7 @@ const MovieListItem = () => {
             </div>
             <div className="wd-photo-col d-none d-md-block col-md-5">
               <img
-                className="w-100 mx-3"
+                className="w-75 mx-3"
                 src={
                   "https://image.tmdb.org/t/p/w440_and_h660_face/" +
                   movie.poster_path

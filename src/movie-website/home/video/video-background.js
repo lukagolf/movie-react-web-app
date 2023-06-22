@@ -15,7 +15,7 @@ function VideoBackground({topMovieRef}) {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log("FIRST", firstMovie)
+
         dispatch(findMovieVideoThunk(firstMovie.id));
     }, [firstMovie]);
 
@@ -30,7 +30,7 @@ function VideoBackground({topMovieRef}) {
     };
 
     const onExplore = (e) => {
-      console.log("explore button clicked");
+
       e.preventDefault();
       topMovieRef.current.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
     }
@@ -71,7 +71,7 @@ function VideoBackground({topMovieRef}) {
               <span onClick={onExplore}>
             <ExploreBtn />
               </span>
-            
+
           </div>
           </div>
         </div>

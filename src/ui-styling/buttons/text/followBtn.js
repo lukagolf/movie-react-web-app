@@ -7,7 +7,7 @@ function FollowBtn({text, isFollowed, fn}) {
     onClick={fn}
       className={`${
         isFollowed
-          ? "wd-lightPinkBackground wd-disable-hover"
+          ? "wd-purpleBackground"
           : "wd-pinkBackground"
       } wd-whiteText rounded-pill p-2 m-1`}
     >
