@@ -13,7 +13,7 @@ const ReviewItem = ({ review }) => {
     }
     return (
       <li>
-        {currentUser && currentUser.role === "ADMIN" && (
+        {currentUser && currentUser.roles[0] === "ADMIN" && (
           <DeleteBtn
             fn={() => deleteReviewHandler(review._id)}
             className={"float-end"}

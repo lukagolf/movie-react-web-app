@@ -54,7 +54,7 @@ const MovieListItem = () => {
     <div>
       <div className="wd-video-details-background row">
         <div className="d-flex wd-details-row row">
-          {currentUser && currentUser.role === "VIEWER" && (
+          {currentUser && currentUser.roles[0] === "VIEWER" && (
             <div className="wd-left-col col-1">
               <SavedBtn fn={handleSaveBtn} />
             </div>

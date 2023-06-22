@@ -21,7 +21,7 @@ function Profile() {
         <MyNav />
       )}
       <ProfileInfo />
-      <ProfileLists />
+      <ProfileLists key={currentUser.roles.join()} />
 
     </>
   );

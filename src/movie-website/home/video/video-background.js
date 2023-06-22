@@ -58,7 +58,7 @@ function VideoBackground() {
           <div className="ps-4">
             <h4
               style={{ textTransform: "lowercase" }}
-            >{`- Welcome ${currentUser? currentUser.role : ""} -`}</h4>
+            >{`- Welcome ${currentUser? currentUser.roles[0] : ""} -`}</h4>
             <ExploreBtn />
           </div>
         </div>

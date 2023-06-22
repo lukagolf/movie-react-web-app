@@ -78,7 +78,7 @@ function HomeCarousel() {
     <div>
       <br />
       {currentUser &&
-        currentUser.role === "VIEWER" &&
+        currentUser.roles[0] === "VIEWER" &&
         savedMovies.length > 0 && (
           <div>
             <div className="wd-carousel-title position-relative">
@@ -129,7 +129,7 @@ function HomeCarousel() {
       {/* <br /> */}
 
       {currentUser &&
-        currentUser.role === "CRITIC" &&
+        currentUser.roles[0] === "CRITIC" &&
         reviewedMovies.length >= 0 && (
           <div>
             <div className="wd-carousel-title position-relative">
