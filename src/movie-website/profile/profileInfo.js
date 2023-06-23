@@ -11,7 +11,7 @@ import { logoutThunk, updateUserThunk, fetchProfileByUsernameThunk }
 import FollowBtn from "../../ui-styling/buttons/text/followBtn";
 import BlackTextBtn from "../../ui-styling/buttons/text/blackTextBtn";
 
-function ProfileInfo({ isCurUser }) {
+function ProfileInfo() {
   const { currentUser } = useSelector((state) => state.user);
   const [profile, setProfile] = useState(currentUser);
   const [isLoading, setIsLoading] = useState(true);
@@ -169,7 +169,7 @@ function ProfileInfo({ isCurUser }) {
                 selected={selectedButton === role}
               />
             ))}
-            {!isCurrentUserProfile && isAnotherViewer && (
+            {!isCurrentUserProfile && profile?.roles.includes("CRITIC") && (
               <>
                 {followedCritics.filter((critic) => critic._id === profile._id)
                   .length === 0 ? (
