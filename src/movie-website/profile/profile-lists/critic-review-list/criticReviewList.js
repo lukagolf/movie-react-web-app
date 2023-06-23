@@ -3,15 +3,33 @@ import CriticReviewListItem from "./criticReviewListItem";
 import "../../index.css"
 import { findCriticReviewsThunk } from "../../../services/reviews-thunks";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { fetchProfileByUsernameThunk } from "../../../services/auth-thunks";
 
 function CriticReviewList() {
     const { currentUser } = useSelector((state) => state.user);
     const [criticReviews, setCriticReviews] = useState([]);
+    const [profile, setProfile] = useState({});
     let {username} = useParams();
     const dispatch = useDispatch();
 
     let criticUsername = username ? username : currentUser?.username;
+
+    useEffect(() => {
+        const loadProfile = async () => {
+            try {
+                const actionResult = await dispatch(fetchProfileByUsernameThunk(criticUsername));
+                if (actionResult.type.endsWith('fulfilled')) {
+                    setProfile(actionResult.payload);
+                } else {
+                    console.error('Failed to load profile:', actionResult);
+                }
+            } catch (error) {
+                console.error('Error loading profile:', error);
+            }
+        }
+        loadProfile();
+    }, [username, dispatch]);
 
     useEffect(() => {
         const loadCriticReviews = async () => {
@@ -34,7 +52,7 @@ function CriticReviewList() {
         <div>
             <ul className="wd-profile-list list-group">
                 <li >
-                    <h3>Your Reviews</h3><br />
+                    <h3>{profile.firstName}'s Reviews</h3><br />
                 </li>
                 {
                     criticReviews.map(review =>

@@ -42,7 +42,6 @@ function RegisterScreen() {
                 navigate(`/profile`);
             } else {
                 setSuccess(false);
-                throw new Error(actionResult.error.message);
             }
         } catch (e) {
             alert(e);
