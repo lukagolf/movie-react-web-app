@@ -14,18 +14,18 @@ function MovieBucketListItem({ movieInfo }) {
   const location = useLocation();
 
   const dispatch = useDispatch();
-   const handleUnSaveBtn = async (e) => {
-     const newSavedMoviesList = userSavedMovies.filter(
-       (savedMovie) => savedMovie.id !== movieInfo.id
-     );
-     const updatedViewer = {
-       ...currentUser,
-       savedMovies: newSavedMoviesList,
-     };
-     dispatch(updateUserThunk(updatedViewer));
-     e.preventDefault();
-     alert("Un-saving movie: " + movieInfo.title);
-   };
+  const handleUnSaveBtn = async (e) => {
+    const newSavedMoviesList = userSavedMovies.filter(
+      (savedMovie) => savedMovie.id !== movieInfo.id
+    );
+    const updatedViewer = {
+      ...currentUser,
+      savedMovies: newSavedMoviesList,
+    };
+    dispatch(updateUserThunk(updatedViewer));
+    e.preventDefault();
+    alert("Un-saving movie: " + movieInfo.title);
+  };
   return (
     <>
       <NavLink
@@ -33,10 +33,13 @@ function MovieBucketListItem({ movieInfo }) {
         state={{ movieInfo }}
         className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
       >
-        <DeleteBtn
-          fn={(e) => handleUnSaveBtn(e)}
-          className={"float-end"}
-        />
+        {
+          (location.pathname.endsWith("/profile") || location.pathname.endsWith(`/profile/${currentUser.username}`)) &&
+          <DeleteBtn
+            fn={(e) => handleUnSaveBtn(e)}
+            className={"float-end"}
+          />
+        }
         <div className="row p-3 wd-movie-list-row">
           <div className="col-3 wd-movie-list-image d-none d-lg-block">
             <img
