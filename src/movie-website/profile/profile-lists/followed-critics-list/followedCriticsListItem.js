@@ -13,7 +13,7 @@ function FollowedCriticsListItem({critic}) {
 
    const dispatch = useDispatch();
 
-   const handleUnFollow = async () => {
+   const handleUnFollow = async (e) => {
       const newFollowingList = followedCritics.filter(
         (followed) => followed._id !== critic._id
       );
@@ -22,6 +22,7 @@ function FollowedCriticsListItem({critic}) {
         followedCritics: newFollowingList,
       };
       dispatch(updateUserThunk(updatedViewer));
+      e.preventDefault();
       alert("Unfollowed this critic");
     };
 
@@ -31,7 +32,7 @@ function FollowedCriticsListItem({critic}) {
         className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
       >
         <DeleteBtn
-          fn={() => handleUnFollow()}
+          fn={(e) => handleUnFollow(e)}
           className={"float-end"}
         />
         <div className="row p-3 wd-movie-list-row">

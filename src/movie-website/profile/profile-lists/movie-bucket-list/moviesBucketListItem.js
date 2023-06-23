@@ -10,7 +10,6 @@ import { useState } from "react";
 function MovieBucketListItem({ movieInfo }) {
   const {currentUser} = useSelector(state => state.user);
   const userSavedMovies = currentUser?.savedMovies;
-  const [stayOnPage, setStayOnPage] = useState(false);
 
   const dispatch = useDispatch();
   const handleUnSaveBtn = async (e) => {
@@ -22,14 +21,13 @@ function MovieBucketListItem({ movieInfo }) {
       savedMovies: newSavedMoviesList,
     };
     dispatch(updateUserThunk(updatedViewer));
-    setStayOnPage(true);
     e.preventDefault();
     alert("Un-saving movie: " + movieInfo.title);
   };
   return (
     <>
       <NavLink
-        to={stayOnPage ? `/profile` : `/details/${movieInfo.id}`}
+        to={`/details/${movieInfo.id}`}
         state={{ movieInfo }}
         className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
       >
