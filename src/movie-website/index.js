@@ -17,10 +17,10 @@ function MovieWebsite() {
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/home" element={<Home />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/profile" element={<CurrentUserProfile />} />
         <Route path="/profile/:username" element={<Profile />} />
         <Route path="/details/:id" element={<Details />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<CurrentUserProfile />} />
       </Routes>
     </>
   );

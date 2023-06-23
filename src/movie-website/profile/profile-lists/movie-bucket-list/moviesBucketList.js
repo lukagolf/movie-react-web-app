@@ -11,19 +11,19 @@ function MoviesBucketList() {
   const savedMovies = profileUser?.savedMovies;
   const dispatch = useDispatch();
   const location = useLocation();
-  let { urlUsername } = useParams();
+  let { username } = useParams();
 
   useEffect(() => {
     const loadProfileUser = async () => {
       if (location.pathname.endsWith("/profile") || location.pathname.endsWith(`/profile/${currentUser.username}`)) {
         setProfileUser(currentUser);
-      } else if (urlUsername && urlUsername !== currentUser.username) {
-        const { payload } = await dispatch(fetchProfileByUsernameThunk(urlUsername));
+      } else if (username && username !== currentUser.username) {
+        const { payload } = await dispatch(fetchProfileByUsernameThunk(username));
         setProfileUser(payload);
       }
     }
     loadProfileUser();
-  }, [urlUsername, location.pathname, currentUser]);
+  }, [username, location.pathname, currentUser]);
 
   return (
     <div>

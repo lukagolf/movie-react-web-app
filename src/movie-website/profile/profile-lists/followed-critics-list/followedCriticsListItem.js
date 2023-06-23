@@ -6,10 +6,12 @@ import { useSelector } from "react-redux";
 import DeleteBtn from "../../../../ui-styling/buttons/icons/deleteBtn";
 import { useDispatch } from "react-redux";
 import { updateUserThunk } from "../../../services/auth-thunks";
+import { useLocation } from "react-router-dom";
 
 function FollowedCriticsListItem({critic}) {
    const { currentUser } = useSelector((state) => state.user);
    const followedCritics = currentUser?.followedCritics;
+   const location = useLocation();
 
    const dispatch = useDispatch();
 
@@ -30,10 +32,13 @@ function FollowedCriticsListItem({critic}) {
         to={{ pathname: `/profile/${critic.username}` }}
         className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
       >
-        <DeleteBtn
-          fn={() => handleUnFollow()}
-          className={"float-end"}
-        />
+        {
+          (location.pathname.endsWith("/profile") || location.pathname.endsWith(`/profile/${currentUser.username}`)) &&
+          <DeleteBtn
+            fn={() => handleUnFollow()}
+            className={"float-end"}
+          />
+        }
         <div className="row p-3 wd-movie-list-row">
           <div className="col-3 wd-movie-list-image d-none d-lg-block">
             <FaUserCircle size={50} className="float-left mr-3" />
