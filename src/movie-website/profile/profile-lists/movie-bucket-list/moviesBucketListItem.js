@@ -1,27 +1,29 @@
 import React from "react";
 import "../../index.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { updateUserThunk } from "../../../services/auth-thunks";
+import { useLocation } from "react-router-dom";
 import DeleteBtn from "../../../../ui-styling/buttons/icons/deleteBtn";
 
 function MovieBucketListItem({ movieInfo }) {
-  const {currentUser} = useSelector(state => state.user);
+  const { currentUser } = useSelector(state => state.user);
   const userSavedMovies = currentUser?.savedMovies;
+  const location = useLocation();
 
   const dispatch = useDispatch();
-   const handleUnSaveBtn = async () => {
-     const newSavedMoviesList = userSavedMovies.filter(
-       (savedMovie) => savedMovie.id !== movieInfo.id
-     );
-     const updatedViewer = {
-       ...currentUser,
-       savedMovies: newSavedMoviesList,
-     };
-     dispatch(updateUserThunk(updatedViewer));
-     alert("Un-saving movie: " + movieInfo.title);
-   };
+  const handleUnSaveBtn = async () => {
+    const newSavedMoviesList = userSavedMovies.filter(
+      (savedMovie) => savedMovie.id !== movieInfo.id
+    );
+    const updatedViewer = {
+      ...currentUser,
+      savedMovies: newSavedMoviesList,
+    };
+    dispatch(updateUserThunk(updatedViewer));
+    alert("Un-saving movie: " + movieInfo.title);
+  };
   return (
     <>
       <NavLink
@@ -29,10 +31,13 @@ function MovieBucketListItem({ movieInfo }) {
         state={{ movieInfo }}
         className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
       >
-        <DeleteBtn
-          fn={() => handleUnSaveBtn()}
-          className={"float-end"}
-        />
+        {
+          (location.pathname.endsWith("/profile") || location.pathname.endsWith(`/profile/${currentUser.username}`)) &&
+          <DeleteBtn
+            fn={() => handleUnSaveBtn()}
+            className={"float-end"}
+          />
+        }
         <div className="row p-3 wd-movie-list-row">
           <div className="col-3 wd-movie-list-image d-none d-lg-block">
             <img

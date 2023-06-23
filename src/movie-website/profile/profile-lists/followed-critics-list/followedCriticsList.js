@@ -9,20 +9,21 @@ function FollowedCriticsList() {
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const location = useLocation();
-  let { urlUsername } = useParams();
+  let { username } = useParams();
   const [followedCritics, setFollowedCritics] = useState([]);
 
   useEffect(() => {
     const loadFollowedCritics = async () => {
       if (location.pathname.endsWith("/profile") || location.pathname.endsWith(`/profile/${currentUser.username}`)) {
         setFollowedCritics(currentUser?.followedCritics);
-      } else if (urlUsername && urlUsername !== currentUser.username) {
-        const { payload } = await dispatch(fetchProfileByUsernameThunk(urlUsername));
+      } else if (username && username !== currentUser.username) {
+        const { payload } = await dispatch(fetchProfileByUsernameThunk(username));
+        console.log(payload);
         setFollowedCritics(payload.followedCritics);
       }
     }
     loadFollowedCritics();
-  }, [location.pathname, urlUsername, currentUser]);
+  }, [location.pathname, username, currentUser]);
 
   return (
     <>
