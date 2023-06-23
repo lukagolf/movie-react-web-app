@@ -15,7 +15,7 @@ function FollowedCriticsListItem({critic}) {
 
    const dispatch = useDispatch();
 
-   const handleUnFollow = async () => {
+   const handleUnFollow = async (e) => {
       const newFollowingList = followedCritics.filter(
         (followed) => followed._id !== critic._id
       );
@@ -24,6 +24,7 @@ function FollowedCriticsListItem({critic}) {
         followedCritics: newFollowingList,
       };
       dispatch(updateUserThunk(updatedViewer));
+      e.preventDefault();
       alert("Unfollowed this critic");
     };
 
@@ -35,7 +36,7 @@ function FollowedCriticsListItem({critic}) {
         {
           (location.pathname.endsWith("/profile") || location.pathname.endsWith(`/profile/${currentUser.username}`)) &&
           <DeleteBtn
-            fn={() => handleUnFollow()}
+            fn={(e) => handleUnFollow(e)}
             className={"float-end"}
           />
         }
