@@ -170,7 +170,7 @@ function ProfileInfo() {
                 selected={selectedButton === role}
               />
             ))}
-            {!isCurrentUserProfile && profile?.roles.includes("CRITIC") && (
+            {currentUser && !isCurrentUserProfile && profile?.roles.includes("CRITIC") && (
               <>
                 {followedCritics.filter((critic) => critic._id === profile._id)
                   .length === 0 ? (

@@ -177,7 +177,7 @@ function CurrentProfileInfo() {
                                 selected={selectedButton === role}
                             />
                         ))}
-                        {!isCurrentUserProfile && isAnotherViewer && (
+                        {currentUser && !isCurrentUserProfile && isAnotherViewer && (
                             <FollowBtn
                                 text={"FOLLOW"}
                                 followed={false}

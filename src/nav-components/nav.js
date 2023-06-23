@@ -1,7 +1,7 @@
 import React from "react";
 import "../ui-styling/index.css"
 import "bootstrap/dist/css/bootstrap.css";
-import { Nav, Navbar} from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ProfileBtn from "../ui-styling/buttons/icons/profileBtn";
 import SearchBtn from "../ui-styling/buttons/icons/searchBtn";
@@ -9,6 +9,8 @@ import WhiteTextBtn from "../ui-styling/buttons/text/whiteTextBtn";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutThunk } from "../movie-website/services/auth-thunks";
 import HomeBtn from "../ui-styling/buttons/icons/homeBtn";
+import { removeUserFromLocalStorage } from "../movie-website/reducers/auth-reducer";
+import { useNavigate } from "react-router";
 
 function MyNav({
   options = {
@@ -19,8 +21,24 @@ function MyNav({
     signOut: false,
   },
 }) {
-  const {currentUser} = useSelector(state => state.user);
+  const { currentUser } = useSelector(state => state.user);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    try {
+      const actionResult = await dispatch(logoutThunk());
+      if (logoutThunk.fulfilled.match(actionResult)) {
+        dispatch(removeUserFromLocalStorage());
+        navigate("/login");
+      } else {
+        throw new Error(actionResult.error.message);
+      }
+    } catch (e) {
+      alert(e);
+    }
+  };
+
   return (
     <Navbar>
       <Nav className="container-fluid ps-5 pe-5 ">
@@ -70,9 +88,7 @@ function MyNav({
               <Nav.Link as={Link} to="/home">
                 <WhiteTextBtn
                   text={"Sign Out"}
-                  fn={() => {
-                    dispatch(logoutThunk());
-                  }}
+                  fn={handleLogout}
                 />
               </Nav.Link>
             </Nav.Item>
