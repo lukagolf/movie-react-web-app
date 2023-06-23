@@ -19,8 +19,8 @@ function CurrentProfileInfo() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const username = currentUser?.username;
-    const isCurrentUserProfile = currentUser?.username === username;
-    const isAnotherViewer = currentUser?.roles.includes("VIEWER");
+    const isCurrentUserProfile = currentUser && currentUser.username === username;
+    const isAnotherViewer = currentUser && currentUser.roles ? currentUser.roles.includes("VIEWER") : false;
 
     const initSelectedRole = () => {
         if (currentUser?.roles?.includes('VIEWER')) {
@@ -169,7 +169,7 @@ function CurrentProfileInfo() {
                     <br />
                     <br />
                     <span>
-                        {profile.roles.map((role, index) => (
+                        {profile.roles && profile.roles.map((role, index) => (
                             <TagBtn
                                 key={index}
                                 text={role}

@@ -19,8 +19,9 @@ function ProfileInfo() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { username } = useParams();
-  const isCurrentUserProfile = currentUser?.username === username;
-  const isAnotherViewer = currentUser?.roles.includes("VIEWER");
+  const isCurrentUserProfile = currentUser && currentUser.username === username;
+  const isAnotherViewer = currentUser && currentUser.roles ? currentUser.roles.includes("VIEWER") : false;
+
 
   const initSelectedRole = () => {
     if (currentUser?.roles?.includes('VIEWER')) {
@@ -78,7 +79,7 @@ function ProfileInfo() {
     alert("Followed this critic");
   };
 
-  const handleUnFollow = async() => {
+  const handleUnFollow = async () => {
     const newFollowingList = followedCritics.filter(
       (critic) => critic._id !== profile._id
     );
@@ -161,7 +162,7 @@ function ProfileInfo() {
           <br />
           <br />
           <span>
-            {profile.roles.map((role, index) => (
+            {profile.roles && profile.roles.map((role, index) => (
               <TagBtn
                 key={index}
                 text={role}

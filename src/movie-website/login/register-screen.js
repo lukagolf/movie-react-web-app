@@ -39,7 +39,7 @@ function RegisterScreen() {
                 setSuccess(true);
                 dispatch(setUser(actionResult.payload));
                 dispatch(storeUserInLocalStorage(actionResult.payload));
-                navigate(`/profile/${username}`);
+                navigate(`/profile`);
             } else {
                 setSuccess(false);
                 throw new Error(actionResult.error.message);
