@@ -5,32 +5,36 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { updateUserThunk } from "../../../services/auth-thunks";
 import DeleteBtn from "../../../../ui-styling/buttons/icons/deleteBtn";
+import { useState } from "react";
 
 function MovieBucketListItem({ movieInfo }) {
   const {currentUser} = useSelector(state => state.user);
   const userSavedMovies = currentUser?.savedMovies;
+  const [stayOnPage, setStayOnPage] = useState(false);
 
   const dispatch = useDispatch();
-   const handleUnSaveBtn = async () => {
-     const newSavedMoviesList = userSavedMovies.filter(
-       (savedMovie) => savedMovie.id !== movieInfo.id
-     );
-     const updatedViewer = {
-       ...currentUser,
-       savedMovies: newSavedMoviesList,
-     };
-     dispatch(updateUserThunk(updatedViewer));
-     alert("Un-saving movie: " + movieInfo.title);
-   };
+  const handleUnSaveBtn = async (e) => {
+    const newSavedMoviesList = userSavedMovies.filter(
+      (savedMovie) => savedMovie.id !== movieInfo.id
+    );
+    const updatedViewer = {
+      ...currentUser,
+      savedMovies: newSavedMoviesList,
+    };
+    dispatch(updateUserThunk(updatedViewer));
+    setStayOnPage(true);
+    e.preventDefault();
+    alert("Un-saving movie: " + movieInfo.title);
+  };
   return (
     <>
       <NavLink
-        to={`/details/${movieInfo.id}`}
+        to={stayOnPage ? `/profile` : `/details/${movieInfo.id}`}
         state={{ movieInfo }}
         className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
       >
         <DeleteBtn
-          fn={() => handleUnSaveBtn()}
+          fn={(e) => handleUnSaveBtn(e)}
           className={"float-end"}
         />
         <div className="row p-3 wd-movie-list-row">
