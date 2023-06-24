@@ -9,7 +9,7 @@ const Banner = ({success, message}) => {
         <div className="card-body">
           <h5 className="card-title">{success ? "Success!" : "Error!"}</h5>
           <p className="card-text">
-            {success ? "You have successfully logged in" : "Invalid input - try again"}
+            {/* {success ? "You have successfully logged in" : "Invalid input - try again"} */}{message}
           </p>
         </div>
       </div>

@@ -25,7 +25,7 @@ function CurrentUserProfileLists() {
     <div className="wd-review-div">
       <div className="wd-review-content">
         {currentUser && (
-          <div>
+          <div className="wd-list">
             <div className="col-2"></div>
             <div className="col-8 wd-list-col">
               {profileUser && profileUser.roles && profileUser.roles[0] === "VIEWER" && (

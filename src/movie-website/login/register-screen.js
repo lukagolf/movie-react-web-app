@@ -25,6 +25,7 @@ function RegisterScreen() {
     const [displayBanner, setDisplayBanner] = useState(false);
     const [success, setSuccess] = useState(false);
     const [previousRole, setPreviousRole] = useState([]);
+    const [errorMessage, setErrorMessage] = useState("try again");
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -32,9 +33,31 @@ function RegisterScreen() {
     const handleRegister = async () => {
         console.log('Register button clicked');
         setDisplayBanner(true);
+
+        if (!username) {
+            setErrorMessage("Username required");
+        }
+        else if (!password) {
+            setErrorMessage("Password required");
+        }
+        else if (!firstName) {
+            setErrorMessage("First name required");
+        }
+        else if (!lastName) {
+            setErrorMessage("Last name required");
+        }
+        else if (!email) {
+            setErrorMessage("Email required");
+        }
+        else if (!role) {
+            setErrorMessage("At least one role selection required");
+        }
         try {
             const roles = role.map(r => r.value);
             const actionResult = await dispatch(registerThunk({ username, password, firstName, lastName, email, roles }));
+            if (actionResult.error.message.includes("403")) {
+                setErrorMessage("Username taken. Please choose another one.")
+            }
             if (registerThunk.fulfilled.match(actionResult)) {
                 setSuccess(true);
                 dispatch(setUser(actionResult.payload));
@@ -136,7 +159,7 @@ function RegisterScreen() {
                 </div>
                 <br />
                 {displayBanner ? (
-                    <Banner success={success} />
+                    <Banner success={success} message={errorMessage} />
                 ) : (
                     ""
                 )}
