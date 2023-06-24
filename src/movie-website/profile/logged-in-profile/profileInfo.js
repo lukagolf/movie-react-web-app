@@ -128,78 +128,85 @@ function CurrentProfileInfo() {
         return <div>Loading...</div>;
     } else {
         return (
-            <div className="wd-profile-info-background row wd-padding">
-                <div className="wd-details-col col-6">
-                    <h2>
-                        {profile.firstName} {profile.lastName}
-                        {isCurrentUserProfile && " (You)"}
-                    </h2>
-                    <br />
-                    <h4>@{profile.username}</h4>
-                    {isCurrentUserProfile && (
-                        <>
-                            <label className="pe-2" for="firstNameEdit">
-                                First Name
-                            </label>
-                            <input
-                                id="firstNameEdit"
-                                type="text"
-                                value={profile.firstName}
-                                className="form-control w-75"
-                                onChange={(e) =>
-                                    setProfile({ ...profile, firstName: e.target.value })
-                                }
-                            />
-                            <br />
-                            <label className="pe-2 mb-2" for="lastNameEdit">
-                                Last Name
-                            </label>
-                            <input
-                                id="lastNameEdit"
-                                type="text"
-                                value={profile.lastName}
-                                className="form-control w-75"
-                                onChange={(e) =>
-                                    setProfile({ ...profile, lastName: e.target.value })
-                                }
-                            />
-                        </>
-                    )}
+          <div className="wd-profile-info-background row wd-padding">
+            <div className="wd-details-col col-sm-12 col-md-8 col-xl-7">
+              <h2>
+                {profile.firstName} {profile.lastName}
+                {isCurrentUserProfile && " (You)"}
+              </h2>
+              <br />
+              <h4>@{profile.username}</h4>
+              {isCurrentUserProfile && (
+                <>
+                  <label className="pe-2" for="firstNameEdit">
+                    First Name
+                  </label>
+                  <input
+                    id="firstNameEdit"
+                    type="text"
+                    value={profile.firstName}
+                    className="form-control w-75"
+                    onChange={(e) =>
+                      setProfile({ ...profile, firstName: e.target.value })
+                    }
+                  />
+                  <br />
+                  <label className="pe-2 mb-2" for="lastNameEdit">
+                    Last Name
+                  </label>
+                  <input
+                    id="lastNameEdit"
+                    type="text"
+                    value={profile.lastName}
+                    className="form-control w-75"
+                    onChange={(e) =>
+                      setProfile({ ...profile, lastName: e.target.value })
+                    }
+                  />
+                </>
+              )}
 
-                    <br />
-                    <br />
-                    <span>
-                        {profile.roles.map((role, index) => (
-                            <TagBtn
-                                key={index}
-                                text={role}
-                                fn={isCurrentUserProfile ? () => handleRoleSelection(role) : null}
-                                selected={selectedButton === role}
-                            />
-                        ))}
-                        {!isCurrentUserProfile && isAnotherViewer && (
-                            <FollowBtn
-                                text={"FOLLOW"}
-                                followed={false}
-                                fn={() => handleFollow()}
-                            />
-                        )}
-                    </span>
-                    <br />
-                    <br />
-                    {isCurrentUserProfile && (
-                        <>
-                            <BlackTextBtn text={"Sign Out"} fn={handleLogout} />
-                            <BlackTextBtn text={"Save"} fn={save} />
-                            <br />
-                            <br />
-                        </>
-                    )}
-                </div>
-                <div className="wd-photo-col d-none d-md-block col-md-6">
-                    <FaUserCircle size={300} />
-                </div>
+              <br />
+              <br />
+              <span>
+                {profile.roles.map((role, index) => (
+                  <TagBtn
+                    key={index}
+                    text={role}
+                    fn={
+                      isCurrentUserProfile
+                        ? () => handleRoleSelection(role)
+                        : null
+                    }
+                    selected={selectedButton === role}
+                  />
+                ))}
+                {!isCurrentUserProfile && isAnotherViewer && (
+                  <FollowBtn
+                    text={"FOLLOW"}
+                    followed={false}
+                    fn={() => handleFollow()}
+                  />
+                )}
+              </span>
+              <br />
+              <br />
+              {isCurrentUserProfile && (
+                <>
+                  <BlackTextBtn text={"Sign Out"} fn={handleLogout} />
+                  <BlackTextBtn text={"Save"} fn={save} />
+                  <br />
+                  <br />
+                </>
+              )}
             </div>
+            <div className="wd-photo-col d-none d-md-block col-md-3 d-xl-none">
+              <FaUserCircle size={200} />
+            </div>
+            <div className="wd-photo-col d-none d-xl-block col-xl-5">
+              <FaUserCircle size={300} />
+            </div>
+          </div>
         );
     }
 }
