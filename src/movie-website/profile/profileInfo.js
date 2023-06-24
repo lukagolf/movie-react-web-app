@@ -11,7 +11,7 @@ import { logoutThunk, updateUserThunk, fetchProfileByUsernameThunk }
 import FollowBtn from "../../ui-styling/buttons/text/followBtn";
 import BlackTextBtn from "../../ui-styling/buttons/text/blackTextBtn";
 
-function ProfileInfo() {
+function ProfileInfo({ isCurUser }) {
   const { currentUser } = useSelector((state) => state.user);
   const [profile, setProfile] = useState(currentUser);
   const [isLoading, setIsLoading] = useState(true);
@@ -70,31 +70,31 @@ function ProfileInfo() {
     }
   };
 
-   const handleFollow = async () => {
-     try {
-       if (isAnotherViewer) {
-         console.log(
-           followedCritics.filter((critic) => critic._id === profile._id)
-         );
-         if (
-           followedCritics.filter((critic) => critic._id === profile._id)
-             .length === 0
-         ) {
-           alert("Followed this critic");
-           const newFollowingList = followedCritics.concat(profile);
-           const updatedViewer = {
-             ...currentUser,
-             followedCritics: newFollowingList,
-           };
-           dispatch(updateUserThunk(updatedViewer));
-         } else {
-           throw new Error("Already following this critic");
-         }
-       }
-     } catch (e) {
-       alert(e);
-     }
-   };
+  const handleFollow = async () => {
+    try {
+      if (isAnotherViewer) {
+        console.log(
+          followedCritics.filter((critic) => critic._id === profile._id)
+        );
+        if (
+          followedCritics.filter((critic) => critic._id === profile._id)
+            .length === 0
+        ) {
+          alert("Followed this critic");
+          const newFollowingList = followedCritics.concat(profile);
+          const updatedViewer = {
+            ...currentUser,
+            followedCritics: newFollowingList,
+          };
+          dispatch(updateUserThunk(updatedViewer));
+        } else {
+          throw new Error("Already following this critic");
+        }
+      }
+    } catch (e) {
+      alert(e);
+    }
+  };
 
   const handleUnFollow = async () => {
     const newFollowingList = followedCritics.filter(
@@ -150,7 +150,7 @@ function ProfileInfo() {
           <h4>@{profile.username}</h4>
           {isCurrentUserProfile && (
             <>
-            <br/>
+              <br />
               <h5>{profile.email}</h5>
               <br />
               <label className="pe-2" for="firstNameEdit">
