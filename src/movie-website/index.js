@@ -7,8 +7,6 @@ import Login from "./login/index";
 import ScrollToTop from "./scroll-to-top";
 import CurrentUserProfile from "./profile/logged-in-profile/currUserProfile";
 
-
-
 function MovieWebsite() {
   return (
     <>

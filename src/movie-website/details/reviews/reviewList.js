@@ -18,7 +18,6 @@ const ReviewList = () => {
     })
     return (
         <div className="wd-review-list-div">
-            {/* <pre>{JSON.stringify(reviews, null, 2)}</pre> */}
             <ul className="list-group wd-review-list">
                 <li >
                     <h3>Critic Reviews</h3><br />

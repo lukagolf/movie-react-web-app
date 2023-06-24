@@ -1,7 +1,7 @@
 import MyNav from "../../../nav-components/nav";
 import { useSelector } from "react-redux";
-import CurrentProfileInfo from "./profileInfo";
-import CurrentUserProfileLists from "./profileLists";
+import ProfileInfo from "../profileInfo";
+import ProfileLists from "../profile-lists/profileLists";
 
 function CurrentUserProfile() {
   const { currentUser } = useSelector((state) => state.user);
@@ -21,11 +21,21 @@ function CurrentUserProfile() {
       ) : (
         <MyNav />
       )}
-      <CurrentProfileInfo />
-      {currentUser && <CurrentUserProfileLists key={currentUser.roles ? currentUser.roles.join() : ''} />}
+      {/* <CurrentProfileInfo /> */}
+      <ProfileInfo isCurUser={true} />
+      {currentUser && (
+        <ProfileLists
+          isCurUser={true}
+          key={currentUser.roles ? currentUser.roles.join() : ""}
+        />
+      )}
+      {/* {currentUser && (
+        <CurrentUserProfileLists
+          key={currentUser.roles ? currentUser.roles.join() : ""}
+        />
+      )} */}
     </>
-
-  )
+  );
 }
 
 export default CurrentUserProfile;

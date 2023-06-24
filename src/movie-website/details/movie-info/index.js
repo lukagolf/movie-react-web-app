@@ -65,7 +65,6 @@ const MovieListItem = () => {
     return <div>Loading...</div>;
   }
 
-
   return (
     <div>
       <div className="wd-video-details-background row">

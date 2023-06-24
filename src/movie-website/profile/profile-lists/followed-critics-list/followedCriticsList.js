@@ -33,7 +33,7 @@ function FollowedCriticsList() {
           <br />
         </li>
         {followedCritics.map((critic) => (
-          <FollowedCriticsListItem critic={critic}/>
+          <FollowedCriticsListItem critic={critic} key={critic.username} />
         ))}
       </ul>
     </>
