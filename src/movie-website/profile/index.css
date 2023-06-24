@@ -54,3 +54,8 @@
 .wd-md-screen-size-img {
     max-width: 100%;
 }
+
+.wd-list {
+    min-height: 1px;
+    min-width: 55%;
+}

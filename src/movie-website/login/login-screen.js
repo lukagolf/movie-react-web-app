@@ -8,19 +8,30 @@ import { useDispatch } from "react-redux";
 import { loginThunk } from "../services/auth-thunks";
 import { setUser } from "../reducers/auth-reducer";
 import { storeUserInLocalStorage } from "../reducers/auth-reducer";
+import { act } from "react-dom/test-utils";
 
 function LoginScreen() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [displayBanner, setDisplayBanner] = useState(false);
     const [isValid, setIsValid] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("try again");
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleLogin = async () => {
+        if (!username) {
+            setErrorMessage("Username required");
+        }
+        else if (!password) {
+            setErrorMessage("Password required");
+        }
         try {
             const actionResult = await dispatch(loginThunk({ username, password }));
+            if (actionResult.error.message.includes("403")) {
+                setErrorMessage("Invalid credentials. Please try again.")
+            }
             if (loginThunk.fulfilled.match(actionResult)) {
                 setDisplayBanner(true);
                 setIsValid(true);
@@ -57,7 +68,7 @@ function LoginScreen() {
                     <BlackTextBtn text={"Sign In"} fn={handleLogin} />
                 </div>
                 <br />
-                {displayBanner ? <Banner success={isValid} /> : ""}
+                {displayBanner ? <Banner success={isValid} message={errorMessage} /> : ""}
             </div>
         </>
     );
