@@ -1,5 +1,4 @@
 import React, { forwardRef, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import "./index.css";
 import "../../../ui-styling/index.css";
 import Carousel from 'react-multi-carousel';

@@ -32,7 +32,7 @@ function MoviesBucketList() {
         <br />
         {savedMovies?.map((movie) => (
           <li>
-            <MovieBucketListItem movieInfo={movie} />
+            <MovieBucketListItem movieInfo={movie} key={movie.id}/>
           </li>
         ))}
       </ul>

@@ -18,7 +18,10 @@ function ProfileInfo({ isCurUser }) {
   const [followedCritics, setFollowedCritics] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { username } = useParams();
+  let { username } = useParams();
+  if (isCurUser) {
+    username = currentUser?.username;
+  }
   const isCurrentUserProfile = currentUser?.username === username;
   const isAnotherViewer = currentUser?.roles.includes("VIEWER");
 
@@ -50,7 +53,6 @@ function ProfileInfo({ isCurUser }) {
   };
 
   const save = () => {
-
     dispatch(updateUserThunk(profile));
   };
 
@@ -68,15 +70,31 @@ function ProfileInfo({ isCurUser }) {
     }
   };
 
-  const handleFollow = async () => {
-    const newFollowingList = followedCritics.concat(profile);
-    const updatedViewer = {
-      ...currentUser,
-      followedCritics: newFollowingList,
-    };
-    dispatch(updateUserThunk(updatedViewer));
-    alert("Followed this critic");
-  };
+   const handleFollow = async () => {
+     try {
+       if (isAnotherViewer) {
+         console.log(
+           followedCritics.filter((critic) => critic._id === profile._id)
+         );
+         if (
+           followedCritics.filter((critic) => critic._id === profile._id)
+             .length === 0
+         ) {
+           alert("Followed this critic");
+           const newFollowingList = followedCritics.concat(profile);
+           const updatedViewer = {
+             ...currentUser,
+             followedCritics: newFollowingList,
+           };
+           dispatch(updateUserThunk(updatedViewer));
+         } else {
+           throw new Error("Already following this critic");
+         }
+       }
+     } catch (e) {
+       alert(e);
+     }
+   };
 
   const handleUnFollow = async() => {
     const newFollowingList = followedCritics.filter(
@@ -93,19 +111,21 @@ function ProfileInfo({ isCurUser }) {
   useEffect(() => {
     const getProfile = async () => {
       const { payload } = await dispatch(fetchProfileByUsernameThunk(username));
-      let { roles } = payload;
 
       // Check if roles is not an array and convert it to an array
-      if (typeof roles === 'string') {
-        roles = [roles];
+      if (payload) {
+        let { roles } = payload;
+        if (typeof roles === "string") {
+          roles = [roles];
+        }
+
+        setProfile({ ...payload, roles });
+        setIsLoading(false);
+
+        // Get the selected role from the local storage
+        const savedRole = window.localStorage.getItem("selectedRole");
+        setSelectedRole(savedRole ? savedRole : initSelectedRole());
       }
-
-      setProfile({ ...payload, roles });
-      setIsLoading(false);
-
-      // Get the selected role from the local storage
-      const savedRole = window.localStorage.getItem('selectedRole');
-      setSelectedRole(savedRole ? savedRole : initSelectedRole());
     };
     getProfile();
   }, [username, dispatch, selectedRole]);
@@ -121,7 +141,7 @@ function ProfileInfo({ isCurUser }) {
   } else if (profile) {
     return (
       <div className="wd-profile-info-background row wd-padding">
-        <div className="wd-details-col col-6">
+        <div className="wd-details-col col-sm-12 col-md-8 col-xl-7">
           <h2>
             {profile.firstName} {profile.lastName}
             {isCurrentUserProfile && " (You)"}
@@ -130,6 +150,9 @@ function ProfileInfo({ isCurUser }) {
           <h4>@{profile.username}</h4>
           {isCurrentUserProfile && (
             <>
+            <br/>
+              <h5>{profile.email}</h5>
+              <br />
               <label className="pe-2" for="firstNameEdit">
                 First Name
               </label>
@@ -165,7 +188,9 @@ function ProfileInfo({ isCurUser }) {
               <TagBtn
                 key={index}
                 text={role}
-                fn={isCurrentUserProfile ? () => handleRoleSelection(role) : null}
+                fn={
+                  isCurrentUserProfile ? () => handleRoleSelection(role) : null
+                }
                 selected={selectedButton === role}
               />
             ))}
@@ -199,7 +224,10 @@ function ProfileInfo({ isCurUser }) {
             </>
           )}
         </div>
-        <div className="wd-photo-col d-none d-md-block col-md-6">
+        <div className="wd-photo-col d-none d-md-block col-md-3 d-xl-none">
+          <FaUserCircle size={200} />
+        </div>
+        <div className="wd-photo-col d-none d-xl-block col-xl-5">
           <FaUserCircle size={300} />
         </div>
       </div>
