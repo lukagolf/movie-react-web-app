@@ -28,13 +28,14 @@ function CurrentUserProfileLists() {
           <div className="wd-list">
             <div className="col-2"></div>
             <div className="col-8 wd-list-col">
-              {profileUser && profileUser.roles && profileUser.roles[0] === "VIEWER" && (
-                <div>
-                  <MoviesBucketList />
-                  <FollowedCriticsList />
-                </div>
-              )}
-              {profileUser && profileUser.roles && profileUser.roles[0] === "CRITIC" && (
+              {profileUser && profileUser.roles && profileUser.roles.includes("VIEWER")
+                && (
+                  <div>
+                    <MoviesBucketList />
+                    <FollowedCriticsList />
+                  </div>
+                )}
+              {profileUser && profileUser.roles && profileUser.roles.includes("CRITIC") && (
                 <div>
                   <CriticReviewList />
                 </div>
