@@ -3,6 +3,10 @@
 ## Plan
 https://docs.google.com/document/d/1tYJLnQkKFlXBifnOB4-2YerHBUJm00Dv58PXaHBBo6M/edit?usp=sharing
 
+## UML Diagram
+<img width="687" alt="MicrosoftTeams-image" src="https://github.com/kzeng24/movie-react-web-app/assets/52469441/e5a22525-843d-4771-b6f7-eb8543a11e98">
+
+
 ## Basic Prototypes for user types:
 
 https://kzeng24.wixsite.com/cinescope-anonymous
