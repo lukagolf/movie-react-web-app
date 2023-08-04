@@ -1,8 +1,5 @@
 # Project Info
 
-## Deployed at 
-https://kz--capable-truffle-066ad3.netlify.app
-
 ## Plan
 https://docs.google.com/document/d/1tYJLnQkKFlXBifnOB4-2YerHBUJm00Dv58PXaHBBo6M/edit?usp=sharing
 
