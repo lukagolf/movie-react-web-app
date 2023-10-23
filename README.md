@@ -1,25 +1,11 @@
 # Project Info
 
-## Plan
-https://docs.google.com/document/d/1tYJLnQkKFlXBifnOB4-2YerHBUJm00Dv58PXaHBBo6M/edit?usp=sharing
-
-## UML Diagram
-<img width="687" alt="MicrosoftTeams-image" src="https://github.com/kzeng24/movie-react-web-app/assets/52469441/e5a22525-843d-4771-b6f7-eb8543a11e98">
-
-
-## Basic Prototypes for user types:
-
-https://kzeng24.wixsite.com/cinescope-anonymous
-
-https://kzeng24.wixsite.com/cinescope-viewer
-
-https://kzeng24.wixsite.com/cinescope-critic
-
-https://kzeng24.wixsite.com/cinescope-admin
+## Project Proposal
+https://docs.google.com/document/d/1hvqXcs96izobISyzpywbK4Xs7Eo_e7GC8VgBho-5j7E
 
 
 ## Connects to node server
-https://github.com/kzeng24/movie-node-server-app
+https://github.com/lukagolf/movie-node-server-app
 
 ---------------------------------------------------------------------------------------------------
 
