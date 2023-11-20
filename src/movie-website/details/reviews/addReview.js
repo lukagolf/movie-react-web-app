@@ -17,16 +17,17 @@ const AddReview = () => {
 
     const reviewClickHandler = async() => {
         const newReview = {
-            movieId: id,
-            username: currentUser.username,
+            movie_id: id,
+            critic_id: currentUser.username,
+            date_reviewed: new Date().toISOString().slice(0, 19).replace('T', ' '),
             title: title,
             rating: rating,
-            description: description
+            review_text: description
         };
         try {
             await dispatch(createReviewThunk(newReview)).unwrap();
         } catch (e) {
-            alert("Unable to create review: missing required fields");
+            // alert("Unable to create review: missing required fields");
         }
 
         setTitle("");

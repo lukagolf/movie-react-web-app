@@ -11,11 +11,9 @@ function SearchResult() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("SEARCH RESULTS: ")
     dispatch(findMoviesThunk({title: searchParams.get("q")}));
   }, [dispatch]);
 
-  console.log("MOVIES IS " + JSON.stringify(movies))
   return (
     <>
       <div className="">

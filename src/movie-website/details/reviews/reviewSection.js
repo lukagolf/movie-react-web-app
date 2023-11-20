@@ -15,7 +15,7 @@ function ReviewSection() {
                 <div className="col-8">
                     <ReviewList />
                     <br/>
-                    {currentUser && currentUser.roles[0] === 'CRITIC' && <AddReview />}
+                    {currentUser && currentUser.roles.includes('Critic') && <AddReview />}
                 </div>
                 <div className="col-2"></div>
             </div>

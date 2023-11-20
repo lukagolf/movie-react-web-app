@@ -19,31 +19,31 @@ const ReviewItem = ({ review }) => {
     alert("Create an account to proceed");
   };
 
-  const reviewedByCurrentUser = review.username === currentUser?.username;
+  const reviewedByCurrentUser = review.critic_id === currentUser?.username;
 
   return (
     <div>
       {currentUser ? (
         <NavLink
-          to={`/profile${reviewedByCurrentUser ? "" : "/" + review.username}`}
+          to={`/profile${reviewedByCurrentUser ? "" : "/" + review.critic_id}`}
           state={{ review }}
           className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
         >
           <div>
             {currentUser && currentUser.roles[0] === "ADMIN" && (
               <DeleteBtn
-                fn={(event) => deleteReviewHandler(event, review._id)}
+                fn={(event) => deleteReviewHandler(event, review.rev_id)}
                 className={"float-end"}
               />
 
             )}
             <h3>
-              {review.username} {reviewedByCurrentUser && " (You)"}
+              {review.critic_id} {reviewedByCurrentUser && " (You)"}
             </h3>
 
             <h4>{review.title}</h4>
             <Rating name="read-only" value={review.rating} readOnly />
-            <h5>Description: {review.description}</h5>
+            <h5>Description: {review.review_text}</h5>
           </div>
         </NavLink>
       ) : (
@@ -54,10 +54,10 @@ const ReviewItem = ({ review }) => {
           onClick={forceLogin}
         >
           <div>
-            <h3>{review.username}</h3>
+            <h3>{review.critic_id}</h3>
             <h4>{review.title}</h4>
             <Rating name="read-only" value={review.rating} readOnly />
-            <h5>Description: {review.description}</h5>
+            <h5>Description: {review.review_text}</h5>
           </div>
         </NavLink>
       )}

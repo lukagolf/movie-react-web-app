@@ -62,7 +62,7 @@ const HomeCarousel = forwardRef((props, ref) => {
     <div>
       <br />
       {currentUser &&
-        currentUser.roles[0] === "VIEWER" &&
+        currentUser.roles.includes("VIEWER") &&
         savedMovies.length >= 0 && (
           <div>
             <div className="wd-carousel-title position-relative">

@@ -25,20 +25,14 @@ function ProfileInfo({ isCurUser }) {
   }
   // console.log("PROFILE INFO: current user is " + currentUser.firstname + " " + currentUser.lastname)
   const isCurrentUserProfile = currentUser?.username === username;
-  const isAnotherViewer = currentUser?.role1 === 'Viewer' ||
-                          currentUser?.role2 === 'Viewer';
+  const isAnotherViewer = currentUser?.roles?.includes("VIEWER");
 
-  let roles = null
-  if (currentUser) {
-    roles = [currentUser.role1, currentUser.role2]
-    currentUser = {...currentUser, roles}
-  }
-  console.log("PROFILE INFO: CURRENT USER IS " + currentUser)
+  console.log("PROFILE INFO: CURRENT USER IS " + JSON.stringify(currentUser))
 
   const initSelectedRole = () => {
-    if (currentUser && currentUser.roles.includes('Viewer')) {
+    if (currentUser?.roles?.includes('VIEWER')) {
       return 'VIEWER';
-    } else if (currentUser && currentUser.roles.includes('Critic')) {
+    } else if (currentUser?.roles?.includes('CRITIC')) {
       return 'CRITIC';
     } else {
       return currentUser?.roles?.[0];
@@ -50,7 +44,7 @@ function ProfileInfo({ isCurUser }) {
   const [selectedButton, setSelectedButton] = useState(initSelectedRole());
 
   const handleRoleSelection = (role) => {
-    const otherRoles = roles.filter(r => r !== role);
+    const otherRoles = currentUser.roles.filter(r => r !== role);
     const updatedRoles = [role, ...otherRoles];
     // this part is sus
     const updatedUser = { ...currentUser, roles: updatedRoles };
@@ -126,10 +120,11 @@ function ProfileInfo({ isCurUser }) {
       console.log("PRF. INFO: Payload was " + payload)
       // Check if roles is not an array and convert it to an array
       if (payload) {
-        let { role1, role2 } = payload;
-        if (typeof role1 === "string") {
-          roles = [role1, role2];
+        let { roles } = payload;
+        if (typeof roles === "string") {
+          roles = [roles];
         }
+
 
         setProfile({ ...payload, roles });
         setIsLoading(false);
@@ -197,7 +192,7 @@ function ProfileInfo({ isCurUser }) {
           <br />
           <br />
           <span>
-            {roles && roles.map((role, index) => (
+            {profile.roles && profile.roles.map((role, index) => (
               <TagBtn
                 key={index}
                 text={role}
