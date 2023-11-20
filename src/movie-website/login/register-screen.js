@@ -67,7 +67,7 @@ function RegisterScreen() {
             alert('You cannot select Viewer and Critic together!');
             setRole(previousRole);
         }
-    }, [role]);
+    }, [role, previousRole]);
 
     return (
         <>
@@ -121,6 +121,7 @@ function RegisterScreen() {
                     <label htmlFor="role" className="mt-2">
                         Role
                     </label>
+                    <br />
                     <Multiselect
                         options={allRoles}
                         isObject={true}
@@ -133,8 +134,24 @@ function RegisterScreen() {
                     />
                     <br />
                     <BlackTextBtn text="Register" fn={handleRegister} />
+{/* 
+                    <div className="dropdown">
+                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Role
+                    </button>
+                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a className="dropdown-item" value='Admin'>Admin</a>
+                        <a className="dropdown-item" value='Viewer'>Viewer </a>
+                        <a className="dropdown-item" value='Critic'>Critic </a>
+                    </div>
+                    </div> */}
+                    <br />
+                    <br />
+                    <br />
                 </div>
+
                 <br />
+
                 {displayBanner ? (
                     <Banner success={success} />
                 ) : (
