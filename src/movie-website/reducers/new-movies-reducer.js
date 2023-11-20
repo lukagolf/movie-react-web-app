@@ -23,6 +23,7 @@ const newMoviesSlice = createSlice({
             );
             state.newMovies = filterMovies.slice(0, 10);
             state.firstMovie = state.newMovies[0];
+            console.log("MOVIES REDUCER" + JSON.stringify(state.firstMovie))
         },
         [findNewMoviesThunk.rejected]: (state, action) => {
             state.loading = false;

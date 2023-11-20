@@ -12,13 +12,14 @@ const searchSlice = createSlice({
             })
             .addCase(findMoviesThunk.fulfilled, (state, action) => {
                 state.status = 'succeeded';
+                console.log("FIND MOVIES THUNK: setting data = " + JSON.stringify(action.payload))
                 state.data = action.payload;
             })
             .addCase(findMoviesThunk.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
-            });
-    },
+            })
+        },
 });
 export default searchSlice.reducer;
 

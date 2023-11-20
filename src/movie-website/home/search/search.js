@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { findMoviesThunk } from "../../services/search-thunks";
 
-function HomeSearch() {
+function HomeSearch(path="search") {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [title, setTitle] = useState("");

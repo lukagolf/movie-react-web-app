@@ -13,15 +13,19 @@ import { getProfileByUsername } from "./movie-website/services/auth-service";
 import movieVideoReducer from "./movie-website/reducers/movie-video-reducer";
 import topMoviesReducer from "./movie-website/reducers/top-movies-reducer";
 import newMoviesReducer from "./movie-website/reducers/new-movies-reducer";
+import tmdbReducer from "./movie-website/reducers/tmdb-reducer";
+import movieReducer from "./movie-website/reducers/movie-reducer";
 
 const store = configureStore({
   reducer: {
+    tmdb: tmdbReducer,
     reviews: reviewsReducer,
     user: authReducer,
     search: searchReducer,
     newMovies: newMoviesReducer,
     video: movieVideoReducer,
     topMovies: topMoviesReducer,
+    movie: movieReducer
   },
 });
 

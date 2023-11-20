@@ -10,6 +10,7 @@ import "../index.css"
 import { useParams } from "react-router";
 
 function ProfileLists({isCurUser}) {
+  console.log("PROFILE LISTS GOT PROCCD")
   const { currentUser } = useSelector((state) => state.user);
   let { username } = useParams();
   if (isCurUser) {

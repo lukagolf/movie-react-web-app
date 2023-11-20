@@ -11,7 +11,6 @@ import CriticCarouselComponent from './critic-carousel-component';
 import CarouselComponent from './carousel-component';
 
 const HomeCarousel = forwardRef((props, ref) => {
-
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },

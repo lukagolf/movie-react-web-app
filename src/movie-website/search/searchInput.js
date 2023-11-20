@@ -8,7 +8,7 @@ import { findMoviesThunk } from "../services/search-thunks";
 import { useNavigate } from "react-router";
 import { createSearchParams } from "react-router-dom";
 
-function SearchInput() {
+function SearchInput({path='search'}) {
 
   const [title, setSearch] = useState("");
 
@@ -16,10 +16,11 @@ function SearchInput() {
   const navigate = useNavigate();
 
   const handleSearch = async () => {
+  console.log("SEARCH INPUT: PATH IS " + path)
     try {
         await dispatch(findMoviesThunk({ title }));
         navigate({
-          pathname: '/search/',
+          pathname: `/${path}/`,
           search: `?${createSearchParams({
             q: title
           }).toString()}`
@@ -48,7 +49,7 @@ function SearchInput() {
               placeholder="Search movies"
               onChange={(event) => setSearch(event.target.value)}
             />
-            <SearchBtn fn={handleSearch} />
+            <SearchBtn fn={handleSearch} path={path} />
           </div>
         </div>
       </div>

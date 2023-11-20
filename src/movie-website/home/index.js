@@ -6,6 +6,7 @@ import HomeSearch from "./search/search";
 import { useSelector } from "react-redux";
 function Home() {
   const { currentUser } = useSelector((state) => state.user);
+  console.log("HOME: CURRENT USER IS " + JSON.stringify(currentUser))
   const topMoviesRef = useRef(null);
 
   return (
@@ -18,6 +19,7 @@ function Home() {
             signIn: false,
             profile: true,
             signOut: true,
+            addMovie: false
           }}
         />
       ) : (
@@ -28,6 +30,7 @@ function Home() {
             signIn: true,
             profile: false,
             signOut: false,
+            addMovie: true
           }}
         />
       )}

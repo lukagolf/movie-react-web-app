@@ -100,7 +100,7 @@ function CurrentProfileInfo() {
             // Check if payload exists
             if (payload) {
                 let { roles } = payload;
-
+                console.log("PROFILEINFO: got the payload, it's " + payload)
                 // Check if roles is not an array and convert it to an array
                 if (typeof roles === 'string') {
                     roles = [roles];
@@ -116,7 +116,7 @@ function CurrentProfileInfo() {
         };
         getProfile();
     }, [username, dispatch, selectedRole]);
-
+    console.log("PROFILE INFO: username is " + username)
 
     useEffect(() => {
         if (currentUser && isAnotherViewer) {

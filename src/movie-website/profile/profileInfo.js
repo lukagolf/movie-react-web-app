@@ -12,7 +12,8 @@ import FollowBtn from "../../ui-styling/buttons/text/followBtn";
 import BlackTextBtn from "../../ui-styling/buttons/text/blackTextBtn";
 
 function ProfileInfo({ isCurUser }) {
-  const { currentUser } = useSelector((state) => state.user);
+  console.log("IN PROFILE INFO")
+  let { currentUser } = useSelector((state) => state.user);
   const [profile, setProfile] = useState(currentUser);
   const [isLoading, setIsLoading] = useState(true);
   const [followedCritics, setFollowedCritics] = useState([]);
@@ -22,13 +23,22 @@ function ProfileInfo({ isCurUser }) {
   if (isCurUser) {
     username = currentUser?.username;
   }
+  // console.log("PROFILE INFO: current user is " + currentUser.firstname + " " + currentUser.lastname)
   const isCurrentUserProfile = currentUser?.username === username;
-  const isAnotherViewer = currentUser?.roles.includes("VIEWER");
+  const isAnotherViewer = currentUser?.role1 === 'Viewer' ||
+                          currentUser?.role2 === 'Viewer';
+
+  let roles = null
+  if (currentUser) {
+    roles = [currentUser.role1, currentUser.role2]
+    currentUser = {...currentUser, roles}
+  }
+  console.log("PROFILE INFO: CURRENT USER IS " + currentUser)
 
   const initSelectedRole = () => {
-    if (currentUser?.roles?.includes('VIEWER')) {
+    if (currentUser && currentUser.roles.includes('Viewer')) {
       return 'VIEWER';
-    } else if (currentUser?.roles?.includes('CRITIC')) {
+    } else if (currentUser && currentUser.roles.includes('Critic')) {
       return 'CRITIC';
     } else {
       return currentUser?.roles?.[0];
@@ -40,8 +50,9 @@ function ProfileInfo({ isCurUser }) {
   const [selectedButton, setSelectedButton] = useState(initSelectedRole());
 
   const handleRoleSelection = (role) => {
-    const otherRoles = currentUser.roles.filter(r => r !== role);
+    const otherRoles = roles.filter(r => r !== role);
     const updatedRoles = [role, ...otherRoles];
+    // this part is sus
     const updatedUser = { ...currentUser, roles: updatedRoles };
 
     dispatch(setUser(updatedUser));
@@ -110,13 +121,14 @@ function ProfileInfo({ isCurUser }) {
 
   useEffect(() => {
     const getProfile = async () => {
+      console.log("PROFILE INFO: USING EFFECT")
       const { payload } = await dispatch(fetchProfileByUsernameThunk(username));
-
+      console.log("PRF. INFO: Payload was " + payload)
       // Check if roles is not an array and convert it to an array
       if (payload) {
-        let { roles } = payload;
-        if (typeof roles === "string") {
-          roles = [roles];
+        let { role1, role2 } = payload;
+        if (typeof role1 === "string") {
+          roles = [role1, role2];
         }
 
         setProfile({ ...payload, roles });
@@ -129,6 +141,7 @@ function ProfileInfo({ isCurUser }) {
     };
     getProfile();
   }, [username, dispatch, selectedRole]);
+  console.log("PROFILEINFO: current user is " + currentUser)
 
   useEffect(() => {
     if (currentUser && isAnotherViewer) {
@@ -184,7 +197,7 @@ function ProfileInfo({ isCurUser }) {
           <br />
           <br />
           <span>
-            {profile.roles && profile.roles.map((role, index) => (
+            {roles && roles.map((role, index) => (
               <TagBtn
                 key={index}
                 text={role}

@@ -11,9 +11,11 @@ function SearchResult() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("SEARCH RESULTS: ")
     dispatch(findMoviesThunk({title: searchParams.get("q")}));
   }, [dispatch]);
 
+  console.log("MOVIES IS " + JSON.stringify(movies))
   return (
     <>
       <div className="">
@@ -23,15 +25,15 @@ function SearchResult() {
               {status === 'loading' && <div>Loading...</div>}
               {status === 'succeeded' && movies && (
                 <div className="list-group ">
-                  {movies.results.map((movie) => (
+                  {movies.map((movie) => (
                     <NavLink
-                      to={`/details/${movie.id}`}
+                      to={`/details/${movie.movie_id}`}
                       state={{ movie }}
                       className="list-group-item list-group-item-action flex-column align-items-start">
                       <div className="row p-3">
                         <div className="col-md-5 col-lg-4">
                           <img
-                            src={"https://image.tmdb.org/t/p/w440_and_h660_face/" + movie.poster_path}
+                            src={movie.photo_url}
                             height="5px"
                             className="img-fluid float-left mr-3"
                           />

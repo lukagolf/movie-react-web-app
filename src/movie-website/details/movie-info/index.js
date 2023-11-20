@@ -8,30 +8,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DeleteBtn from "../../../ui-styling/buttons/icons/deleteBtn";
 import { updateUserThunk } from "../../services/auth-thunks";
+import { findMovieByIDThunk } from "../../services/movie-thunks";
 
 const MovieListItem = () => {
   const { currentUser } = useSelector(state => state.user);
+  const { movie, loading } = useSelector(state => state.movie)
   const userSavedMovies = currentUser?.savedMovies;
   const { id } = useParams();
-  const [movie, setMovie] = useState(null);
+  // const [movie, setMovie] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchMovie = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}?api_key=ffdfb660a1488ae7f304368f73e0e7ec`
-        );
-        setMovie(response.data);
-      } catch (error) {
-        console.error('Failed to fetch movie:', error.response);
-        alert("This search is currently unavailable. Please try again later.")
-      }
-    };
-    fetchMovie();
-  }, [id]);
+    // const fetchMovie = async () => {
+    //   try {
+    //     const response = await axios.get(
+    //       `https://api.themoviedb.org/3/movie/${id}?api_key=ffdfb660a1488ae7f304368f73e0e7ec`
+    //     );
+    //     setMovie(response.data);
+    //   } catch (error) {
+    //     console.error('Failed to fetch movie:', error.response);
+    //     alert("This search is currently unavailable. Please try again later.")
+    //   }
+    // };
+    // fetchMovie();
+    
+    dispatch(findMovieByIDThunk(id))
+  }, [dispatch]);
 
-  const dispatch = useDispatch();
 
   const handleSaveBtn = async () => {
     const newSavedMoviesList = userSavedMovies.concat(movie);
@@ -61,7 +65,7 @@ const MovieListItem = () => {
   }
 
   // Check if movie exists
-  if (!movie) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
@@ -85,25 +89,22 @@ const MovieListItem = () => {
             <div className="col-sm-9 col-md-5">
               <h1>{movie.original_title}</h1>
               <br />
-              <h5>
+              {/* <h5>
                 <b>Rating:</b> {movie.vote_average}
-              </h5>
+              </h5> */}
               <br />
               <h5>
                 <b>Release date:</b> {movie.release_date}
               </h5>
               <br />
               <h5>
-                <b>Summary:</b> {movie.overview}
+                <b>Summary:</b> {movie.summary}
               </h5>
 
               <div className="d-sm-block d-md-none wd-details-row">
                 <img
                   className="w-75"
-                  src={
-                    "https://image.tmdb.org/t/p/w440_and_h660_face/" +
-                    movie.poster_path
-                  }
+                  src={movie.photo_url}
                   alt="Movie Poster"
                 />
               </div>
@@ -111,10 +112,7 @@ const MovieListItem = () => {
             <div className="wd-photo-col d-none d-md-block col-md-5">
               <img
                 className="w-75 mx-3"
-                src={
-                  "https://image.tmdb.org/t/p/w440_and_h660_face/" +
-                  movie.poster_path
-                }
+                src={movie.photo_url}
                 alt="Movie Poster"
               />
             </div>
