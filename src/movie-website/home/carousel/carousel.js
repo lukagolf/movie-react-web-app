@@ -42,7 +42,7 @@ const HomeCarousel = forwardRef((props, ref) => {
 
     const loadReviewedMovies = async () => {
       let movieIds = [];
-      if (currentUser) {
+      if (currentUser && currentUser.roles.includes('CRITIC')) {
         const { payload } = await dispatch(
           findCriticReviewsThunk(currentUser.username)
         );
