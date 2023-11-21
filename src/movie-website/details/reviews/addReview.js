@@ -22,12 +22,14 @@ const AddReview = () => {
             date_reviewed: new Date().toISOString().slice(0, 19).replace('T', ' '),
             title: title,
             rating: rating,
-            review_text: description
+            review_text: description,
+            likes: [],
+            dislikes: []
         };
         try {
             await dispatch(createReviewThunk(newReview)).unwrap();
         } catch (e) {
-            // alert("Unable to create review: missing required fields");
+            alert("Unable to create review: missing required fields");
         }
 
         setTitle("");

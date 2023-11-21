@@ -8,7 +8,10 @@ const ReviewList = () => {
     // const [movieReviews, setMovieReviews] = useState([]);
     const { reviews } = useSelector(state => state.reviews)
     let { id } = useParams();
-
+    const sortedReviews = [...reviews].sort((rev1, rev2) => 
+        (rev2.likes.length - rev2.dislikes.length) -
+        (rev1.likes.length - rev1.dislikes.length)
+    )
     const dispatch = useDispatch();
     // might need to add dependency array
     useEffect(() => {
@@ -17,6 +20,7 @@ const ReviewList = () => {
             // setMovieReviews(payload);
         // }
         // loadMovieReviews();
+        console.log("REDISPATCHING")
         dispatch(findMovieReviewsThunk(id));
     }, [dispatch, id])
     console.log("REVIEW LIST: MOVIE REVIEWS ARE " + JSON.stringify(reviews))
@@ -28,9 +32,9 @@ const ReviewList = () => {
                     <h3>Critic Reviews</h3><br />
                 </li>
                 {
-                    reviews && reviews.map((review) =>
+                    reviews && sortedReviews.map((review) =>
                         <ReviewItem
-                            key={review._id}
+                            key={review.rev_id}
                             review={review} />
                     )
                 }
