@@ -3,7 +3,7 @@ import "../../index.css";
 import { NavLink, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { updateUserThunk } from "../../../services/auth-thunks";
+import { unsaveMovieThunk } from "../../../services/auth-thunks";
 import { useLocation } from "react-router-dom";
 import DeleteBtn from "../../../../ui-styling/buttons/icons/deleteBtn";
 import { useState } from "react";
@@ -15,21 +15,14 @@ function MovieBucketListItem({ movieInfo }) {
 
   const dispatch = useDispatch();
   const handleUnSaveBtn = async (e) => {
-    const newSavedMoviesList = userSavedMovies.filter(
-      (savedMovie) => savedMovie.id !== movieInfo.id
-    );
-    const updatedViewer = {
-      ...currentUser,
-      savedMovies: newSavedMoviesList,
-    };
-    dispatch(updateUserThunk(updatedViewer));
+    dispatch(unsaveMovieThunk({ username: currentUser.username, movie_id: movieInfo.movie_id }));
     e.preventDefault();
     alert("Un-saving movie: " + movieInfo.title);
   };
   return (
     <>
       <NavLink
-        to={`/details/${movieInfo.id}`}
+        to={`/details/${movieInfo.movie_id}`}
         state={{ movieInfo }}
         className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
       >
@@ -43,27 +36,19 @@ function MovieBucketListItem({ movieInfo }) {
         <div className="row p-3 wd-movie-list-row">
           <div className="col-3 wd-movie-list-image d-none d-lg-block">
             <img
-              src={`http://image.tmdb.org/t/p/w500/${movieInfo.backdrop_path}`}
+              src={movieInfo.photo_url}
               className="float-left mr-3"
             />
           </div>
           <div className="col-9 wd-movie-list-info d-none d-lg-block">
             <h3>{movieInfo.title}</h3>
-            <div>
-              Rating: {movieInfo.vote_average}
-              <br />
-            </div>
           </div>
           <div className="d-lg-none col-12">
             <img
-              src={`http://image.tmdb.org/t/p/w500/${movieInfo.backdrop_path}`}
+               src={movieInfo.photo_url}
               className="float-left mr-3 wd-md-screen-size-img"
             />
             <h3>{movieInfo.title}</h3>
-            <div>
-              Rating: {movieInfo.vote_average}
-              <br />
-            </div>
           </div>
         </div>
       </NavLink>

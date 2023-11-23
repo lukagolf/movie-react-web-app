@@ -48,7 +48,7 @@ function ProfileInfo({ isCurUser }) {
     const updatedRoles = [role, ...otherRoles];
     // this part is sus
     const updatedUser = { ...currentUser, roles: updatedRoles };
-
+    console.log("UPDATED USER IS " + JSON.stringify(updatedUser))
     dispatch(setUser(updatedUser));
     dispatch(storeUserInLocalStorage(updatedUser));
     dispatch(updateUserThunk(updatedUser));

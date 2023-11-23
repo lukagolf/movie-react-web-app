@@ -11,6 +11,11 @@ export const findTMDBMoviesThunk = createAsyncThunk(
     async (searchParams) => await moviesService.findTMDBMovies(searchParams)
 );
 
+export const getGenresThunk = createAsyncThunk(
+    "search/getGenres",
+    async () => await moviesService.getTMDBGenres()
+)
+
 export const addMovieThunk = createAsyncThunk(
     "search/addMovie",
     async(movie) => await moviesService.addMovie(movie)

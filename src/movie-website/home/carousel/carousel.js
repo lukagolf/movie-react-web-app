@@ -4,13 +4,13 @@ import "../../../ui-styling/index.css";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { findNewMoviesThunk } from '../../services/new-movies-thunks';
-import { findTopMoviesThunk } from '../../services/top-movies-thunks';
-import { findCriticReviewsThunk } from '../../services/reviews-thunks';
+import { findNewMoviesThunk } from '../../services/new-movies-thunks'; // these can maybe go away
+import { findTopMoviesThunk } from '../../services/top-movies-thunks'; // ^
+import { findCriticReviewsThunk } from '../../services/reviews-thunks'; // ^
 import CriticCarouselComponent from './critic-carousel-component';
 import CarouselComponent from './carousel-component';
 
-const HomeCarousel = forwardRef((props, ref) => {
+const HomeCarousel = forwardRef(({movies}, ref) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },

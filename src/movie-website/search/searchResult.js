@@ -38,10 +38,24 @@ function SearchResult() {
                         </div>
                         <div className="col-md-7 col-lg-8">
                           <h3>{movie.title}</h3>
-                          <div className="wd-search-result-text d-none d-md-block">
-                            Release date: {movie.release_date}
+                          <div className="wd-search-result-text d-none d-md-block fs-5">
+                          {new Date(movie.release_date).toLocaleDateString(
+                            'en-US', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric'
+                            })}
+                           </div>
                             <br />
-                          </div>
+                            { movie.genres && movie.genres.length !== 0 &&
+                                <div className="wd-search-result-text d-none d-md-block">
+                                {
+                                  movie.genres.map((genre, index) =>
+                                    index <= 2 ? <div key={index}> {genre}</div> : ``
+                                  )
+                                }
+                                </div>
+                        }
                         </div>
                       </div>
                     </NavLink>

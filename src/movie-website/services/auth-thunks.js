@@ -31,6 +31,21 @@ export const updateUserThunk = createAsyncThunk(
         return user;
     });
 
+export const saveMovieThunk = createAsyncThunk(
+    "user/saveMovie", async ({username, movie_id}, thunkAPI) => {
+        await authService.saveMovie(username, movie_id)
+        return thunkAPI.dispatch(fetchProfileByUsernameThunk(username)) // return updated user
+    }
+)
+
+export const unsaveMovieThunk = createAsyncThunk(
+    "user/unsaveMovie", async ({username, movie_id}, thunkAPI) => {
+        console.log("going to unsave the movie")
+        await authService.unsaveMovie(username, movie_id)
+        return thunkAPI.dispatch(fetchProfileByUsernameThunk(username))
+    }
+)
+
 export const registerThunk = createAsyncThunk(
     "user/register", async (credentials) => {
         console.log("REGISTER THUNK")

@@ -40,7 +40,6 @@ function CurrentProfileInfo() {
         const otherRoles = currentUser.roles.filter(r => r !== role);
         const updatedRoles = [role, ...otherRoles];
         const updatedUser = { ...currentUser, roles: updatedRoles };
-
         dispatch(setUser(updatedUser));
         dispatch(storeUserInLocalStorage(updatedUser));
         dispatch(updateUserThunk(updatedUser));
@@ -50,7 +49,6 @@ function CurrentProfileInfo() {
     };
 
     const save = () => {
-        console.log(profile);
         dispatch(updateUserThunk(profile));
     };
 

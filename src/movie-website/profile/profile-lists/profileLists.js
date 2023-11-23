@@ -10,7 +10,6 @@ import "../index.css"
 import { useParams } from "react-router";
 
 function ProfileLists({isCurUser}) {
-  console.log("PROFILE LISTS GOT PROCCD")
   const { currentUser } = useSelector((state) => state.user);
   let { username } = useParams();
   if (isCurUser) {
@@ -34,13 +33,13 @@ function ProfileLists({isCurUser}) {
           <div>
             <div className="col-2"></div>
             <div className="col-8 wd-list-col">
-              {profileUser && profileUser.roles && profileUser.roles.includes("VIEWER") && (
+              {profileUser && profileUser.roles && profileUser.roles.includes("Viewer") && (
                 <div>
                   <MoviesBucketList />
                   <FollowedCriticsList />
                 </div>
               )}
-              {profileUser && profileUser.roles && profileUser.roles.includes("CRITIC") && (
+              {profileUser && profileUser.roles && profileUser.roles.includes("Critic") && (
                 <div>
                   <CriticReviewList />
                 </div>

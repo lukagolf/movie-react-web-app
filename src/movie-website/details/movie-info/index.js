@@ -7,8 +7,9 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DeleteBtn from "../../../ui-styling/buttons/icons/deleteBtn";
-import { updateUserThunk } from "../../services/auth-thunks";
+import { saveMovieThunk, unsaveMovieThunk } from "../../services/auth-thunks";
 import { findMovieByIDThunk } from "../../services/movie-thunks";
+import { saveMovie } from "../../services/auth-service";
 
 const MovieListItem = () => {
   const { currentUser } = useSelector(state => state.user);
@@ -20,42 +21,16 @@ const MovieListItem = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // const fetchMovie = async () => {
-    //   try {
-    //     const response = await axios.get(
-    //       `https://api.themoviedb.org/3/movie/${id}?api_key=ffdfb660a1488ae7f304368f73e0e7ec`
-    //     );
-    //     setMovie(response.data);
-    //   } catch (error) {
-    //     console.error('Failed to fetch movie:', error.response);
-    //     alert("This search is currently unavailable. Please try again later.")
-    //   }
-    // };
-    // fetchMovie();
-    
     dispatch(findMovieByIDThunk(id))
   }, [dispatch]);
 
-
   const handleSaveBtn = async () => {
-    const newSavedMoviesList = userSavedMovies.concat(movie);
-    const updatedViewer = {
-      ...currentUser,
-      savedMovies: newSavedMoviesList,
-    };
-    dispatch(updateUserThunk(updatedViewer));
+    dispatch(saveMovieThunk({ username: currentUser.username, movie_id: movie.movie_id }));
     alert("Saving movie: " + movie.title);
   };
 
   const handleUnSaveBtn = async () => {
-    const newSavedMoviesList = userSavedMovies.filter(
-      (savedMovie) => savedMovie.id !== movie.id
-    );
-    const updatedViewer = {
-      ...currentUser,
-      savedMovies: newSavedMoviesList,
-    };
-    dispatch(updateUserThunk(updatedViewer));
+    dispatch(unsaveMovieThunk({ username: currentUser.username, movie_id: movie.movie_id }));
     alert("Un-saving movie: " + movie.title);
   };
 
@@ -75,10 +50,10 @@ const MovieListItem = () => {
         <div className="wd-details-row">
           <div className="row">
             <div className="wd-left-col col-sm-3 col-md-2 col-lg-1">
-              {currentUser && currentUser.roles[0] === "VIEWER" && (
+              {currentUser && currentUser.roles[0].toUpperCase() === "VIEWER" && (
                 <>
                   {userSavedMovies.filter(
-                    (savedMovie) => savedMovie.id === movie.id
+                    (savedMovie) => savedMovie.movie_id === movie.movie_id
                   ).length === 0 ?  <SavedBtn fn={handleSaveBtn} /> : <DeleteBtn fn={handleUnSaveBtn} addWhiteBorder={true} />}
 
                 </>
@@ -94,13 +69,31 @@ const MovieListItem = () => {
               </h5> */}
               <br />
               <h5>
-                <b>Release date:</b> {movie.release_date}
+                <b>Release date: </b> 
+                {new Date(movie.release_date).toLocaleDateString(
+                'en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
               </h5>
               <br />
               <h5>
                 <b>Summary:</b> {movie.summary}
               </h5>
-
+              <br />
+              { movie.genres && movie.genres.length !== 0 &&
+              <h5>
+                <b> Genres: </b>
+                <div>
+                {
+                  movie.genres.map((genre, index, array) =>
+                  <span key={index}> {genre}{index !== array.length - 1 && ` \u00B7`}</span>
+                  )
+                }
+                </div>
+              </h5>
+              }
               <div className="d-sm-block d-md-none wd-details-row">
                 <img
                   className="w-75"
@@ -115,6 +108,7 @@ const MovieListItem = () => {
                 src={movie.photo_url}
                 alt="Movie Poster"
               />
+              
             </div>
           </div>
         </div>

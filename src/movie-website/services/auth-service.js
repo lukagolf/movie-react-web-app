@@ -24,7 +24,7 @@ export const profile = async () => {
 };
 
 export const updateUser = async (user) => {
-    const response = await api.put(`${USERS_URL}/${user._id}`, user);
+    const response = await api.put(`${USERS_URL}/${user.username}`, user);
     return response.data;
 };
 
@@ -39,3 +39,13 @@ export const getProfileByUsername = async (username) => {
     return response;
 };
 
+export const saveMovie = async (username, movie_id) => {
+    const response = await api.put(`${USERS_URL}/save/${username}/${movie_id}`)
+    return response;
+}
+
+export const unsaveMovie = async (username, movie_id) => {
+    console.log("service is also going to usnave the movie")
+    const response = await api.put(`${USERS_URL}/unsave/${username}/${movie_id}`)
+    return response;
+}
