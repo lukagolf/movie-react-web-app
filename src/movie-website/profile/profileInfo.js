@@ -68,6 +68,7 @@ function ProfileInfo({ isCurUser }) {
 
   const save = () => {
     dispatch(updateUserThunk(profile));
+    alert("Information saved")
   };
 
   const handleLogout = async () => {
@@ -228,7 +229,7 @@ function ProfileInfo({ isCurUser }) {
                 value={profile.firstname}
                 className="form-control w-75"
                 onChange={(e) =>
-                  setProfile({ ...profile, frstname: e.target.value })
+                  setProfile({ ...profile, firstname: e.target.value })
                 }
               />
               <br />
@@ -244,6 +245,19 @@ function ProfileInfo({ isCurUser }) {
                   setProfile({ ...profile, lastname: e.target.value })
                 }
               />
+              <br />
+              <label className="pe-2 mb-2" for="emailEdit">
+                Email
+              </label>
+              <input
+                id="emailEdit"
+                type="text"
+                value={profile.email}
+                className="form-control w-75"
+                onChange={(e) =>
+                  setProfile({ ...profile, email: e.target.value })
+                }
+            />
             </>
           )}
 

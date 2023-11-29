@@ -5,7 +5,6 @@ import ProfileLists from "../profile-lists/profileLists";
 
 function CurrentUserProfile() {
   const { currentUser } = useSelector((state) => state.user);
-  console.log("IN CURRENT USER PROFILE")
   return (
     <>
       {currentUser ? (

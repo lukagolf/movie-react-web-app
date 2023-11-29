@@ -8,9 +8,11 @@ import BackBtn from "../../../ui-styling/buttons/icons/backBtn";
 import "../index.css"
 import { useParams } from "react-router";
 
-function ProfileLists({isCurUser}) {
+function ProfileLists() {
   const { currentUser } = useSelector((state) => state.user);
   let { username } = useParams();
+  const isCurUser = currentUser && currentUser.username === username
+
   if (isCurUser) {
     username = currentUser?.username;
   }
@@ -44,7 +46,7 @@ function ProfileLists({isCurUser}) {
               )}
             </div>
             <div className="col-2"></div>
-            {isCurUser && currentUser.roles[0] ==="Admin" && (
+            {isCurUser && currentUser.roles[0] === "Admin" && (
                 <div>
                   <AssignedReportsList />
                 </div>
