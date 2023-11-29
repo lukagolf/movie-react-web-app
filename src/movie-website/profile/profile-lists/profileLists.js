@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfileByUsernameThunk } from "../../services/auth-thunks";
-
+import AssignedReportsList from "./assigned-reports-list/assignedReportsList";
 import CriticReviewList from "./critic-review-list/criticReviewList";
 import MoviesBucketList from "./movie-bucket-list/moviesBucketList";
 import FollowedCriticsList from "./followed-critics-list/followedCriticsList";
@@ -33,19 +33,24 @@ function ProfileLists({isCurUser}) {
           <div>
             <div className="col-2"></div>
             <div className="col-8 wd-list-col">
-              {profileUser && profileUser.roles && profileUser.roles.includes("Viewer") && (
+              {profileUser && profileUser.roles && profileUser.roles[0] === "Viewer" && (
                 <div>
                   <MoviesBucketList />
                   <FollowedCriticsList />
                 </div>
               )}
-              {profileUser && profileUser.roles && profileUser.roles.includes("Critic") && (
+              {profileUser && profileUser.roles && profileUser.roles[0] ==="Critic" && (
                 <div>
                   <CriticReviewList />
                 </div>
               )}
             </div>
             <div className="col-2"></div>
+            {isCurUser && currentUser.roles[0] ==="Admin" && (
+                <div>
+                  <AssignedReportsList />
+                </div>
+              )}
           </div>
         )}
       </div>

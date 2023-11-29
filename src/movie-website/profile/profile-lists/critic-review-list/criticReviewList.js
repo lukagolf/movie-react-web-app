@@ -52,7 +52,7 @@ function CriticReviewList() {
         <div>
             <ul className="wd-profile-list list-group">
                 <li >
-                    <h3>{profile.firstName}'s Reviews</h3><br />
+                    <h3>{profile.firstname}'s Reviews</h3><br />
                 </li>
                 {
                     criticReviews.map(review =>
@@ -61,7 +61,9 @@ function CriticReviewList() {
                             title={review.title}
                             rating={review.rating}
                             description={review.description}
-                            movieId={review.movieId} />
+                            movieId={review.movie_id}
+                            photo={review.photo_url}
+                            />
                     )
                 }
             </ul>

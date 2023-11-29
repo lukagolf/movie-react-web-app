@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 
 
-function CriticReviewListItem({ title, rating, description, movieId }) {
+function CriticReviewListItem({ title, rating, description, movieId, photo }) {
     const [movieReviewed, setMovieReviewed] = useState([]);
     useEffect(() => {
         const GET_MOVIE_API = `https://api.themoviedb.org/3/movie/${movieId}`;
@@ -26,7 +26,7 @@ function CriticReviewListItem({ title, rating, description, movieId }) {
         >
             <div className="row p-3 wd-movie-list-row">
                 <div className="col-3 wd-movie-list-image d-none d-lg-block">
-                    <img src={`http://image.tmdb.org/t/p/w500/${movieReviewed.backdrop_path}`}
+                    <img src={photo}
                         className="float-left mr-3"
                     />
                 </div>
@@ -40,7 +40,7 @@ function CriticReviewListItem({ title, rating, description, movieId }) {
                     </div>
                 </div>
                 <div className="d-lg-none col-12">
-                    <img src={`http://image.tmdb.org/t/p/w500/${movieReviewed.backdrop_path}`}
+                    <img src={photo}
                         className="float-left mr-3 wd-md-screen-size-img"
                     />
                     <h3>{movieReviewed.title}</h3><br />

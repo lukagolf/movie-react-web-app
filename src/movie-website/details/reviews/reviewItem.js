@@ -6,6 +6,8 @@ import { deleteReviewThunk } from "../../services/reviews-thunks";
 import { likeReviewThunk, dislikeReviewThunk } from "../../services/likes-thunks";
 import { NavLink } from 'react-router-dom';
 import DeleteBtn from "../../../ui-styling/buttons/icons/deleteBtn";
+import ReportBtn from "../../../ui-styling/buttons/icons/reportBtn";
+import ReportReview from "./reportReview";
 import LikeBtn from "../../../ui-styling/buttons/icons/likeBtn";
 import DislikeBtn from "../../../ui-styling/buttons/icons/dislikeBtn";
 
@@ -14,6 +16,7 @@ const ReviewItem = ({ review }) => {
 
   const[liked, setLiked] = useState(false)
   const[disliked, setDisliked] = useState(false)
+  const[reporting, setReporting] = useState(false)
 
   const { currentUser } = useSelector((state) => state.user);
   const username = currentUser ? currentUser.username : null
@@ -30,6 +33,10 @@ const ReviewItem = ({ review }) => {
     event.preventDefault(); // prevents the default action
     event.stopPropagation(); // stops the event from bubbling up
     dispatch(deleteReviewThunk(id));
+  }
+
+  const toggleReporting = () => {
+    setReporting(!reporting)
   }
 
   const onLikeClick = () => {
@@ -55,9 +62,18 @@ const ReviewItem = ({ review }) => {
   const reviewedByCurrentUser = review.critic_id === currentUser?.username;
 
   return (
+  <>
+    {
+      reporting &&
+      <ReportReview reporting={reporting} 
+                    toggleReporting={toggleReporting}
+                    rev_id={review.rev_id}/>
+    }
     <div>
       {currentUser ? (
-        <div className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item">
+        <div className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item 
+                        position-relative">
+          <ReportBtn fn={toggleReporting} additional_classes='position-absolute pl-0 top-0 end-0'/> 
           <NavLink
             to={`/profile${reviewedByCurrentUser ? "" : "/" + review.critic_id}`}
             state={{ review }}
@@ -72,7 +88,7 @@ const ReviewItem = ({ review }) => {
 
               )}
               <h3>
-                {review.critic_id} {reviewedByCurrentUser && " (You)"}
+               {review.critic_id} {reviewedByCurrentUser && " (You)"} 
               </h3>
 
               <h4>{review.title}</h4>
@@ -107,6 +123,7 @@ const ReviewItem = ({ review }) => {
         </NavLink>
       )}
     </div>
+    </>
   );
 }
 export default ReviewItem;

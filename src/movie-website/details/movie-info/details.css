@@ -33,6 +33,18 @@
     width: 100%;
 }
 
+.wd-width-70 {
+    width: 80%;
+}
+
+.wd-width-80 {
+    width: 80%;
+}
+
+.wd-width-100 {
+    width: 100%;
+}
+
 .wd-photo-small-screen {
     padding-top: 20px;
 }

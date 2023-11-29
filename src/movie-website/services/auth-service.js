@@ -45,7 +45,12 @@ export const saveMovie = async (username, movie_id) => {
 }
 
 export const unsaveMovie = async (username, movie_id) => {
-    console.log("service is also going to usnave the movie")
     const response = await api.put(`${USERS_URL}/unsave/${username}/${movie_id}`)
     return response;
+}
+
+export const deleteUser = async (username) => {
+    console.log("going to delete user")
+    const response = await api.delete(`${USERS_URL}/${username}`)
+    return response
 }

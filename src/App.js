@@ -15,6 +15,7 @@ import topMoviesReducer from "./movie-website/reducers/top-movies-reducer";
 import newMoviesReducer from "./movie-website/reducers/new-movies-reducer";
 import tmdbReducer from "./movie-website/reducers/tmdb-reducer";
 import movieReducer from "./movie-website/reducers/movie-reducer";
+import reportsReducer from "./movie-website/reducers/reports-reducer";
 
 const store = configureStore({
   reducer: {
@@ -25,7 +26,8 @@ const store = configureStore({
     newMovies: newMoviesReducer,
     video: movieVideoReducer,
     topMovies: topMoviesReducer,
-    movie: movieReducer
+    movie: movieReducer,
+    reports: reportsReducer
   },
 });
 

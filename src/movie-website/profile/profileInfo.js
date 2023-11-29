@@ -23,17 +23,17 @@ function ProfileInfo({ isCurUser }) {
   if (isCurUser) {
     username = currentUser?.username;
   }
-  // console.log("PROFILE INFO: current user is " + currentUser.firstname + " " + currentUser.lastname)
+
   const isCurrentUserProfile = currentUser?.username === username;
-  const isAnotherViewer = currentUser?.roles?.includes("VIEWER");
+  const isAnotherViewer = currentUser?.roles?.includes("Viewer");
 
   console.log("PROFILE INFO: CURRENT USER IS " + JSON.stringify(currentUser))
 
   const initSelectedRole = () => {
-    if (currentUser?.roles?.includes('VIEWER')) {
-      return 'VIEWER';
-    } else if (currentUser?.roles?.includes('CRITIC')) {
-      return 'CRITIC';
+    if (currentUser?.roles?.includes('Viewer')) {
+      return 'Viewer';
+    } else if (currentUser?.roles?.includes('Critic')) {
+      return 'Critic';
     } else {
       return currentUser?.roles?.[0];
     }
@@ -151,7 +151,7 @@ function ProfileInfo({ isCurUser }) {
       <div className="wd-profile-info-background row wd-padding">
         <div className="wd-details-col col-sm-12 col-md-8 col-xl-7">
           <h2>
-            {profile.firstName} {profile.lastName}
+            {profile.firstname} {profile.lastname}
             {isCurrentUserProfile && " (You)"}
           </h2>
           <br />
@@ -202,7 +202,7 @@ function ProfileInfo({ isCurUser }) {
                 selected={selectedButton === role}
               />
             ))}
-            {currentUser && !isCurrentUserProfile && profile?.roles.includes("CRITIC") && (
+            {currentUser && !isCurrentUserProfile && profile?.roles.includes("Critic") && (
               <>
                 {followedCritics.filter((critic) => critic._id === profile._id)
                   .length === 0 ? (

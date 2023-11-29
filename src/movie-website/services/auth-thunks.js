@@ -57,9 +57,15 @@ export const registerThunk = createAsyncThunk(
 export const fetchProfileByUsernameThunk = createAsyncThunk(
     "auth/fetchProfileByUsername",
     async (username) => {
-        console.log("AUTH THUNK: Getting by username")
         const response = await authService.getProfileByUsername(username)
-        console.log("WE GOT " + JSON.stringify(response.data))
         return response.data;
     }
 );
+
+export const deleteUserThunk = createAsyncThunk(
+    "auth/deleteUser",
+    async (username) => {
+        console.log("delete user thunk got " + username)
+        const response = await authService.deleteUser(username)
+    }
+)
