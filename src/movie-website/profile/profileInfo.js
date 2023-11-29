@@ -8,16 +8,20 @@ import { FaUserCircle } from "react-icons/fa";
 import { removeUserFromLocalStorage, setUser, storeUserInLocalStorage } from "../reducers/auth-reducer";
 import { logoutThunk, updateUserThunk, fetchProfileByUsernameThunk }
   from "../services/auth-thunks";
+import UserList from "./profile-lists/user-list/user-list";
 import FollowBtn from "../../ui-styling/buttons/text/followBtn";
 import BlackTextBtn from "../../ui-styling/buttons/text/blackTextBtn";
 import { addFollowThunk, getFollowedCriticsThunk, unfollowThunk, getFollowersThunk } from "../services/follows-thunks";
+import { current } from "@reduxjs/toolkit";
 
 function ProfileInfo({ isCurUser }) {
   let { currentUser } = useSelector((state) => state.user);
   const [profile, setProfile] = useState(currentUser);
   const [isLoading, setIsLoading] = useState(true);
   const [followedCritics, setFollowedCritics] = useState([]);
-  let followingViewers = [];
+  const [viewUsersList, setViewUsersList] = useState(false);
+  const [usersList, setUsersList] = useState([])
+  const [followingViewers, setFollowingViewers] = useState([])
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let { username } = useParams();
@@ -29,23 +33,25 @@ function ProfileInfo({ isCurUser }) {
     username = currentUser?.username;
   }
 
+
   const isCurrentUserProfile = currentUser?.username === username;
   const isAnotherViewer = currentUser?.roles?.includes("Viewer");
+  const isCriticProfile = profile?.roles?.includes("Critic");
+  const isViewerProfile = profile?.roles?.includes("Viewer");
 
 
   const initSelectedRole = () => {
-    if (currentUser?.roles?.includes('Viewer')) {
-      return 'Viewer';
-    } else if (currentUser?.roles?.includes('Critic')) {
-      return 'Critic';
-    } else {
+      console.log("INIT: CURRENT USER IS " + JSON.stringify(currentUser))
       return currentUser?.roles?.[0];
-    }
   };
 
   const [selectedRole, setSelectedRole] = useState(null);
 
-  const [selectedButton, setSelectedButton] = useState(initSelectedRole());
+  const [selectedButton, setSelectedButton] = useState('');
+
+  if (currentUser && selectedButton === '') {
+    setSelectedButton(initSelectedRole())
+  }
 
   const handleRoleSelection = (role) => {
     const otherRoles = currentUser.roles.filter(r => r !== role);
@@ -79,49 +85,21 @@ function ProfileInfo({ isCurUser }) {
   };
 
   const handleFollow = async () => {
-    // try {
-    //   if (isAnotherViewer) {
-    //     console.log(
-    //       followedCritics.filter((critic) => critic._id === profile._id)
-    //     );
-    //     if (
-    //       followedCritics.filter((critic) => critic._id === profile._id)
-    //         .length === 0
-    //     ) {
       if (followedCritics.includes(profile.username)) {
         alert("Already following this critic")
         return
       }
-      console.log("Going to add follow with user: " + currentUser.username)
-      console.log("And critic: " + username)
       dispatch(addFollowThunk({"viewer": currentUser.username, "critic": username}));
-      console.log("Going to shift " + profile.username)
       setFollowedCritics([...followedCritics, profile.username])
-      console.log("followedCritics is now " + JSON.stringify(followedCritics))
+      setFollowingViewers([...followingViewers, currentUser.username])
       alert("Followed this critic");
       setIsFollowing(true)
-      
-    //     } else {
-    //       throw new Error("Already following this critic");
-    //     }
-        
-    //   }
-        
-    // } catch (e) {
-    //   alert(e);
-    // }
   };
 
   const handleUnFollow = async () => {
-    // const newFollowingList = followedCritics.filter(
-    //   (critic) => critic._id !== profile._id
-    // );
-    // const updatedViewer = {
-    //   ...currentUser,
-    //   followedCritics: newFollowingList,
-    // };
     dispatch(unfollowThunk({"viewer": currentUser.username, "critic": username}));
     setFollowedCritics(followedCritics.filter(critic => critic !== username));
+    setFollowingViewers(followingViewers.filter(viewer => viewer !== currentUser.username))
     alert("Unfollowed this critic");
     console.log("Followed critics is now " + JSON.stringify(followedCritics))
     setIsFollowing(false)
@@ -130,7 +108,6 @@ function ProfileInfo({ isCurUser }) {
   
   useEffect(() => {
     if (followedCritics) {
-      console.log("FUCKING FOLLOWED CRITICS IS " + JSON.stringify(followedCritics))
       console.log("Checking to see if followedCritics includes " + username)
       setIsFollowing(followedCritics.includes(username))
     }
@@ -180,25 +157,63 @@ function ProfileInfo({ isCurUser }) {
 
   useEffect(() => {
     const getFollowers = async () => {
-      if (profile && profile.roles.includes('Critic')) {
-        followingViewers = await dispatch(getFollowersThunk(profile.username))
+      if (profile && isCriticProfile) {
+        const { payload } = await dispatch(getFollowersThunk(profile.username))
+        // followingViewers = payload
+        setFollowingViewers(payload)
+        console.log("FollowingViewers is " + JSON.stringify(followingViewers))
       }
     }
     getFollowers()
   }, [profile])
+
+  const handleViewFollowers = () => {
+    setUsersList(followingViewers)
+    console.log("users list is now " + JSON.stringify(usersList))
+    toggleViewUsersList()
+  }
+
+  const handleViewFollowedCritics = () => {
+    setUsersList(followedCritics)
+    toggleViewUsersList()
+  }
+
+  const toggleViewUsersList = () => {
+    setViewUsersList(!viewUsersList)
+  } 
 
   if (isLoading) {
     return <div>Loading...</div>;
   } else if (profile) {
     return (
       <div className="wd-profile-info-background row wd-padding">
+        {
+          viewUsersList &&
+          <UserList visible={viewUsersList}
+                    toggleVisible={toggleViewUsersList}
+                    userList={usersList}
+                    header={usersList === followedCritics ? 'Followed Critics' : 'Followers'}/>
+        }
         <div className="wd-details-col col-sm-12 col-md-8 col-xl-7">
           <h2>
             {profile.firstname} {profile.lastname}
             {isCurrentUserProfile && " (You)"}
           </h2>
-          <br />
+          <br/>
           <h4>@{profile.username}</h4>
+          { isCriticProfile &&
+           <div onClick={handleViewFollowers}
+                className="text-underline-hover">
+                {followingViewers.length} Follower{followingViewers.length === 1 ? '' : 's'}
+            </div>
+          }
+          {
+            isViewerProfile &&
+            <div onClick={handleViewFollowedCritics}
+                 className="text-underline-hover">
+                  Following {followedCritics.length} Critic{followedCritics.length === 1 ? '' : 's'}
+            </div>
+          }
           {isCurrentUserProfile && (
             <>
               <br />
@@ -245,7 +260,7 @@ function ProfileInfo({ isCurUser }) {
                 selected={selectedButton === role}
               />
             ))}
-            {currentUser && !isCurrentUserProfile && profile?.roles.includes("Critic") && (
+            {currentUser && !isCurrentUserProfile && isCriticProfile && (
               <>
                 {!isFollowing ? (
                   <FollowBtn

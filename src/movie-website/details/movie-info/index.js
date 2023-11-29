@@ -62,7 +62,7 @@ const MovieListItem = () => {
             </div>
 
             <div className="col-sm-9 col-md-5">
-              <h1>{movie.original_title}</h1>
+              <h1>{movie.title}</h1>
               <br />
               {/* <h5>
                 <b>Rating:</b> {movie.vote_average}

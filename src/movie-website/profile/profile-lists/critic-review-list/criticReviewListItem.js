@@ -5,23 +5,11 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 
 
-function CriticReviewListItem({ title, rating, description, movieId, photo }) {
+function CriticReviewListItem({ title, rating, description, movieId, photo, movie_title }) {
     const [movieReviewed, setMovieReviewed] = useState([]);
-    useEffect(() => {
-        const GET_MOVIE_API = `https://api.themoviedb.org/3/movie/${movieId}`;
-        const loadMovie = async () => {
-            const response = await axios.get(GET_MOVIE_API, {
-                params: {
-                    api_key: 'ffdfb660a1488ae7f304368f73e0e7ec',
-                },
-            })
-            setMovieReviewed(response.data);
-        }
-        loadMovie();
-    }, [movieId])
 
     return (
-        <Link to={{ pathname: `/details/${movieReviewed.id}` }}
+        <Link to={{ pathname: `/details/${movieId}` }}
             className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item"
         >
             <div className="row p-3 wd-movie-list-row">
@@ -31,7 +19,7 @@ function CriticReviewListItem({ title, rating, description, movieId, photo }) {
                     />
                 </div>
                 <div className="col-9 wd-movie-list-info d-none d-lg-block">
-                    <h3>{movieReviewed.title}</h3><br />
+                    <h3>{movie_title}</h3><br />
                     <h4> {title}</h4>
                     <div>
                         <Rating name="read-only" value={rating} readOnly />
@@ -43,7 +31,7 @@ function CriticReviewListItem({ title, rating, description, movieId, photo }) {
                     <img src={photo}
                         className="float-left mr-3 wd-md-screen-size-img"
                     />
-                    <h3>{movieReviewed.title}</h3><br />
+                    <h3>{movie_title}</h3><br />
                     <h4> {title}</h4>
                     <div>
                         <Rating name="read-only" value={rating} readOnly />

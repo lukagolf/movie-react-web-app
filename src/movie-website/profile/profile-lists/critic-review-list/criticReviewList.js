@@ -55,15 +55,18 @@ function CriticReviewList() {
                     <h3>{profile.firstname}'s Reviews</h3><br />
                 </li>
                 {
-                    criticReviews.map(review =>
-                        <CriticReviewListItem
+                    criticReviews.map(review => {
+                        console.log("review is " + JSON.stringify(review))
+                        return <CriticReviewListItem
                             key={review._id}
                             title={review.title}
                             rating={review.rating}
                             description={review.description}
                             movieId={review.movie_id}
                             photo={review.photo_url}
+                            movie_title={review.movie_title}
                             />
+                    }
                     )
                 }
             </ul>
