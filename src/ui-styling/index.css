@@ -173,3 +173,7 @@ button:hover.wd-redBackground {
 .wd-disable-hover {
     pointer-events: none;
 }
+
+.float-right {
+    float: right
+}

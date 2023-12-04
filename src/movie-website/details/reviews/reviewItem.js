@@ -8,12 +8,15 @@ import { NavLink } from 'react-router-dom';
 import DeleteBtn from "../../../ui-styling/buttons/icons/deleteBtn";
 import ReportBtn from "../../../ui-styling/buttons/icons/reportBtn";
 import ReportReview from "./reportReview";
+import EditBtn from "../../../ui-styling/buttons/icons/editBtn";
 import LikeBtn from "../../../ui-styling/buttons/icons/likeBtn";
 import DislikeBtn from "../../../ui-styling/buttons/icons/dislikeBtn";
+import EditReviewItem from "./editReviewItem";
 
 const ReviewItem = ({ review }) => {
   const dispatch = useDispatch();
 
+  const[editing, setEditing] = useState(false)
   const[liked, setLiked] = useState(false)
   const[disliked, setDisliked] = useState(false)
   const[reporting, setReporting] = useState(false)
@@ -21,7 +24,7 @@ const ReviewItem = ({ review }) => {
   const { currentUser } = useSelector((state) => state.user);
   const username = currentUser ? currentUser.username : null
   const { rev_id } = review
-
+  console.log("EDITING IS " + editing)
   useEffect(() => {
     if (currentUser && currentUser.roles.includes('Viewer')) {
       setLiked(review.likes.includes(username))
@@ -37,6 +40,11 @@ const ReviewItem = ({ review }) => {
 
   const toggleReporting = () => {
     setReporting(!reporting)
+  }
+
+  const toggleEditing = () => {
+    console.log("editing...?")
+    setEditing(!editing)
   }
 
   const onLikeClick = () => {
@@ -70,23 +78,31 @@ const ReviewItem = ({ review }) => {
                     rev_id={review.rev_id}/>
     }
     <div>
-      {currentUser ? (
+    {
+      editing && 
+      <EditReviewItem review={review} toggleEditing={toggleEditing}/>
+    }
+    {!editing && currentUser &&
         <div className="list-group-item list-group-item-action flex-column align-items-start wd-movie-list-item 
                         position-relative">
-          <ReportBtn fn={toggleReporting} additional_classes='position-absolute pl-0 top-0 end-0'/> 
+        { currentUser.roles[0] === 'Viewer' &&
+          <ReportBtn fn={toggleReporting} additional_classes='float-right'/> 
+        }
+        { currentUser.username === review.critic_id &&
+          <EditBtn fn={toggleEditing} additional_classes='float-right'/> 
+        }
+        { (currentUser.roles[0] === 'Admin' || currentUser.username === review.critic_id) &&
+           <DeleteBtn
+           fn={(event) => deleteReviewHandler(event, review.rev_id)}
+           className={"float-end"}
+         />
+        }
           <NavLink
             to={`/profile${reviewedByCurrentUser ? "" : "/" + review.critic_id}`}
             state={{ review }}
             className="wd-movie-list-item text-decoration-none"
           >
             <div>
-              {currentUser && currentUser.roles[0] === "ADMIN" && (
-                <DeleteBtn
-                  fn={(event) => deleteReviewHandler(event, review.rev_id)}
-                  className={"float-end"}
-                />
-
-              )}
               <h3>
                {review.critic_id} {reviewedByCurrentUser && " (You)"} 
               </h3>
@@ -107,7 +123,8 @@ const ReviewItem = ({ review }) => {
               {review.likes.length - review.dislikes.length}
           </span>
          </div>
-      ) : (
+      }
+      {!currentUser &&
         <NavLink
           to={"/login"}
           state={{ review }}
@@ -121,7 +138,7 @@ const ReviewItem = ({ review }) => {
             <h5>Description: {review.review_text}</h5>
           </div>
         </NavLink>
-      )}
+    }
     </div>
     </>
   );

@@ -1,18 +1,18 @@
 import React from "react";
-import { RiPencilFill } from "react-icons/ri";
+import { BsPencil } from "react-icons/bs";
 import "../../index.css";
 import "bootstrap/dist/css/bootstrap.css";
-
-function EditBtn({addWhiteBorder}) {
+// redirects to previous parent page
+function EditBtn({fn, additional_classes=''}) {
   return (
-    <button
-      className={`square rounded-circle ${
-        addWhiteBorder ? "wd-whiteBorder wd-circleBorderBtn" : "wd-circleBtn"
-      } wd-blackBackground wd-whiteText`}
-    >
-      <RiPencilFill size={25} />
-    </button>
+    <>
+      <button 
+        type="button"
+        className={`btn wd-whiteBackground wd-greyText no-border ${additional_classes}`}
+        onClick={fn} >
+        <BsPencil size={25} />
+      </button>
+    </>
   );
 }
-
 export default EditBtn;

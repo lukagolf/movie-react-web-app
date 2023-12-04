@@ -39,6 +39,8 @@ export const createReviewThunk = createAsyncThunk(
 
 export const updateReviewThunk = createAsyncThunk(
     'reviews/updateReview',
-    async (review) =>
-        await service.updateReview(review)
+    async ({newReview}, thunkApi) => {
+        await service.updateReview(newReview)
+        thunkApi.dispatch(findMovieReviewsThunk(newReview.movie_id))
+    }
 );

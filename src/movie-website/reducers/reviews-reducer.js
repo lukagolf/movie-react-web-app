@@ -64,7 +64,7 @@ const reviewsSlice = createSlice({
         [deleteReviewThunk.fulfilled]:
             (state, { payload }) => {
                 state.loading = false
-                state.reviews = state.reviews.filter(r => r._id !== payload)
+                state.reviews = state.reviews.filter(r => r.rev_id !== payload)
             },
         [findReviewsThunk.pending]:
             (state) => {
