@@ -68,3 +68,8 @@ export const getAllMovies = async () => {
 export const deleteMovie = async (movie_id) => {
   const response = await axios.delete(`${MOVIES_URL}/${movie_id}`)
 }
+
+export const updateMovie = async (movie) => {
+  const response = await axios.put(`${MOVIES_URL}/${movie.movie_id}`, movie)
+  return response;
+}

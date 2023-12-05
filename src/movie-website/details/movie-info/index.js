@@ -8,9 +8,13 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DeleteBtn from "../../../ui-styling/buttons/icons/deleteBtn";
+
+
+import EditBtn from "../../../ui-styling/buttons/icons/editBtn";
 import { saveMovieThunk, unsaveMovieThunk } from "../../services/auth-thunks";
 import { findMovieByIDThunk, deleteMovieThunk } from "../../services/movie-thunks";
 import { saveMovie } from "../../services/auth-service";
+import EditMovie from "./editMovieInfo"
 
 const MovieListItem = () => {
   const { currentUser } = useSelector(state => state.user);
@@ -18,9 +22,12 @@ const MovieListItem = () => {
   const userSavedMovies = currentUser?.savedMovies;
   const { id } = useParams();
   const [viewPopup, setViewPopup] = useState(false)
+  const [editing, setEditing] = useState(false)
   // const [movie, setMovie] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  console.log("MOVIE IS " + JSON.stringify(movie))
 
   useEffect(() => {
     dispatch(findMovieByIDThunk(id))
@@ -49,10 +56,19 @@ const MovieListItem = () => {
     alert("Create an account to proceed");
     navigate("/login");
   }
+  
+  const toggleEditing = () => {
+    setEditing(!editing)
+  }
 
   // Check if movie exists
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (editing) {
+    console.log('editing toggled')
+    return <EditMovie movie={movie} toggleEditing={toggleEditing}/>
   }
 
   return (
@@ -69,7 +85,10 @@ const MovieListItem = () => {
           <div className="row">
             <div className="wd-left-col col-sm-3 col-md-2 col-lg-1">
             {currentUser && currentUser.roles[0] === "Admin" && (
-                 <DeleteBtn fn={toggleVisible} addWhiteBorder={true}/>
+                <>
+                  <DeleteBtn fn={toggleVisible} addWhiteBorder={true}/>
+                  <EditBtn fn={toggleEditing} additional_classes="position-absolute top-0 end-0"/>
+                </>
               )}
               {currentUser && currentUser.roles[0] === "Viewer" && (
                 <>
@@ -85,9 +104,6 @@ const MovieListItem = () => {
             <div className="col-sm-9 col-md-5">
               <h1>{movie.title}</h1>
               <br />
-              {/* <h5>
-                <b>Rating:</b> {movie.vote_average}
-              </h5> */}
               <br />
               <h5>
                 <b>Release date: </b> 
@@ -109,7 +125,7 @@ const MovieListItem = () => {
                 <div>
                 {
                   movie.genres.map((genre, index, array) =>
-                  <span key={index}> {genre}{index !== array.length - 1 && ` \u00B7`}</span>
+                  <span key={index}> {genre.toUpperCase()}{index !== array.length - 1 && ` \u00B7`}</span>
                   )
                 }
                 </div>
@@ -129,7 +145,6 @@ const MovieListItem = () => {
                 src={movie.photo_url}
                 alt="Movie Poster"
               />
-              
             </div>
           </div>
         </div>

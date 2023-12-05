@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as moviesService from "./movies-service";
+import { create } from "@mui/material/styles/createTransitions";
 
 export const findMovieByIDThunk = createAsyncThunk(
   "movies/findMovieByID",
@@ -14,4 +15,9 @@ export const getAllMoviesThunk = createAsyncThunk(
 export const deleteMovieThunk = createAsyncThunk(
   "movies/deleteMovie",
   async (movie_id) => await moviesService.deleteMovie(movie_id)
+)
+
+export const updateMovieThunk = createAsyncThunk(
+  "movies/updateMovie",
+  async (movie) => await moviesService.updateMovie(movie)
 )

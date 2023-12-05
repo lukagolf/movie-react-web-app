@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { findMovieByIDThunk, getAllMoviesThunk } from "../services/movie-thunks";
+import { findMovieByIDThunk, getAllMoviesThunk, updateMovieThunk } from "../services/movie-thunks";
 import { addMovieThunk } from "../services/search-thunks";
 
 const initialState = {
@@ -49,6 +49,20 @@ const movieSlice = createSlice({
             state.movieList = action.payload;
         },
         [addMovieThunk.rejected]: (state) => {
+            state.loading = false;
+            state.status = 'failed';
+        },
+        [updateMovieThunk.pending]: (state)  => {
+            state.loading = true;
+            state.error = null
+            state.status = 'pending'
+        },
+        [updateMovieThunk.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.status = 'succeeded'
+            state.movie = action.payload.data;
+        },
+        [updateMovieThunk.rejected]: (state) => {
             state.loading = false;
             state.status = 'failed';
         },

@@ -22,13 +22,13 @@ function MyNav({
     signIn: true,
     profile: false,
     signOut: false,
-    adminAdd: false,
     addMovie: true
   },
 }) {
   const { currentUser } = useSelector(state => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  let adminAdd = currentUser?.roles[0] == "Admin"
 
   const handleLogout = async () => {
     try {
@@ -111,7 +111,7 @@ function MyNav({
           ) : (
             ""
           )}
-           {options.adminAdd ? (
+           {adminAdd ? (
             <Nav.Item>
               <Nav.Link as={Link} to={"/add"}>
               <WhiteTextBtn

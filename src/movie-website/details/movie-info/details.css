@@ -52,3 +52,21 @@
 .float-right {
     float: right
 }
+
+.l-5 {
+    left: 5
+}
+
+.movie-details-input {
+    background-color: black;
+    color: white;
+}
+
+.movie-details-input:focus {
+    background-color: black;
+    color: white;
+}
+
+.end-5 {
+    right: 20px
+}

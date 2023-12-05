@@ -11,7 +11,7 @@ function AddMovie() {
   const { status } = useSelector(state => state.movie)
   const [genreList, setGenreList] = useState(['']);
   const [validDate, setValidDate] = useState(true);
-  const [submitted, setSubmitted] = useState(true)
+  const [submitted, setSubmitted] = useState(false)
   const [date, setDate] = useState('')
   const [photo, setPhoto] = useState('')
   const [title, setTitle] = useState('')
