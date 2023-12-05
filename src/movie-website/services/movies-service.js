@@ -61,7 +61,10 @@ export const findTopMovies = async () => {
 }
 
 export const getAllMovies = async () => {
-  console.log("making the call")
   const response = await axios.get(MOVIES_URL)
   return response;
+}
+
+export const deleteMovie = async (movie_id) => {
+  const response = await axios.delete(`${MOVIES_URL}/${movie_id}`)
 }

@@ -8,8 +8,9 @@ import { getAllMoviesThunk } from "../services/movie-thunks";
 
 function Home() {
   const { currentUser } = useSelector((state) => state.user);
-  const movies = useSelector((state) => state.movie.movieList)
+  const movies = useSelector((state) => state.movie.movieList);
   const topMoviesRef = useRef(null);
+  const adminAdd = currentUser?.roles[0] === 'Admin';
   
   console.log("MOVIES IS " + JSON.stringify(movies))
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function Home() {
             signIn: false,
             profile: true,
             signOut: true,
+            adminAdd,
             addMovie: false
           }}
         />

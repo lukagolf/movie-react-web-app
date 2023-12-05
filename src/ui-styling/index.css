@@ -177,3 +177,7 @@ button:hover.wd-redBackground {
 .float-right {
     float: right
 }
+
+.d-inline {
+    display: inline
+}

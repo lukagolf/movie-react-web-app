@@ -1,0 +1,10 @@
+.modal-content {
+  text-align: center; /* Center text horizontally */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically if needed */
+  /* Add other styling as needed (width, height, padding, etc.) */
+}
+.modal-header h3 {
+  text-align: center
+}

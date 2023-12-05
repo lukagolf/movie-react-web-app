@@ -22,6 +22,7 @@ function MyNav({
     signIn: true,
     profile: false,
     signOut: false,
+    adminAdd: false,
     addMovie: true
   },
 }) {
@@ -100,6 +101,17 @@ function MyNav({
             ""
           )}
           {options.addMovie ? (
+            <Nav.Item>
+              <Nav.Link as={Link} to={"/tmdb"}>
+              <WhiteTextBtn
+                  text={"Add Movies"}
+                />
+              </Nav.Link>
+            </Nav.Item>
+          ) : (
+            ""
+          )}
+           {options.adminAdd ? (
             <Nav.Item>
               <Nav.Link as={Link} to={"/add"}>
               <WhiteTextBtn

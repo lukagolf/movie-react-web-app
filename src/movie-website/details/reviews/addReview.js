@@ -9,7 +9,6 @@ import { useParams } from "react-router";
 const AddReview = () => {
     const { currentUser } = useSelector((state) => state.user);
     const { id } = useParams();
-
     let [title, setTitle] = useState('');
     let [rating, setRating] = useState(0);
     let [description, setDescription] = useState('');

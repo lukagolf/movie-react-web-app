@@ -5,7 +5,8 @@ import Home from "./home/index";
 import Details from "./details/index";
 import Login from "./login/index";
 import ScrollToTop from "./scroll-to-top";
-import AddMovies from "../add_movie";
+import tmdbAdd from "../add_from_tmdb";
+import AdminAdd from "./add_movie"
 import CurrentUserProfile from "./profile/logged-in-profile/currUserProfile";
 
 function MovieWebsite() {
@@ -20,7 +21,8 @@ function MovieWebsite() {
         <Route path="/profile/:username" element={<Profile />} />
         <Route path="/details/:id" element={<Details />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/add" element={<AddMovies />} />
+        <Route path="/tmdb" element={<tmdbAdd />} />
+        <Route path="/add" element={<AdminAdd/>}/>
       </Routes>
     </>
   );

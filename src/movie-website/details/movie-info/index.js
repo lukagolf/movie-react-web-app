@@ -3,12 +3,13 @@ import axios from "axios";
 import "./details.css";
 import "../../../ui-styling/index.css";
 import SavedBtn from "../../../ui-styling/buttons/icons/savedBtn";
+import YesNoPopup from "../../../util/yesNoPopup";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DeleteBtn from "../../../ui-styling/buttons/icons/deleteBtn";
 import { saveMovieThunk, unsaveMovieThunk } from "../../services/auth-thunks";
-import { findMovieByIDThunk } from "../../services/movie-thunks";
+import { findMovieByIDThunk, deleteMovieThunk } from "../../services/movie-thunks";
 import { saveMovie } from "../../services/auth-service";
 
 const MovieListItem = () => {
@@ -16,6 +17,7 @@ const MovieListItem = () => {
   const { movie, loading } = useSelector(state => state.movie)
   const userSavedMovies = currentUser?.savedMovies;
   const { id } = useParams();
+  const [viewPopup, setViewPopup] = useState(false)
   // const [movie, setMovie] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,6 +36,15 @@ const MovieListItem = () => {
     alert("Un-saving movie: " + movie.title);
   };
 
+  const handleDeleteMovie = async () => {
+    dispatch(deleteMovieThunk(movie.movie_id))
+    navigate("/home")
+  }
+
+  const toggleVisible = () => {
+    setViewPopup(!viewPopup)
+  }
+
   const forceLogin = () => {
     alert("Create an account to proceed");
     navigate("/login");
@@ -46,11 +57,21 @@ const MovieListItem = () => {
 
   return (
     <div>
+      {
+        viewPopup &&
+        <YesNoPopup visible={viewPopup} 
+                    toggleVisible={toggleVisible} 
+                    text="Delete this movie?" 
+                    yesFn={handleDeleteMovie}/>
+      }
       <div className="wd-video-details-background row">
         <div className="wd-details-row">
           <div className="row">
             <div className="wd-left-col col-sm-3 col-md-2 col-lg-1">
-              {currentUser && currentUser.roles[0].toUpperCase() === "VIEWER" && (
+            {currentUser && currentUser.roles[0] === "Admin" && (
+                 <DeleteBtn fn={toggleVisible} addWhiteBorder={true}/>
+              )}
+              {currentUser && currentUser.roles[0] === "Viewer" && (
                 <>
                   {userSavedMovies.filter(
                     (savedMovie) => savedMovie.movie_id === movie.movie_id
