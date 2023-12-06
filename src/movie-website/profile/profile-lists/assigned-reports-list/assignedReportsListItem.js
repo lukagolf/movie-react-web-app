@@ -21,28 +21,34 @@ const AssignedReportsListItem = ({
     report_text, 
     movie_id, 
     review_text,
-    is_resolved }) => {
+    is_resolved,
+     }) => {
     
     const dispatch = useDispatch()
-
+    const [removed, setRemoved] = useState(false)
     const handleDismiss = () => {
       dispatch(resolveReportThunk(rep_id))
       dispatch(findAdminReportsThunk(adminUsername))
     }
 
-    const handleDeleteCritic = () => {
+    const handleDeleteCritic = async () => {
       dispatch(deleteUserThunk(critic_id))
-      // handleDismiss()
+      setRemoved(true)
     }
 
-    const handleDeleteReview = () => {
+    const handleDeleteReview = async () => {
       dispatch(deleteReviewThunk(rev_id))
-      // handleDismiss()
+      setRemoved(true)
+    }
+
+    if (removed) {
+      return (
+        <></>
+      )
     }
 
     return (
       <>
-      
          <div className="list-group-item list-group-item-action flex-column align-items-start"
         >
           <Link to={{ pathname: `/details/${movie_id}` }} className="text-decoration-none text-black">

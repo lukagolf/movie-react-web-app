@@ -33,23 +33,18 @@ function AddMovie() {
     setGenreList(newGenres);
   }
 
-  const validateDate = () => {
-    setValidDate(new Date(date) <= new Date())
-    return validDate
-  }
-
-  const emptyFields = () => {
-    setShowError(title === '' || overview === '' || photo === '' || genreList.length === 0)
-    return showError
-  }
 
   const handleSubmit = (event) => {
+    setShowError(false)
+    setValidDate(true)
+    setSubmitted(false)
     event.preventDefault();
-    setSubmitted(true)
-    if (!validateDate()) {
+    if (new Date(date) > new Date()) {
+      setValidDate(false)
       return
     }
-    if (emptyFields()) {
+    if (title === '' || overview === '' || photo === '' || genreList.length === 0) {
+      setShowError(true)
       return
     }
 
@@ -63,6 +58,7 @@ function AddMovie() {
       "poster_path": photo
     }
     dispatch(addMovieThunk(newMovie))
+    setSubmitted(true)
     setOverview('')
     setPhoto('')
     setDate('')

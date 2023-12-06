@@ -49,6 +49,10 @@ function CurrentProfileInfo() {
     };
 
     const save = () => {
+        if (profile.firstName === '' || profile.lastName === '' || profileEmail === '') {
+            alert("Cannot save profile with empty fields")
+            return
+        }
         dispatch(updateUserThunk(profile));
     };
 

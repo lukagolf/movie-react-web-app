@@ -6,8 +6,8 @@ const PHOTO_URL = 'https://image.tmdb.org/t/p/w440_and_h660_face';
 
 const AddToDBButton = ({movie}) => {
   const dispatch = useDispatch();
-  movie.poster_path = `${PHOTO_URL}/${movie.poster_path}`
-  const onAddMovie = () => dispatch(addMovieThunk(movie))
+  const photo_url = movie.poster_path ? `${PHOTO_URL}/${movie.poster_path}` : ''
+  const onAddMovie = () => dispatch(addMovieThunk({...movie, poster_path: photo_url}))
   // let { status } = useSelector(state => state.search)
 
   return (

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logoutThunk, deleteUserThunk } from "../../services/auth-thunks";
 import { useNavigate } from "react-router";
 import ProfileInfo from "../profileInfo";
-import ProfileLists from "../profile-lists/profileLists";
+import ProfileLists from "./profileLists";
 import RedTextBtn from "../../../ui-styling/buttons/text/redTextBtn";
 import ConfirmDelete from "../../../util/yesNoPopup";
 

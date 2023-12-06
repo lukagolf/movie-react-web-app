@@ -101,13 +101,14 @@ function MyNav({
             ""
           )}
           {options.addMovie ? (
-            <Nav.Item>
-              <Nav.Link as={Link} to={"/tmdb"}>
-              <WhiteTextBtn
-                  text={"Add Movies"}
-                />
-              </Nav.Link>
-            </Nav.Item>
+            // <Nav.Item>
+            //   <Nav.Link as={Link} to={"/tmdb"}>
+            //   <WhiteTextBtn
+            //       text={"Add Movies"}
+            //     />
+            //   </Nav.Link>
+            // </Nav.Item>
+            ""
           ) : (
             ""
           )}

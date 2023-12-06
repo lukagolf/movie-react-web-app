@@ -30,8 +30,11 @@ function RegisterScreen() {
     const dispatch = useDispatch();
 
     const handleRegister = async () => {
-        console.log('Register button clicked');
         setDisplayBanner(true);
+        if (username === '' || password === '' || firstName === '' || lastName === '' || email === '' || role.length === 0) {
+            alert("Please fill out all fields.");
+            return;
+        }
         try {
             const roles = role.map(r => r.value);
             const actionResult = await dispatch(registerThunk({ username, password, firstName, lastName, email, roles }));
@@ -42,6 +45,9 @@ function RegisterScreen() {
                 navigate(`/profile`);
             } else {
                 setSuccess(false);
+                if (!success) {
+                    alert("That email address is already taken.")
+                }
             }
         } catch (e) {
             alert(e);
@@ -63,8 +69,8 @@ function RegisterScreen() {
     useEffect(() => {
         if (role.length > 2 ||
             (role.find(item => item.value === 'VIEWER') && role.find(item => item.value === 'CRITIC')) ||
-            (role.length === 2 && !role.find(item => item.value === 'ADMIN'))) {
-            alert('You cannot select Viewer and Critic together!');
+            (role.find(item => item.value === 'ADMIN') && role.find(item => item.value === 'CRITIC')))  {
+            alert('Viewer and Admin are the only compatible roles');
             setRole(previousRole);
         }
     }, [role, previousRole]);

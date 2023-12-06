@@ -67,6 +67,11 @@ function ProfileInfo({ isCurUser }) {
   };
 
   const save = () => {
+    console.log("PROFILE: " + JSON.stringify(profile))
+      if (profile.firstname === '' || profile.lastname === '' || profile.email === '') {
+        alert("Cannot save profile with empty fields")
+        return
+    }
     dispatch(updateUserThunk(profile));
     alert("Information saved")
   };

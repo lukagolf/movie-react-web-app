@@ -19,6 +19,8 @@ function ProfileLists() {
   const [profileUser, setProfileUser] = useState(null);
   const dispatch = useDispatch();
 
+  console.log("HELLO?")
+
   useEffect(() => {
     const loadProfileUser = async () => {
       const { payload } = await dispatch(fetchProfileByUsernameThunk(username));

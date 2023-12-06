@@ -14,13 +14,13 @@ function CarouselComponent({movie}) {
   return (
     <Link
       to={{
-        pathname: `/details/${movie.id}`,
+        pathname: `/details/${movie.movie_id}`,
         state: { movie: movie },
       }}
     >
       <div
         className="wd-slider p-0 m-0 wd-centerOverlayOpacity"
-        key={movie.id}
+        key={movie.movie_id}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -28,7 +28,7 @@ function CarouselComponent({movie}) {
           <h4 className="wd-centerTextOverlay">{movie.title}</h4>
         )}
         <img
-          src={"http://image.tmdb.org/t/p/w500/" + movie.backdrop_path}
+          src={movie.photo_url}
           alt="movie"
         />
       </div>

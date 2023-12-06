@@ -12,7 +12,7 @@ import { getGenresThunk } from "../movie-website/services/search-thunks";
 import SearchInput from '../movie-website/search/searchInput'
 import SearchResult from './search-result'
 
-const AddMovie = () => {
+const AddFromTmdb = () => {
   const {search} = useSelector((state) => state.search);
   const [results, setResults] = useState([]);
 
@@ -49,4 +49,4 @@ const AddMovie = () => {
     </>
   );
 }
-export default AddMovie;
+export default AddFromTmdb;

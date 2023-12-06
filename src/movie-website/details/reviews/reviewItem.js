@@ -24,7 +24,7 @@ const ReviewItem = ({ review }) => {
   const { currentUser } = useSelector((state) => state.user);
   const username = currentUser ? currentUser.username : null
   const { rev_id } = review
-  console.log("EDITING IS " + editing)
+
   useEffect(() => {
     if (currentUser && currentUser.roles.includes('Viewer')) {
       setLiked(review.likes.includes(username))
@@ -43,7 +43,6 @@ const ReviewItem = ({ review }) => {
   }
 
   const toggleEditing = () => {
-    console.log("editing...?")
     setEditing(!editing)
   }
 
