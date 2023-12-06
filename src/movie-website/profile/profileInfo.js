@@ -270,6 +270,7 @@ function ProfileInfo({ isCurUser }) {
           <br />
           <span>
             {profile.roles && profile.roles.map((role, index) => (
+              role != null &&
               <TagBtn
                 key={index}
                 text={role}
