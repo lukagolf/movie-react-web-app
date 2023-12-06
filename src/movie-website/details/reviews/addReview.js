@@ -9,7 +9,6 @@ import { useParams } from "react-router";
 const AddReview = () => {
     const { currentUser } = useSelector((state) => state.user);
     const { id } = useParams();
-
     let [title, setTitle] = useState('');
     let [rating, setRating] = useState(0);
     let [description, setDescription] = useState('');
@@ -17,11 +16,14 @@ const AddReview = () => {
 
     const reviewClickHandler = async() => {
         const newReview = {
-            movieId: id,
-            username: currentUser.username,
+            movie_id: id,
+            critic_id: currentUser.username,
+            date_reviewed: new Date().toISOString().slice(0, 19).replace('T', ' '),
             title: title,
             rating: rating,
-            description: description
+            review_text: description,
+            likes: [],
+            dislikes: []
         };
         try {
             await dispatch(createReviewThunk(newReview)).unwrap();

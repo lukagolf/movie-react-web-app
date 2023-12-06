@@ -1,3 +1,6 @@
+/* To remove ability to add movies from tMDB, 
+   simply set addMovie to false in this file only */
+
 import React from "react";
 import "../ui-styling/index.css"
 import "bootstrap/dist/css/bootstrap.css";
@@ -19,11 +22,13 @@ function MyNav({
     signIn: true,
     profile: false,
     signOut: false,
+    addMovie: true
   },
 }) {
   const { currentUser } = useSelector(state => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  let adminAdd = currentUser?.roles[0] == "Admin"
 
   const handleLogout = async () => {
     try {
@@ -89,6 +94,29 @@ function MyNav({
                 <WhiteTextBtn
                   text={"Sign Out"}
                   fn={handleLogout}
+                />
+              </Nav.Link>
+            </Nav.Item>
+          ) : (
+            ""
+          )}
+          {options.addMovie ? (
+            // <Nav.Item>
+            //   <Nav.Link as={Link} to={"/tmdb"}>
+            //   <WhiteTextBtn
+            //       text={"Add Movies"}
+            //     />
+            //   </Nav.Link>
+            // </Nav.Item>
+            ""
+          ) : (
+            ""
+          )}
+           {adminAdd ? (
+            <Nav.Item>
+              <Nav.Link as={Link} to={"/add"}>
+              <WhiteTextBtn
+                  text={"Add Movies"}
                 />
               </Nav.Link>
             </Nav.Item>

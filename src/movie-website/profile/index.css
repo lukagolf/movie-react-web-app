@@ -59,3 +59,11 @@
     min-height: 1px;
     min-width: 55%;
 }
+
+.text-underline-hover {
+    text-decoration: none;
+}
+
+.text-underline-hover:hover {
+    text-decoration: underline;
+}

@@ -40,7 +40,6 @@ function CurrentProfileInfo() {
         const otherRoles = currentUser.roles.filter(r => r !== role);
         const updatedRoles = [role, ...otherRoles];
         const updatedUser = { ...currentUser, roles: updatedRoles };
-
         dispatch(setUser(updatedUser));
         dispatch(storeUserInLocalStorage(updatedUser));
         dispatch(updateUserThunk(updatedUser));
@@ -50,7 +49,10 @@ function CurrentProfileInfo() {
     };
 
     const save = () => {
-        console.log(profile);
+        if (profile.firstName === '' || profile.lastName === '' || profileEmail === '') {
+            alert("Cannot save profile with empty fields")
+            return
+        }
         dispatch(updateUserThunk(profile));
     };
 
@@ -100,7 +102,7 @@ function CurrentProfileInfo() {
             // Check if payload exists
             if (payload) {
                 let { roles } = payload;
-
+                console.log("PROFILEINFO: got the payload, it's " + payload)
                 // Check if roles is not an array and convert it to an array
                 if (typeof roles === 'string') {
                     roles = [roles];
@@ -116,7 +118,7 @@ function CurrentProfileInfo() {
         };
         getProfile();
     }, [username, dispatch, selectedRole]);
-
+    console.log("PROFILE INFO: username is " + username)
 
     useEffect(() => {
         if (currentUser && isAnotherViewer) {

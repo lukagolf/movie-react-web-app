@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as service from "./reviews-service";
 
 
+
 export const findReviewsThunk = createAsyncThunk(
     "reviews/findReviews",
     async () => await service.findReviews()
@@ -38,6 +39,8 @@ export const createReviewThunk = createAsyncThunk(
 
 export const updateReviewThunk = createAsyncThunk(
     'reviews/updateReview',
-    async (review) =>
-        await service.updateReview(review)
+    async ({newReview}, thunkApi) => {
+        await service.updateReview(newReview)
+        thunkApi.dispatch(findMovieReviewsThunk(newReview.movie_id))
+    }
 );

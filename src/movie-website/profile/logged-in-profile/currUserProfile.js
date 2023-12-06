@@ -1,13 +1,38 @@
 import MyNav from "../../../nav-components/nav";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutThunk, deleteUserThunk } from "../../services/auth-thunks";
+import { useNavigate } from "react-router";
 import ProfileInfo from "../profileInfo";
-import ProfileLists from "../profile-lists/profileLists";
+import ProfileLists from "./profileLists";
+import RedTextBtn from "../../../ui-styling/buttons/text/redTextBtn";
+import ConfirmDelete from "../../../util/yesNoPopup";
 
 function CurrentUserProfile() {
   const { currentUser } = useSelector((state) => state.user);
+  const [showDeletePrompt, setDeletePrompt] = useState(false)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const toggleDeletePrompt = () => {
+    setDeletePrompt(!showDeletePrompt);
+  }
+
+  const handleDeleteAccount = () => {
+    dispatch(logoutThunk())
+    dispatch(deleteUserThunk(currentUser.username))
+    navigate('/home')
+  }
 
   return (
     <>
+      {
+        showDeletePrompt &&
+        <ConfirmDelete visible={showDeletePrompt}
+                       text="Delete your account? This action cannot be undone."
+                       toggleVisible={toggleDeletePrompt}
+                       yesFn={handleDeleteAccount}/>
+      }
       {currentUser ? (
         <MyNav
           options={{
@@ -34,6 +59,9 @@ function CurrentUserProfile() {
           key={currentUser.roles ? currentUser.roles.join() : ""}
         />
       )} */}
+      <div className="d-flex flex-row justify-content-center">
+          <RedTextBtn text="Delete Profile" fn={toggleDeletePrompt}/>
+      </div>
     </>
   );
 }

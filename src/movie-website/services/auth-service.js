@@ -24,14 +24,13 @@ export const profile = async () => {
 };
 
 export const updateUser = async (user) => {
-    const response = await api.put(`${USERS_URL}/${user._id}`, user);
+    const response = await api.put(`${USERS_URL}/${user.username}`, user);
     return response.data;
 };
 
 export const register = async ({ username, password, firstName, lastName, email, roles }) => {
     const response = await api.post(`${USERS_URL}/register`, { username, password, firstName, lastName, email, roles });
     const user = response.data;
-    console.log("USERRR: ", user);
     return user;
 };
 
@@ -40,3 +39,18 @@ export const getProfileByUsername = async (username) => {
     return response;
 };
 
+export const saveMovie = async (username, movie_id) => {
+    const response = await api.put(`${USERS_URL}/save/${username}/${movie_id}`)
+    return response;
+}
+
+export const unsaveMovie = async (username, movie_id) => {
+    const response = await api.put(`${USERS_URL}/unsave/${username}/${movie_id}`)
+    return response;
+}
+
+export const deleteUser = async (username) => {
+    console.log("going to delete user")
+    const response = await api.delete(`${USERS_URL}/${username}`)
+    return response
+}

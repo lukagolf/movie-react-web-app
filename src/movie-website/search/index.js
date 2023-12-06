@@ -10,7 +10,6 @@ import SearchResult from "./searchResult";
 function Search() {
   const {search} = useSelector((state) => state.search);
   const [results, setResults] = useState([]);
-
   const handleSearch = (results) => {
     setResults(results);
   };
@@ -32,7 +31,7 @@ function Search() {
         <MyNav />
       )}
 
-      <SearchInput onSearch={handleSearch}/>
+      <SearchInput/>
       <br />
       <hr />
 

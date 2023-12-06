@@ -33,6 +33,36 @@
     width: 100%;
 }
 
+.wd-width-70 {
+    width: 80%;
+}
+
+.wd-width-80 {
+    width: 80%;
+}
+
+.wd-width-100 {
+    width: 100%;
+}
+
 .wd-photo-small-screen {
     padding-top: 20px;
+}
+
+.float-right {
+    float: right
+}
+
+.l-5 {
+    left: 5
+}
+
+.movie-details-input {
+    background-color: black;
+    color: white;
+}
+
+.movie-details-input:focus {
+    background-color: black;
+    color: white;
 }

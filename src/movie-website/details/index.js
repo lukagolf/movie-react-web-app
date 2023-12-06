@@ -21,7 +21,7 @@ function Details() {
       ) : (
         <MyNav />
       )}
-      <MovieListItem />
+      <MovieListItem /> 
       <ReviewSection />
     </div>
   );

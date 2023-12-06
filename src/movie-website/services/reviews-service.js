@@ -32,6 +32,20 @@ export const deleteReview = async (rid) => {
 }
 
 export const updateReview = async (review) => {
-    const response = await axios.put(`${REVIEWS_API}/${review._id}`, review);
+    const response = await axios.put(`${REVIEWS_API}/${review.rev_id}`, review);
     return review;
+}
+
+export const toggleLike = async (alreadyLiked, rev_id, username) => {
+    const likes = alreadyLiked ? 'unlike' : 'like'
+    const response = 
+        await axios.put(`${REVIEWS_API}/${likes}/${rev_id}/${username}`)
+    return response;
+}
+
+export const toggleDislike = async (alreadyDisliked, rev_id, username) => {
+    const dislikes = alreadyDisliked ? 'undislike' : 'dislike'
+    const response = 
+        await axios.put(`${REVIEWS_API}/${dislikes}/${rev_id}/${username}`)
+    return response;
 }

@@ -44,6 +44,10 @@ h4 {
     background-color: #FE4DAF;
 }
 
+.wd-redBackground {
+    background-color: red;
+}
+
 .wd-lightPinkBackground {
     background-color: #f89dd1;
 }
@@ -75,12 +79,20 @@ h4 {
     color: black !important;
 }
 
+.wd-greyText {
+    color: grey !important;
+}
+
 .wd-purpleText {
     color: #825CA7 !important;
 }
 
 .wd-pinkText {
     color: #FE4DAF
+}
+
+.wd-greenText {
+    color: green
 }
 
 
@@ -94,6 +106,11 @@ h4 {
 .wd-whiteBorder {
     border-width: 2px;
     border-color: white;
+}
+
+.wd-redBorder {
+    border-width: 2px;
+    border-color: red;
 }
 
 .wd-borderNone {
@@ -155,9 +172,25 @@ button:hover.wd-greenBackground {
     background-color: #b7ec0b;
 }
 
+button:hover.wd-redBackground {
+    background-color: rgb(243, 29, 29);
+}
+
+.end-5 {
+    right: 5px
+}
+
 
 /* DISABLE HOVER*/
 
 .wd-disable-hover {
     pointer-events: none;
+}
+
+.float-right {
+    float: right
+}
+
+.d-inline {
+    display: inline
 }

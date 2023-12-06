@@ -24,6 +24,30 @@ const templateReview = {
 const reviewsSlice = createSlice({
     name: 'reviews',
     initialState,
+    reducers: {
+        likeReview(state, action) {
+            const {rev_id, username} = action.payload
+            const revIndex = state.reviews.findIndex(rev => rev.rev_id === rev_id)
+            state.reviews[revIndex].likes.push(username)
+        },
+        unlikeReview(state, action) {
+            const {rev_id, username} = action.payload
+            const revIndex = state.reviews.findIndex(rev => rev.rev_id === rev_id)
+            state.reviews[revIndex].likes = 
+                state.reviews[revIndex].likes.filter(user => user !== username)
+        },
+        dislikeReview(state, action) {
+            const {rev_id, username} = action.payload
+            const revIndex = state.reviews.findIndex(rev => rev.rev_id === rev_id)
+            state.reviews[revIndex].dislikes.push(username)
+        },
+        undislikeReview(state, action) {
+            const {rev_id, username} = action.payload
+            const revIndex = state.reviews.findIndex(rev => rev.rev_id === rev_id)
+            state.reviews[revIndex].dislikes = 
+                state.reviews[revIndex].dislikes.filter(user => user !== username)
+        }
+    },
     extraReducers: {
         [updateReviewThunk.fulfilled]:
             (state, { payload }) => {
@@ -35,11 +59,12 @@ const reviewsSlice = createSlice({
             (state, { payload }) => {
                 state.loading = false
                 state.reviews.unshift(payload)
+                console.log("STATE.REVIEWS IS NOW " + JSON.stringify(state.reviews))
             },
         [deleteReviewThunk.fulfilled]:
             (state, { payload }) => {
                 state.loading = false
-                state.reviews = state.reviews.filter(r => r._id !== payload)
+                state.reviews = state.reviews.filter(r => r.rev_id !== payload)
             },
         [findReviewsThunk.pending]:
             (state) => {
@@ -90,4 +115,9 @@ const reviewsSlice = createSlice({
 });
 
 export default reviewsSlice.reducer;
-
+export const {
+    dislikeReview,
+    undislikeReview,
+    likeReview,
+    unlikeReview,
+} = reviewsSlice.actions;
