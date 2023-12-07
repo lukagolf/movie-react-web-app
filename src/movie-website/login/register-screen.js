@@ -46,7 +46,7 @@ function RegisterScreen() {
             } else {
                 setSuccess(false);
                 if (!success) {
-                    alert("That email address is already taken.")
+                    alert("Username or email address is already taken.")
                 }
             }
         } catch (e) {
